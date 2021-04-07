@@ -7,14 +7,18 @@ import frsf.cidisi.faia.state.AgentState;
 
 public class CaperucitaGoal extends GoalTest {
 
-    @Override
-    public boolean isGoalState (AgentState agentState) {
-    
-    	// TODO: Complete Method
-        if  (true) //((vidasPerdidas < 3) & (mapaBosque.getCellValue(posicion) = FLORES))
-        	{
-            return true;
-        	}
-        return false;
+	@Override
+	public boolean isGoalState (AgentState agentState) {
+
+		CaperucitaState caperucitaState = (CaperucitaState) agentState;
+
+		int row = caperucitaState.getPosicionFila();
+		int col = caperucitaState.getPosicionColumna();
+
+		if  (caperucitaState.getVidasPerdidas() < 3 
+				&& caperucitaState.getPosicionMapa(row, col) == CaperucitaAgentPerception.FLORES)
+			return true;
+
+		return false;
 	}
 }
