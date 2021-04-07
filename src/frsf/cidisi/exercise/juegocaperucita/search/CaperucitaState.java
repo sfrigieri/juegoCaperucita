@@ -16,6 +16,7 @@ public class CaperucitaState extends SearchBasedAgentState {
     private int vidasPerdidas;
     private int dulcesPorJuntar;
     private int celdasPorVisitar;
+    
     private FrameTest frame = new FrameTest();
     private int times = 0;
 
@@ -51,6 +52,49 @@ public class CaperucitaState extends SearchBasedAgentState {
     @Override
     public void updateState(Perception p) {
         
+    	CaperucitaAgentPerception percepcionCaperucita = (CaperucitaAgentPerception) p;
+    	
+        int row = this.getPosicionFila();
+        int col = this.getPosicionColumna();
+         
+        int i = row-1;
+        
+        //El orden de las celdas percibidas parte desde la celda más cercana al agente y en la dirección del sensor. 
+       
+        //El último elemento en la lista es un árbol o la fila 0
+        for (Integer valor : percepcionCaperucita.getSensorSuperior()) 
+        { 
+        	mapaBosque[i][col] = valor.intValue();
+        	i--;
+        }
+			
+
+        	i = row+1;
+        //El último elemento en la lista es un árbol o la fila máxima
+        for (Integer valor : percepcionCaperucita.getSensorInferior()) 
+        { 
+        	mapaBosque[i][col] = valor.intValue();
+        	i++;
+        }
+        
+        
+        	i = col-1;
+        //El último elemento en la lista es un árbol o la columna 0
+        for (Integer valor : percepcionCaperucita.getSensorIzquierdo()) 
+        { 
+        	mapaBosque[row][i] = valor.intValue();
+        	i--;
+        }
+        
+        
+        	i = col+1;
+        //El último elemento en la lista es un árbol o la columna máxima
+        for (Integer valor : percepcionCaperucita.getSensorSuperior()) 
+        { 
+        	mapaBosque[row][col] = valor.intValue();
+        	i++;
+        }
+ 
 //    	 if(times == 0) {
 //         	frame.initBoard("Pacman", world, position);
 //         	times++;
@@ -103,34 +147,58 @@ public class CaperucitaState extends SearchBasedAgentState {
     //TODO: Complete this section with agent-specific methods
     // The following methods are agent-specific:
    	
-     public int[][] getmapaBosque(){
+     public int[][] getMapaBosque(){
         return mapaBosque;
      }
-     public void setmapaBosque(int[][] arg){
+     
+     public void setMapaBosque(int[][] arg){
         mapaBosque = arg;
      }
-     public int[] getposicion(){
+
+     public int getPosicionMapa(int row, int col) {
+         return mapaBosque[row][col];
+     }
+
+     public void setMapaPosicion(int row, int col, int value) {
+         this.mapaBosque[row][col] = value;
+     }
+
+     public int[] getPosicion(){
         return posicion;
      }
-     public void setposicion(int[] arg){
-        posicion = arg;
+     
+     public void setPosicionFila(int value) {
+         this.posicion[0] = value;
      }
-     public int getvidasPerdidas(){
+
+     public void setPosicionColumna(int value) {
+         this.posicion[1] = value;
+     }
+
+     public int getPosicionFila() {
+         return posicion[0];
+     }
+
+     public int getPosicionColumna() {
+         return posicion[1];
+     }
+     
+     public int getVidasPerdidas(){
         return vidasPerdidas;
      }
-     public void setvidasPerdidas(int arg){
+     public void setVidasPerdidas(int arg){
         vidasPerdidas = arg;
      }
-     public int getdulcesPorJuntar(){
+     public int getDulcesPorJuntar(){
         return dulcesPorJuntar;
      }
-     public void setdulcesPorJuntar(int arg){
+     public void setDulcesPorJuntar(int arg){
         dulcesPorJuntar = arg;
      }
-     public int getceldasPorVisitar(){
+     public int getCeldasPorVisitar(){
         return celdasPorVisitar;
      }
-     public void setceldasPorVisitar(int arg){
+     public void setCeldasPorVisitar(int arg){
         celdasPorVisitar = arg;
      }
 	

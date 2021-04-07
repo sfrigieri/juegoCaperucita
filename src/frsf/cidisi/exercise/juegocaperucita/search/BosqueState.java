@@ -67,7 +67,9 @@ public class BosqueState extends EnvironmentState {
 	public void setVidasPerdidasAgente(int arg){
 		vidasPerdidasAgente = arg;
 	}
-
+	
+    //Las celdas percibidas quedan ordenadas en la dirección de cada sensor, partiendo desde la más cercana. 
+	
 	public ArrayList<Integer> getCeldasVisiblesSuperiores(int row, int col) {
 
 		ArrayList<Integer> list = new ArrayList<Integer>();
@@ -77,7 +79,8 @@ public class BosqueState extends EnvironmentState {
 
 		for(int i = row; i > 0; i--) {
 			list.add(mapa[i-1][col]);
-
+			
+			//Última celda visible
 			if(mapa[i-1][col] == CaperucitaAgentPerception.ARBOL)
 				break;
 		}
