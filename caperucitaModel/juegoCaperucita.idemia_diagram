@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:idemia="utn.frsf.cidisi" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_9K0D8JccEeuLeMof8UFb-A" type="Idemia" name="juegoCaperucita.idemia_diagram" measurementUnit="Pixel">
+  <children xmi:type="notation:Shape" xmi:id="_m5VJcJcdEeuLeMof8UFb-A" type="2001" fontName="Segoe UI">
+    <children xmi:type="notation:DecorationNode" xmi:id="_m59bkJcdEeuLeMof8UFb-A" type="5013"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_m6BF8JcdEeuLeMof8UFb-A" type="7001">
+      <children xmi:type="notation:Shape" xmi:id="_sdWLoJcdEeuLeMof8UFb-A" type="3003" fontName="Segoe UI">
+        <children xmi:type="notation:DecorationNode" xmi:id="_sdWLopcdEeuLeMof8UFb-A" type="5005"/>
+        <children xmi:type="notation:DecorationNode" xmi:id="_sdWLo5cdEeuLeMof8UFb-A" type="5006"/>
+        <element xmi:type="idemia:Goal" href="juegoCaperucita.idemia#//@Agent/@Goal"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_sdWLoZcdEeuLeMof8UFb-A"/>
+      </children>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_m6BF8ZcdEeuLeMof8UFb-A"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_m6BF8pcdEeuLeMof8UFb-A"/>
+    </children>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_m6BF85cdEeuLeMof8UFb-A" type="7002">
+      <children xmi:type="notation:Shape" xmi:id="_GUsusJcfEeuLeMof8UFb-A" type="3001" fontName="Segoe UI">
+        <children xmi:type="notation:DecorationNode" xmi:id="_GUsuspcfEeuLeMof8UFb-A" type="5004"/>
+        <children xmi:type="notation:BasicCompartment" xmi:id="_GUsus5cfEeuLeMof8UFb-A" type="7004">
+          <children xmi:type="notation:Shape" xmi:id="_KkskQJcfEeuLeMof8UFb-A" type="3002" fontName="Segoe UI">
+            <children xmi:type="notation:DecorationNode" xmi:id="_KkskQpcfEeuLeMof8UFb-A" type="5001"/>
+            <children xmi:type="notation:DecorationNode" xmi:id="_KkskQ5cfEeuLeMof8UFb-A" type="5002">
+              <styles xmi:type="notation:DescriptionStyle" xmi:id="_KkskRJcfEeuLeMof8UFb-A"/>
+            </children>
+            <children xmi:type="notation:DecorationNode" xmi:id="_KkskRZcfEeuLeMof8UFb-A" type="5003"/>
+            <element xmi:type="idemia:DataStructure" href="juegoCaperucita.idemia#//@Agent/@AgentState/@DataStructure.0"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_KkskQZcfEeuLeMof8UFb-A"/>
+          </children>
+          <children xmi:type="notation:Shape" xmi:id="_gHWNYJcfEeuLeMof8UFb-A" type="3002" fontName="Segoe UI">
+            <children xmi:type="notation:DecorationNode" xmi:id="_gHWNYpcfEeuLeMof8UFb-A" type="5001"/>
+            <children xmi:type="notation:DecorationNode" xmi:id="_gHWNY5cfEeuLeMof8UFb-A" type="5002">
+              <styles xmi:type="notation:DescriptionStyle" xmi:id="_gHWNZJcfEeuLeMof8UFb-A"/>
+            </children>
+            <children xmi:type="notation:DecorationNode" xmi:id="_gHWNZZcfEeuLeMof8UFb-A" type="5003"/>
+            <element xmi:type="idemia:DataStructure" href="juegoCaperucita.idemia#//@Agent/@AgentState/@DataStructure.1"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_gHWNYZcfEeuLeMof8UFb-A"/>
+          </children>
+          <children xmi:type="notation:Shape" xmi:id="_sxjPIJcfEeuLeMof8UFb-A" type="3002" fontName="Segoe UI">
+            <children xmi:type="notation:DecorationNode" xmi:id="_sxjPIpcfEeuLeMof8UFb-A" type="5001"/>
+            <children xmi:type="notation:DecorationNode" xmi:id="_sxjPI5cfEeuLeMof8UFb-A" type="5002">
+              <styles xmi:type="notation:DescriptionStyle" xmi:id="_sxjPJJcfEeuLeMof8UFb-A"/>
+            </children>
+            <children xmi:type="notation:DecorationNode" xmi:id="_sxjPJZcfEeuLeMof8UFb-A" type="5003"/>
+            <element xmi:type="idemia:DataStructure" href="juegoCaperucita.idemia#//@Agent/@AgentState/@DataStructure.2"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_sxjPIZcfEeuLeMof8UFb-A"/>
+          </children>
+          <children xmi:type="notation:Shape" xmi:id="_ty1tAJcfEeuLeMof8UFb-A" type="3002" fontName="Segoe UI">
+            <children xmi:type="notation:DecorationNode" xmi:id="_ty1tApcfEeuLeMof8UFb-A" type="5001"/>
+            <children xmi:type="notation:DecorationNode" xmi:id="_ty1tA5cfEeuLeMof8UFb-A" type="5002">
+              <styles xmi:type="notation:DescriptionStyle" xmi:id="_ty1tBJcfEeuLeMof8UFb-A"/>
+            </children>
+            <children xmi:type="notation:DecorationNode" xmi:id="_ty1tBZcfEeuLeMof8UFb-A" type="5003"/>
+            <element xmi:type="idemia:DataStructure" href="juegoCaperucita.idemia#//@Agent/@AgentState/@DataStructure.3"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ty1tAZcfEeuLeMof8UFb-A"/>
+          </children>
+          <children xmi:type="notation:Shape" xmi:id="_2nFFoJcmEeuLeMof8UFb-A" type="3002" fontName="Segoe UI">
+            <children xmi:type="notation:DecorationNode" xmi:id="_2nFFopcmEeuLeMof8UFb-A" type="5001"/>
+            <children xmi:type="notation:DecorationNode" xmi:id="_2nII8JcmEeuLeMof8UFb-A" type="5002">
+              <styles xmi:type="notation:DescriptionStyle" xmi:id="_2nII8ZcmEeuLeMof8UFb-A"/>
+            </children>
+            <children xmi:type="notation:DecorationNode" xmi:id="_2nII8pcmEeuLeMof8UFb-A" type="5003"/>
+            <element xmi:type="idemia:DataStructure" href="juegoCaperucita.idemia#//@Agent/@AgentState/@DataStructure.4"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_2nFFoZcmEeuLeMof8UFb-A"/>
+          </children>
+          <styles xmi:type="notation:SortingStyle" xmi:id="_GUsutJcfEeuLeMof8UFb-A"/>
+          <styles xmi:type="notation:FilteringStyle" xmi:id="_GUsutZcfEeuLeMof8UFb-A"/>
+        </children>
+        <element xmi:type="idemia:State" href="juegoCaperucita.idemia#//@Agent/@AgentState"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_GUsusZcfEeuLeMof8UFb-A" x="63" y="33"/>
+      </children>
+    </children>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_m6BF9JcdEeuLeMof8UFb-A" type="7003">
+      <children xmi:type="notation:Shape" xmi:id="_MIsocJcxEeuLeMof8UFb-A" type="3004" fontName="Segoe UI">
+        <children xmi:type="notation:DecorationNode" xmi:id="_MIsocpcxEeuLeMof8UFb-A" type="5007"/>
+        <children xmi:type="notation:DecorationNode" xmi:id="_MIsoc5cxEeuLeMof8UFb-A" type="5008"/>
+        <element xmi:type="idemia:Search" href="juegoCaperucita.idemia#//@Agent/@Strategy"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_MIsocZcxEeuLeMof8UFb-A"/>
+      </children>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_m6BF9ZcdEeuLeMof8UFb-A"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_m6BF9pcdEeuLeMof8UFb-A"/>
+    </children>
+    <element xmi:type="idemia:Agent" href="juegoCaperucita.idemia#//@Agent"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_m5VJcZcdEeuLeMof8UFb-A" x="47" y="45" width="429" height="386"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_QchOEJcxEeuLeMof8UFb-A" type="2002" fontName="Segoe UI">
+    <children xmi:type="notation:DecorationNode" xmi:id="_QchOEpcxEeuLeMof8UFb-A" type="5018"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_QchOE5cxEeuLeMof8UFb-A" type="7005">
+      <children xmi:type="notation:Shape" xmi:id="_joSfYJcxEeuLeMof8UFb-A" type="3008" fontName="Segoe UI">
+        <children xmi:type="notation:DecorationNode" xmi:id="_joSfYpcxEeuLeMof8UFb-A" type="5017"/>
+        <children xmi:type="notation:BasicCompartment" xmi:id="_joSfY5cxEeuLeMof8UFb-A" type="7006">
+          <children xmi:type="notation:Shape" xmi:id="_sbNtkJcxEeuLeMof8UFb-A" type="3009" fontName="Segoe UI">
+            <children xmi:type="notation:DecorationNode" xmi:id="_sbQw4JcxEeuLeMof8UFb-A" type="5014"/>
+            <children xmi:type="notation:DecorationNode" xmi:id="_sbQw4ZcxEeuLeMof8UFb-A" type="5015">
+              <styles xmi:type="notation:DescriptionStyle" xmi:id="_sbQw4pcxEeuLeMof8UFb-A"/>
+            </children>
+            <children xmi:type="notation:DecorationNode" xmi:id="_sbQw45cxEeuLeMof8UFb-A" type="5016"/>
+            <element xmi:type="idemia:DataStructure" href="juegoCaperucita.idemia#//@Environment/@EnvironmentState/@DataStructure.0"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_sbNtkZcxEeuLeMof8UFb-A"/>
+          </children>
+          <children xmi:type="notation:Shape" xmi:id="_vk7QgJcxEeuLeMof8UFb-A" type="3009" fontName="Segoe UI">
+            <children xmi:type="notation:DecorationNode" xmi:id="_vk7QgpcxEeuLeMof8UFb-A" type="5014"/>
+            <children xmi:type="notation:DecorationNode" xmi:id="_vk7Qg5cxEeuLeMof8UFb-A" type="5015">
+              <styles xmi:type="notation:DescriptionStyle" xmi:id="_vk7QhJcxEeuLeMof8UFb-A"/>
+            </children>
+            <children xmi:type="notation:DecorationNode" xmi:id="_vk7QhZcxEeuLeMof8UFb-A" type="5016"/>
+            <element xmi:type="idemia:DataStructure" href="juegoCaperucita.idemia#//@Environment/@EnvironmentState/@DataStructure.1"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_vk7QgZcxEeuLeMof8UFb-A"/>
+          </children>
+          <children xmi:type="notation:Shape" xmi:id="_4K0OoJc5EeuLeMof8UFb-A" type="3009" fontName="Segoe UI">
+            <children xmi:type="notation:DecorationNode" xmi:id="_4K0Oopc5EeuLeMof8UFb-A" type="5014"/>
+            <children xmi:type="notation:DecorationNode" xmi:id="_4K0Oo5c5EeuLeMof8UFb-A" type="5015">
+              <styles xmi:type="notation:DescriptionStyle" xmi:id="_4K0OpJc5EeuLeMof8UFb-A"/>
+            </children>
+            <children xmi:type="notation:DecorationNode" xmi:id="_4K0OpZc5EeuLeMof8UFb-A" type="5016"/>
+            <element xmi:type="idemia:DataStructure" href="juegoCaperucita.idemia#//@Environment/@EnvironmentState/@DataStructure.2"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_4K0OoZc5EeuLeMof8UFb-A"/>
+          </children>
+          <styles xmi:type="notation:SortingStyle" xmi:id="_joSfZJcxEeuLeMof8UFb-A"/>
+          <styles xmi:type="notation:FilteringStyle" xmi:id="_joSfZZcxEeuLeMof8UFb-A"/>
+        </children>
+        <element xmi:type="idemia:State" href="juegoCaperucita.idemia#//@Environment/@EnvironmentState"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_joSfYZcxEeuLeMof8UFb-A" x="18" y="9" width="161" height="105"/>
+      </children>
+    </children>
+    <element xmi:type="idemia:Environment" href="juegoCaperucita.idemia#//@Environment"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_QchOEZcxEeuLeMof8UFb-A" x="635" y="45" width="234" height="221"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_9K0D8ZccEeuLeMof8UFb-A"/>
+  <element xmi:type="idemia:AgentModel" href="juegoCaperucita.idemia#/"/>
+  <edges xmi:type="notation:Edge" xmi:id="_eAGgIJc3EeuLeMof8UFb-A" type="4001" source="_m5VJcJcdEeuLeMof8UFb-A" target="_QchOEJcxEeuLeMof8UFb-A">
+    <children xmi:type="notation:DecorationNode" xmi:id="_eAGgJJc3EeuLeMof8UFb-A" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_eAGgJZc3EeuLeMof8UFb-A" x="-1" y="12"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_eAGgIZc3EeuLeMof8UFb-A" routing="Rectilinear"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_eAGgIpc3EeuLeMof8UFb-A" fontName="Segoe UI"/>
+    <element xmi:type="idemia:Action" href="juegoCaperucita.idemia#//@Actions.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_eAGgI5c3EeuLeMof8UFb-A" points="[57, 56, -184, 64]$[216, 56, -25, 64]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_eAapMJc3EeuLeMof8UFb-A" id="(0.8671328671328671,0.07512953367875648)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_eAapMZc3EeuLeMof8UFb-A" id="(0.10683760683760683,0.09502262443438914)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_gI2VUJc3EeuLeMof8UFb-A" type="4001" source="_m5VJcJcdEeuLeMof8UFb-A" target="_QchOEJcxEeuLeMof8UFb-A">
+    <children xmi:type="notation:DecorationNode" xmi:id="_gI2VVJc3EeuLeMof8UFb-A" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_gI2VVZc3EeuLeMof8UFb-A" x="3" y="12"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_gI2VUZc3EeuLeMof8UFb-A" routing="Rectilinear"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_gI2VUpc3EeuLeMof8UFb-A" fontName="Segoe UI"/>
+    <element xmi:type="idemia:Action" href="juegoCaperucita.idemia#//@Actions.1"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_gI2VU5c3EeuLeMof8UFb-A" points="[57, 20, -172, 7]$[216, 20, -13, 7]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_gI5YoJc3EeuLeMof8UFb-A" id="(0.8671328671328671,0.07772020725388601)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_gI5YoZc3EeuLeMof8UFb-A" id="(0.05555555555555555,0.19457013574660634)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_j3d8IJc3EeuLeMof8UFb-A" type="4001" source="_m5VJcJcdEeuLeMof8UFb-A" target="_QchOEJcxEeuLeMof8UFb-A">
+    <children xmi:type="notation:DecorationNode" xmi:id="_j3d8JJc3EeuLeMof8UFb-A" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_j3d8JZc3EeuLeMof8UFb-A" x="2" y="21"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_j3d8IZc3EeuLeMof8UFb-A" routing="Rectilinear"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_j3d8Ipc3EeuLeMof8UFb-A" fontName="Segoe UI"/>
+    <element xmi:type="idemia:Action" href="juegoCaperucita.idemia#//@Actions.2"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_j3d8I5c3EeuLeMof8UFb-A" points="[4, -1, -166, 0]$[163, -7, -7, -6]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_j3g_cJc3EeuLeMof8UFb-A" id="(0.9906759906759907,0.018134715025906734)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_j3g_cZc3EeuLeMof8UFb-A" id="(0.029914529914529916,0.027149321266968326)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_qphewJc3EeuLeMof8UFb-A" type="4001" source="_m5VJcJcdEeuLeMof8UFb-A" target="_QchOEJcxEeuLeMof8UFb-A">
+    <children xmi:type="notation:DecorationNode" xmi:id="_qphexJc3EeuLeMof8UFb-A" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_qphexZc3EeuLeMof8UFb-A" x="-1" y="17"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_qphewZc3EeuLeMof8UFb-A" routing="Rectilinear"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_qphewpc3EeuLeMof8UFb-A" fontName="Segoe UI"/>
+    <element xmi:type="idemia:Action" href="juegoCaperucita.idemia#//@Actions.3"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_qphew5c3EeuLeMof8UFb-A" points="[32, 86, -238, 84]$[191, 86, -79, 84]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_qpkiEJc3EeuLeMof8UFb-A" id="(0.9254079254079254,0.08808290155440414)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_qpkiEZc3EeuLeMof8UFb-A" id="(0.33760683760683763,0.16289592760180996)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_0UP3oJc3EeuLeMof8UFb-A" type="4002" source="_QchOEJcxEeuLeMof8UFb-A" target="_m5VJcJcdEeuLeMof8UFb-A" routing="Rectilinear">
+    <children xmi:type="notation:DecorationNode" xmi:id="_0UP3o5c3EeuLeMof8UFb-A" type="6002">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_0UP3pJc3EeuLeMof8UFb-A" x="-15" y="13"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_0UP3oZc3EeuLeMof8UFb-A" fontName="Segoe UI"/>
+    <element xmi:type="idemia:Perception" href="juegoCaperucita.idemia#//@Perceptions.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_0UP3opc3EeuLeMof8UFb-A" points="[-47, 168, 232, 184]$[-206, 168, 73, 184]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_0US68Jc3EeuLeMof8UFb-A" id="(0.20085470085470086,0.21266968325791855)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_0US68Zc3EeuLeMof8UFb-A" id="(0.8298368298368298,0.08031088082901554)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_1dafIJc3EeuLeMof8UFb-A" type="4002" source="_QchOEJcxEeuLeMof8UFb-A" target="_m5VJcJcdEeuLeMof8UFb-A" routing="Rectilinear">
+    <children xmi:type="notation:DecorationNode" xmi:id="_1dafI5c3EeuLeMof8UFb-A" type="6002">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_1dafJJc3EeuLeMof8UFb-A" x="2" y="13"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_1dafIZc3EeuLeMof8UFb-A" fontName="Segoe UI"/>
+    <element xmi:type="idemia:Perception" href="juegoCaperucita.idemia#//@Perceptions.1"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_1dafIpc3EeuLeMof8UFb-A" points="[54, 187, 326, 191]$[54, 211, 326, 215]$[-222, 211, 50, 215]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_1ddicJc3EeuLeMof8UFb-A" id="(0.2692307692307692,0.15384615384615385)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_1ddicZc3EeuLeMof8UFb-A" id="(0.8834498834498834,0.07772020725388601)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_3Eo7oJc3EeuLeMof8UFb-A" type="4002" source="_QchOEJcxEeuLeMof8UFb-A" target="_m5VJcJcdEeuLeMof8UFb-A" routing="Rectilinear">
+    <children xmi:type="notation:DecorationNode" xmi:id="_3Eo7o5c3EeuLeMof8UFb-A" type="6002">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_3Eo7pJc3EeuLeMof8UFb-A" x="17" y="13"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_3Eo7oZc3EeuLeMof8UFb-A" fontName="Segoe UI"/>
+    <element xmi:type="idemia:Perception" href="juegoCaperucita.idemia#//@Perceptions.2"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_3Eo7opc3EeuLeMof8UFb-A" points="[34, 184, 410, 189]$[34, 233, 410, 238]$[-260, 233, 116, 238]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_3Er-8Jc3EeuLeMof8UFb-A" id="(0.43162393162393164,0.167420814479638)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_3Er-8Zc3EeuLeMof8UFb-A" id="(0.7296037296037297,0.08290155440414508)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_5hDTsJc3EeuLeMof8UFb-A" type="4002" source="_QchOEJcxEeuLeMof8UFb-A" target="_m5VJcJcdEeuLeMof8UFb-A" routing="Rectilinear">
+    <children xmi:type="notation:DecorationNode" xmi:id="_5hDTs5c3EeuLeMof8UFb-A" type="6002">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_5hDTtJc3EeuLeMof8UFb-A" x="17" y="18"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_5hDTsZc3EeuLeMof8UFb-A" fontName="Segoe UI"/>
+    <element xmi:type="idemia:Perception" href="juegoCaperucita.idemia#//@Perceptions.3"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_5hDTspc3EeuLeMof8UFb-A" points="[66, 210, 373, 187]$[66, 294, 373, 271]$[-253, 294, 54, 271]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_5hFI4Jc3EeuLeMof8UFb-A" id="(0.4017094017094017,0.049773755656108594)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_5hFI4Zc3EeuLeMof8UFb-A" id="(0.8741258741258742,0.08808290155440414)"/>
+  </edges>
+</notation:Diagram>

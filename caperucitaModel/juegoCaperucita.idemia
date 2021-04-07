@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<idemia:AgentModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:idemia="utn.frsf.cidisi">
+  <Environment name="Bosque">
+    <EnvironmentState name="BosqueState">
+      <DataStructure name="mapa" type="matrix"/>
+      <DataStructure name="posicionAgente" type="pair"/>
+      <DataStructure name="vidasPerdidas"/>
+    </EnvironmentState>
+  </Environment>
+  <Agent name="CaperucitaAgent">
+    <Strategy xsi:type="idemia:Search"/>
+    <Goal name="CaperucitaGoal" value="(vidasPerdidas &lt; 3) &amp; (mapaBosque.getCellValue(posicion) = FLORES)"/>
+    <AgentState name="CaperucitaState">
+      <DataStructure name="mapaBosque" type="matrix"/>
+      <DataStructure name="posicion" type="pair"/>
+      <DataStructure name="vidasPerdidas"/>
+      <DataStructure name="dulcesPorJuntar"/>
+      <DataStructure name="celdasPorVisitar"/>
+    </AgentState>
+  </Agent>
+  <Actions execute_by="//@Agent" executed_on="//@Environment" name="IrArriba"/>
+  <Actions execute_by="//@Agent" executed_on="//@Environment" name="IrAbajo"/>
+  <Actions execute_by="//@Agent" executed_on="//@Environment" name="IrIzquierda"/>
+  <Actions execute_by="//@Agent" executed_on="//@Environment" name="IrDerecha"/>
+  <Perceptions perceived_on="//@Environment" perceived_by="//@Agent" name="sensorsuperior"/>
+  <Perceptions perceived_on="//@Environment" perceived_by="//@Agent" name="sensorinferior"/>
+  <Perceptions perceived_on="//@Environment" perceived_by="//@Agent" name="sensorizquierdo"/>
+  <Perceptions perceived_on="//@Environment" perceived_by="//@Agent" name="sensorderecho"/>
+</idemia:AgentModel>
