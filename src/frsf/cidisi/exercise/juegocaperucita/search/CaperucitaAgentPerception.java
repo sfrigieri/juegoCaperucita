@@ -1,20 +1,24 @@
 package frsf.cidisi.exercise.juegocaperucita.search;
 
+import java.util.ArrayList;
+
 import frsf.cidisi.faia.agent.Agent;
 import frsf.cidisi.faia.agent.Perception;
 import frsf.cidisi.faia.environment.Environment;
 
 public class CaperucitaAgentPerception extends Perception {
 
-	//TODO: Setup Statics
-    //public static int UNKNOWN_PERCEPTION = -1;   
-	
-	
-	//TODO: Setup Sensors
-	private int sensorsuperior;
-	private int sensorinferior;
-	private int sensorizquierdo;
-	private int sensorderecho;
+    public static int LIBRE = 0;
+    public static int ARBOL = 1;
+    public static int DULCES = 2; 
+    public static int LOBO = 3; 
+    public static int FLORES = 4;
+    
+
+	private ArrayList<Integer> sensorSuperior;
+	private ArrayList<Integer> sensorInferior;
+	private ArrayList<Integer> sensorIzquierdo;
+	private ArrayList<Integer> sensorDerecho;
 	
  
 
@@ -31,13 +35,19 @@ public class CaperucitaAgentPerception extends Perception {
      */
     @Override
     public void initPerception(Agent agentIn, Environment environmentIn) {
-    	
-    	//TODO: Complete Method
+         
+        CaperucitaAgent agent = (CaperucitaAgent) agentIn;
+        Bosque environment = (Bosque) environmentIn;
+        BosqueState environmentState =
+                environment.getEnvironmentState();
         
-        //CaperucitaAgent agent = (CaperucitaAgent) agentIn;
-        //Bosque environment = (Bosque) environmentIn;
-        //BosqueState environmentState =
-        //        environment.getEnvironmentState();
+        int row = environmentState.getPosicionAgente()[0];
+        int col = environmentState.getPosicionAgente()[1];
+
+        this.setSensorSuperior(environment.getCeldasVisiblesSuperiores(row, col));
+        this.setSensorInferior(environment.getCeldasVisiblesInferiores(row, col));
+        this.setSensorIzquierdo(environment.getCeldasVisiblesIzquierdas(row, col));
+        this.setSensorDerecho(environment.getCeldasVisiblesDerechas(row, col));
        
         
     }
@@ -54,29 +64,29 @@ public class CaperucitaAgentPerception extends Perception {
     // The following methods are agent-specific:
     //TODO: Complete this section with the agent-specific methods
 	
-     public int getsensorsuperior(){
-        return sensorsuperior;
+     public ArrayList<Integer> getSensorSuperior(){
+        return sensorSuperior;
      }
-     public void setsensorsuperior(int arg){
-        this.sensorsuperior = arg;
+     public void setSensorSuperior(ArrayList<Integer> arg){
+        this.sensorSuperior = arg;
      }
-     public int getsensorinferior(){
-        return sensorinferior;
+     public ArrayList<Integer> getSensorInferior(){
+        return sensorInferior;
      }
-     public void setsensorinferior(int arg){
-        this.sensorinferior = arg;
+     public void setSensorInferior(ArrayList<Integer> arg){
+        this.sensorInferior = arg;
      }
-     public int getsensorizquierdo(){
-        return sensorizquierdo;
+     public ArrayList<Integer> getSensorIzquierdo(){
+        return sensorIzquierdo;
      }
-     public void setsensorizquierdo(int arg){
-        this.sensorizquierdo = arg;
+     public void setSensorIzquierdo(ArrayList<Integer> arg){
+        this.sensorIzquierdo = arg;
      }
-     public int getsensorderecho(){
-        return sensorderecho;
+     public ArrayList<Integer> getSensorDerecho(){
+        return sensorDerecho;
      }
-     public void setsensorderecho(int arg){
-        this.sensorderecho = arg;
+     public void setSensorDerecho(ArrayList<Integer> arg){
+        this.sensorDerecho = arg;
      }
 	
    

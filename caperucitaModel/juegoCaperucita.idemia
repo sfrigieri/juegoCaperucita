@@ -4,7 +4,7 @@
     <EnvironmentState name="BosqueState">
       <DataStructure name="mapa" type="matrix"/>
       <DataStructure name="posicionAgente" type="pair"/>
-      <DataStructure name="vidasPerdidas"/>
+      <DataStructure name="vidasPerdidasAgente"/>
     </EnvironmentState>
   </Environment>
   <Agent name="CaperucitaAgent">

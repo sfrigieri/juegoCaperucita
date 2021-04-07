@@ -1,5 +1,7 @@
 package frsf.cidisi.exercise.juegocaperucita.search;
 
+import java.util.ArrayList;
+
 import frsf.cidisi.faia.agent.Action;
 import frsf.cidisi.faia.agent.Perception;
 import frsf.cidisi.faia.environment.Environment;
@@ -43,13 +45,32 @@ public class Bosque extends Environment {
         BosqueState envState =
                 this.getEnvironmentState();
 
-        // TODO: Complete Method        
+        int vidasPerdidasAgente = envState.getVidasPerdidasAgente();
+
+        if (vidasPerdidasAgente > 2)
+            return true;    
 
         return false;
     }
+    
+    // Metodos especificos de agente:
 
-	//TODO: Complete this section with agent-specific methods
-    // The following methods are agent-specific:
+	public ArrayList<Integer> getCeldasVisiblesSuperiores(int row, int col) {
+		return ((BosqueState) this.environmentState).getCeldasVisiblesSuperiores(row, col);
+	}
+
+	public ArrayList<Integer> getCeldasVisiblesInferiores(int row, int col) {
+		return ((BosqueState) this.environmentState).getCeldasVisiblesInferiores(row, col);
+	}
+
+	public ArrayList<Integer> getCeldasVisiblesIzquierdas(int row, int col) {
+		return ((BosqueState) this.environmentState).getCeldasVisiblesIzquierdas(row, col);
+	}
+
+	public ArrayList<Integer> getCeldasVisiblesDerechas(int row, int col) {
+		return ((BosqueState) this.environmentState).getCeldasVisiblesDerechas(row, col);
+	}
+
     
     
 }

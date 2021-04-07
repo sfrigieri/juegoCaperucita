@@ -1,5 +1,7 @@
 package frsf.cidisi.exercise.juegocaperucita.search;
 
+import java.util.concurrent.TimeUnit;
+
 import frsf.cidisi.faia.agent.Perception;
 import frsf.cidisi.faia.agent.search.SearchBasedAgentState;
 
@@ -14,7 +16,8 @@ public class CaperucitaState extends SearchBasedAgentState {
     private int vidasPerdidas;
     private int dulcesPorJuntar;
     private int celdasPorVisitar;
-	
+    private FrameTest frame = new FrameTest();
+    private int times = 0;
 
     public CaperucitaState() {
     
@@ -48,7 +51,19 @@ public class CaperucitaState extends SearchBasedAgentState {
     @Override
     public void updateState(Perception p) {
         
-        //TODO: Complete Method
+//    	 if(times == 0) {
+//         	frame.initBoard("Pacman", world, position);
+//         	times++;
+//         }
+//         else
+//         	frame.repaint(world, position);
+//         
+//         try {
+// 			TimeUnit.SECONDS.sleep(1);
+// 		} catch (InterruptedException e) {
+// 			// TODO Auto-generated catch block
+// 			e.printStackTrace();
+// 		}
     }
 
     /**
