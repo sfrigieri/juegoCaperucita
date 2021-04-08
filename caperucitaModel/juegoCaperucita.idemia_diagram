@@ -79,7 +79,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_m6BF9pcdEeuLeMof8UFb-A"/>
     </children>
     <element xmi:type="idemia:Agent" href="juegoCaperucita.idemia#//@Agent"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_m5VJcZcdEeuLeMof8UFb-A" x="47" y="45" width="429" height="386"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_m5VJcZcdEeuLeMof8UFb-A" x="15" y="45" width="426" height="386"/>
   </children>
   <children xmi:type="notation:Shape" xmi:id="_QchOEJcxEeuLeMof8UFb-A" type="2002" fontName="Segoe UI">
     <children xmi:type="notation:DecorationNode" xmi:id="_QchOEpcxEeuLeMof8UFb-A" type="5018"/>
@@ -122,7 +122,7 @@
       </children>
     </children>
     <element xmi:type="idemia:Environment" href="juegoCaperucita.idemia#//@Environment"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_QchOEZcxEeuLeMof8UFb-A" x="635" y="45" width="234" height="221"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_QchOEZcxEeuLeMof8UFb-A" x="745" y="45" width="234" height="221"/>
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_9K0D8ZccEeuLeMof8UFb-A"/>
   <element xmi:type="idemia:AgentModel" href="juegoCaperucita.idemia#/"/>

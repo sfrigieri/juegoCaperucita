@@ -6,14 +6,21 @@ import frsf.cidisi.faia.agent.Action;
 import frsf.cidisi.faia.agent.Perception;
 import frsf.cidisi.faia.environment.Environment;
 
+
+
+	
 public class Bosque extends Environment {
 
-    public Bosque() {
-        // Create the environment state
-        this.environmentState = new BosqueState();
+
+	
+    public Bosque(int escenario) {
+       
+    	this.environmentState = new BosqueState(escenario);
+
     }
 
-    public BosqueState getEnvironmentState() {
+
+	public BosqueState getEnvironmentState() {
         return (BosqueState) super.getEnvironmentState();
     }
 

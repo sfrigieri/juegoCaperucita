@@ -17,67 +17,79 @@ import java.util.Vector;
 
 public class CaperucitaAgent extends SearchBasedAgent {
 
-    public CaperucitaAgent() {
+	public CaperucitaAgent(int escenario) {
 
-        // The Agent Goal
-        CaperucitaGoal agGoal = new CaperucitaGoal();
+		// The Agent Goal
+		CaperucitaGoal agGoal = new CaperucitaGoal();
 
-        // The Agent State
-        CaperucitaState agState = new CaperucitaState();
-        this.setAgentState(agState);
+		// The Agent State
+		CaperucitaState agState = new CaperucitaState(escenario);
 
-        // Create the operators
-        Vector<SearchAction> operators = new Vector<SearchAction>();
-        operators.addElement(new IrArriba());	
-        operators.addElement(new IrAbajo());	
-        operators.addElement(new IrIzquierda());	
-        operators.addElement(new IrDerecha());	
+		this.setAgentState(agState);
 
-        // Create the Problem which the agent will resolve
-        Problem problem = new Problem(agGoal, agState, operators);
-        this.setProblem(problem);
-    }
+		// Create the operators
+		Vector<SearchAction> operators = new Vector<SearchAction>();
+		operators.addElement(new IrArriba());	
+		operators.addElement(new IrAbajo());	
+		operators.addElement(new IrIzquierda());	
+		operators.addElement(new IrDerecha());	
 
-    /**
-     * This method is executed by the simulator to ask the agent for an action.
-     */
-    @Override
-    public Action selectAction() {
+		// Create the Problem which the agent will resolve
+		Problem problem = new Problem(agGoal, agState, operators);
+		this.setProblem(problem);
+	}
 
-        // Create the search strategy
-        DepthFirstSearch strategy = new DepthFirstSearch();          
 
-        // Create a Search object with the strategy
-        Search searchSolver = new Search(strategy);
+	private int[][] getMapa(int i) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-        /* Generate an XML file with the search tree. It can also be generated
-         * in other formats like PDF with PDF_TREE */
-        searchSolver.setVisibleTree(Search.GRAPHVIZ_TREE);
+	private int[] getPosicionInicial(int i) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-        // Set the Search searchSolver.
-        this.setSolver(searchSolver);
+	/**
+	 * This method is executed by the simulator to ask the agent for an action.
+	 */
+	@Override
+	public Action selectAction() {
 
-        // Ask the solver for the best action
-        Action selectedAction = null;
-        try {
-            selectedAction =
-                    this.getSolver().solve(new Object[]{this.getProblem()});
-        } catch (Exception ex) {
-            Logger.getLogger(CaperucitaAgent.class.getName()).log(Level.SEVERE, null, ex);
-        }
+		// Create the search strategy
+		DepthFirstSearch strategy = new DepthFirstSearch();          
 
-        // Return the selected action
-        return selectedAction;
+		// Create a Search object with the strategy
+		Search searchSolver = new Search(strategy);
 
-    }
+		/* Generate an XML file with the search tree. It can also be generated
+		 * in other formats like PDF with PDF_TREE */
+		searchSolver.setVisibleTree(Search.GRAPHVIZ_TREE);
 
-    /**
-     * This method is executed by the simulator to give the agent a perception.
-     * Then it updates its state.
-     * @param p
-     */
-    @Override
-    public void see(Perception p) {
-        this.getAgentState().updateState(p);
-    }
+		// Set the Search searchSolver.
+		this.setSolver(searchSolver);
+
+		// Ask the solver for the best action
+		Action selectedAction = null;
+		try {
+			selectedAction =
+					this.getSolver().solve(new Object[]{this.getProblem()});
+		} catch (Exception ex) {
+			Logger.getLogger(CaperucitaAgent.class.getName()).log(Level.SEVERE, null, ex);
+		}
+
+		// Return the selected action
+		return selectedAction;
+
+	}
+
+	/**
+	 * This method is executed by the simulator to give the agent a perception.
+	 * Then it updates its state.
+	 * @param p
+	 */
+	@Override
+	public void see(Perception p) {
+		this.getAgentState().updateState(p);
+	}
 }

@@ -9,7 +9,7 @@
   </Environment>
   <Agent name="CaperucitaAgent">
     <Strategy xsi:type="idemia:Search"/>
-    <Goal name="CaperucitaGoal" value="(vidasPerdidas &lt; 3) &amp; (mapaBosque.getCellValue(posicion) = FLORES)"/>
+    <Goal name="CaperucitaGoal" value="s.getVidasPerdidas() &lt; 3 &amp;&amp; s.getPosicionMapa(row, col) == FLORES"/>
     <AgentState name="CaperucitaState">
       <DataStructure name="mapaBosque" type="matrix"/>
       <DataStructure name="posicion" type="pair"/>

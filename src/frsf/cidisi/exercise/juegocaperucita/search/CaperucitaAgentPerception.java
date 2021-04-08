@@ -8,12 +8,12 @@ import frsf.cidisi.faia.environment.Environment;
 
 public class CaperucitaAgentPerception extends Perception {
 
+    public static int NO_VISIBLE = -1;
     public static int LIBRE = 0;
     public static int ARBOL = 1;
     public static int DULCES = 2; 
     public static int LOBO = 3; 
     public static int FLORES = 4;
-    
 
 	private ArrayList<Integer> sensorSuperior;
 	private ArrayList<Integer> sensorInferior;

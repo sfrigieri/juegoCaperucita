@@ -14,15 +14,122 @@ public class BosqueState extends EnvironmentState {
 	private int[] posicionAgente;
 	private int vidasPerdidasAgente;
 
-	public BosqueState() {
+	private int escenario;
 
-		//TODO: Complete Method
-		/*
-			// mapa = initData0;
-			// posicionAgente = initData1;
-			// vidasPerdidas = initData2;
-		 */
-		this.initState();
+	public BosqueState(int escenarioAmbiente) {
+
+		escenario = escenarioAmbiente;
+
+		mapa = this.getMapaInicial(escenario);
+		posicionAgente = this.getPosicionInicialAgente(escenario);
+		vidasPerdidasAgente = 0;
+
+		//No se utiliza
+		//	this.initState();
+	}
+
+
+	public int getEscenarioAmbiente() {
+		return escenario;
+	}
+
+	public int[][] getMapaInicial(int escenario) {
+
+		if(escenario == 1)
+		{ 
+			int[][] mapaInicial = new int[9][14];
+
+			for (int row = 0; row < mapaInicial[0].length; row++) {
+				for (int col = 0; col < mapaInicial.length; col++) {
+					mapaInicial[row][col] = CaperucitaAgentPerception.LIBRE;
+				}
+			}
+
+			//Completar con elementos de escenario 1
+			//            mapaInicial[0][0] = CaperucitaAgentPerception.ARBOL;
+			//            mapaInicial[0][0] = CaperucitaAgentPerception.ARBOL;
+			//            mapaInicial[0][0] = CaperucitaAgentPerception.ARBOL;
+			//            mapaInicial[0][0] = CaperucitaAgentPerception.ARBOL;
+			//            mapaInicial[0][0] = CaperucitaAgentPerception.ARBOL;
+			//            mapaInicial[0][0] = CaperucitaAgentPerception.ARBOL;
+			//            mapaInicial[0][0] = CaperucitaAgentPerception.ARBOL;
+			//            mapaInicial[0][0] = CaperucitaAgentPerception.ARBOL;
+
+			return mapaInicial;
+		}
+		if(escenario == 2)
+		{ 
+			int[][] mapaInicial = new int[9][14];
+
+			for (int row = 0; row < mapaInicial[0].length; row++) {
+				for (int col = 0; col < mapaInicial.length; col++) {
+					mapaInicial[row][col] = CaperucitaAgentPerception.LIBRE;
+				}
+			}
+
+			//Completar con elementos de escenario 2
+			//            mapaInicial[0][0] = CaperucitaAgentPerception.ARBOL;
+			//            mapaInicial[0][0] = CaperucitaAgentPerception.ARBOL;
+			//            mapaInicial[0][0] = CaperucitaAgentPerception.ARBOL;
+			//            mapaInicial[0][0] = CaperucitaAgentPerception.ARBOL;
+			//            mapaInicial[0][0] = CaperucitaAgentPerception.ARBOL;
+			//            mapaInicial[0][0] = CaperucitaAgentPerception.ARBOL;
+			//            mapaInicial[0][0] = CaperucitaAgentPerception.ARBOL;
+			//            mapaInicial[0][0] = CaperucitaAgentPerception.ARBOL;
+
+			return mapaInicial;
+		}
+
+		if(escenario == 3)
+		{ 
+			int[][] mapaInicial = new int[9][14];
+
+			for (int row = 0; row < mapaInicial[0].length; row++) {
+				for (int col = 0; col < mapaInicial.length; col++) {
+					mapaInicial[row][col] = CaperucitaAgentPerception.LIBRE;
+				}
+			}
+
+			//Completar con elementos de escenario 3
+			//            mapaInicial[0][0] = CaperucitaAgentPerception.ARBOL;
+			//            mapaInicial[0][0] = CaperucitaAgentPerception.ARBOL;
+			//            mapaInicial[0][0] = CaperucitaAgentPerception.ARBOL;
+			//            mapaInicial[0][0] = CaperucitaAgentPerception.ARBOL;
+			//            mapaInicial[0][0] = CaperucitaAgentPerception.ARBOL;
+			//            mapaInicial[0][0] = CaperucitaAgentPerception.ARBOL;
+			//            mapaInicial[0][0] = CaperucitaAgentPerception.ARBOL;
+			//            mapaInicial[0][0] = CaperucitaAgentPerception.ARBOL;
+
+			return mapaInicial;
+		}
+
+		return null;
+
+	}
+
+	public int[] getPosicionInicialAgente(int escenario) {
+
+		int[] pos = new int[2];
+
+		if(escenario == 1) {
+			pos[0]=5;
+			pos[1]=11;
+			return pos;
+		}
+		
+		if(escenario == 2) {
+			pos[0]=6;
+			pos[1]=3;
+			return pos;
+		}
+		
+		if(escenario == 3) {
+			pos[0]=4;
+			pos[1]=11;
+			return pos;
+		}
+		
+		return null;
 	}
 
 	/**
@@ -67,9 +174,9 @@ public class BosqueState extends EnvironmentState {
 	public void setVidasPerdidasAgente(int arg){
 		vidasPerdidasAgente = arg;
 	}
-	
-    //Las celdas percibidas quedan ordenadas en la dirección de cada sensor, partiendo desde la más cercana. 
-	
+
+	//Las celdas percibidas quedan ordenadas en la dirección de cada sensor, partiendo desde la más cercana. 
+
 	public ArrayList<Integer> getCeldasVisiblesSuperiores(int row, int col) {
 
 		ArrayList<Integer> list = new ArrayList<Integer>();
@@ -79,7 +186,7 @@ public class BosqueState extends EnvironmentState {
 
 		for(int i = row; i > 0; i--) {
 			list.add(mapa[i-1][col]);
-			
+
 			//Última celda visible
 			if(mapa[i-1][col] == CaperucitaAgentPerception.ARBOL)
 				break;
@@ -89,11 +196,11 @@ public class BosqueState extends EnvironmentState {
 	}
 
 	public ArrayList<Integer> getCeldasVisiblesInferiores(int row, int col) {
-		
+
 		ArrayList<Integer> list = new ArrayList<Integer>();
-		
+
 		int maxRow = mapa[col].length-1;
-		
+
 		if(row == maxRow)
 			return list;
 
@@ -108,7 +215,7 @@ public class BosqueState extends EnvironmentState {
 	}
 
 	public ArrayList<Integer> getCeldasVisiblesIzquierdas(int row, int col) {
-		
+
 		ArrayList<Integer> list = new ArrayList<Integer>();
 
 		if(col == 0)
@@ -125,11 +232,11 @@ public class BosqueState extends EnvironmentState {
 	}
 
 	public ArrayList<Integer> getCeldasVisiblesDerechas(int row, int col) {
-		
+
 		ArrayList<Integer> list = new ArrayList<Integer>();
 
 		int maxCol = mapa.length-1;
-		
+
 		if(col == maxCol)
 			return list;
 
@@ -141,6 +248,38 @@ public class BosqueState extends EnvironmentState {
 		}
 
 		return list;
+	}
+
+	public void setPosicionAgenteFila(int value) {
+		this.posicionAgente[0] = value;
+	}
+
+	public void setPosicionAgenteColumna(int value) {
+		this.posicionAgente[1] = value;
+	}
+
+	public int getPosicionAgenteFila() {
+		return posicionAgente[0];
+	}
+
+	public int getPosicionAgenteColumna() {
+		return posicionAgente[1];
+	}
+
+	public void resetMapa() {
+		this.setMapa(this.getMapaInicial(escenario));
+
+	}
+
+	public void resetPosicionAgente() {
+		this.setPosicionAgente(this.getPosicionInicialAgente(escenario));
+		
+	}
+
+
+	public void setMapaPosicion(int row, int col, int valor) {
+	        this.mapa[row][col] = valor;
+	    
 	}
 }
 
