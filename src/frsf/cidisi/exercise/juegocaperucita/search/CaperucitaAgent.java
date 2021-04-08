@@ -40,15 +40,6 @@ public class CaperucitaAgent extends SearchBasedAgent {
 	}
 
 
-	private int[][] getMapa(int i) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	private int[] getPosicionInicial(int i) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	/**
 	 * This method is executed by the simulator to ask the agent for an action.

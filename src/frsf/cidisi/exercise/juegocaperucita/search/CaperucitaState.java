@@ -18,7 +18,7 @@ public class CaperucitaState extends SearchBasedAgentState {
 	private int celdasPorVisitar;
 
 	private int[] posicionInicial;
-
+	//Utilizado para la representación gráfica del estadoAmbiente/Agente
 	private FrameTest frame = new FrameTest();
 	private int times = 0;
 

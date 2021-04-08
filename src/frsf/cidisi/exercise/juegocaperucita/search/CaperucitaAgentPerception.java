@@ -23,7 +23,7 @@ public class CaperucitaAgentPerception extends Perception {
  
 
     public  CaperucitaAgentPerception() {
-    	//TODO: Complete Method
+    	
     }
 
     public CaperucitaAgentPerception(Agent agent, Environment environment) {
@@ -36,7 +36,6 @@ public class CaperucitaAgentPerception extends Perception {
     @Override
     public void initPerception(Agent agentIn, Environment environmentIn) {
          
-        CaperucitaAgent agent = (CaperucitaAgent) agentIn;
         Bosque environment = (Bosque) environmentIn;
         BosqueState environmentState =
                 environment.getEnvironmentState();

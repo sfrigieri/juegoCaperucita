@@ -3,7 +3,6 @@ package frsf.cidisi.exercise.juegocaperucita.search;
 import java.util.ArrayList;
 
 import frsf.cidisi.faia.agent.Action;
-import frsf.cidisi.faia.agent.Perception;
 import frsf.cidisi.faia.environment.Environment;
 
 

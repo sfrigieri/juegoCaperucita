@@ -81,8 +81,8 @@ public class IrArriba extends SearchAction {
 				environmentState.resetPosicionAgente();
 				environmentState.resetMapa();
 				
-				agState.setVidasPerdidas(++vidasPerdidas);
-				agState.setDulcesPorJuntar(3);
+				agState.setVidasPerdidas(++vidasPerdidas); 
+				agState.setDulcesPorJuntar(3);//Las posiciones de dulces se actualizarán con las futuras percepciones
 				agState.setPosicion(agState.getPosicionInicial());
 			}	
 			else {
