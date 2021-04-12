@@ -34,7 +34,7 @@ public class Bosque extends Environment {
         // Create a new perception to return
          CaperucitaAgentPerception perception = new CaperucitaAgentPerception();
 		
-		//TODO : Set the perceptions sensors
+		perception.initPerception(this);
         
         // Return the perception
         return perception;

@@ -33,8 +33,8 @@ public class CaperucitaAgentPerception extends Perception {
     /**
      * This method is used to setup the perception.
      */
-    @Override
-    public void initPerception(Agent agentIn, Environment environmentIn) {
+
+    public void initPerception(Environment environmentIn) {
          
         Bosque environment = (Bosque) environmentIn;
         BosqueState environmentState =
@@ -50,6 +50,12 @@ public class CaperucitaAgentPerception extends Perception {
        
         
     }
+    
+	@Override
+	public void initPerception(Agent agent, Environment environment) {
+		// TODO Auto-generated method stub
+		
+	}
     
     @Override
     public String toString() {
@@ -87,6 +93,8 @@ public class CaperucitaAgentPerception extends Perception {
      public void setSensorDerecho(ArrayList<Integer> arg){
         this.sensorDerecho = arg;
      }
+
+
 	
    
 }
