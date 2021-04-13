@@ -16,11 +16,13 @@ public class CaperucitaState extends SearchBasedAgentState {
 	private int vidasPerdidas;
 	private int dulcesPorJuntar;
 	private int celdasPorVisitar;
-
+	private Double costoAcciones;
+	
 	private int[] posicionInicial;
 	//Utilizado para la representación gráfica del estadoAmbiente/Agente
 	private FrameTest frame = new FrameTest();
 	private int times = 0;
+
 
 	public CaperucitaState(int escenarioAmbiente) {
 
@@ -310,6 +312,15 @@ public class CaperucitaState extends SearchBasedAgentState {
 
 		return celdas;
 	}
+	
+	public void incrementarCostoAcciones(Double costo) {
+		this.costoAcciones += costo;
+		
+	}
+
+	public double getCostoAcciones() {
+		return this.costoAcciones;
+	}
 
 
 	//Las celdas percibidas quedan ordenadas en la dirección de cada sensor, partiendo desde la más cercana. 
@@ -386,6 +397,9 @@ public class CaperucitaState extends SearchBasedAgentState {
 
 		return list;
 	}
+
+
+
 
 
 }

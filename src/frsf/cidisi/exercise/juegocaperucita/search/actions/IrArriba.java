@@ -18,6 +18,8 @@ public class IrArriba extends SearchAction {
 	public SearchBasedAgentState execute(SearchBasedAgentState s) {
 		CaperucitaState agState = (CaperucitaState) s;
 
+		((CaperucitaState) s).incrementarCostoAcciones(this.getCost());
+		
 		int fila = agState.getPosicionFila();
 		int col = agState.getPosicionColumna();
 
@@ -71,7 +73,8 @@ public class IrArriba extends SearchAction {
 
 		ArrayList<Integer> listaCeldas = agState.getCeldasVisiblesSuperiores(fila, col);
 
-		if(!listaCeldas.isEmpty() && listaCeldas.get(0) != CaperucitaAgentPerception.ARBOL) {
+		if(agState.getVidasPerdidas() < 3 && !listaCeldas.isEmpty() 
+				&& listaCeldas.get(0) != CaperucitaAgentPerception.ARBOL) {
 
 			if(listaCeldas.contains(CaperucitaAgentPerception.LOBO)){
 				int vidasPerdidas = agState.getVidasPerdidas();
