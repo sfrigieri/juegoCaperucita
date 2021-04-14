@@ -17,11 +17,11 @@ public class CaperucitaState extends SearchBasedAgentState {
 	private int dulcesPorJuntar;
 	private int celdasPorVisitar;
 	private Double costoAcciones;
-
+	
+	private int escenario;
 	private int[] posicionInicial;
-	//Utilizado para la representación gráfica del estadoAmbiente/Agente
-	private FrameTest frame = new FrameTest();
-	private int times = 0;
+	private FrameTest frame;
+	private int times;
 
 
 	public CaperucitaState(int escenarioAmbiente) {
@@ -34,7 +34,12 @@ public class CaperucitaState extends SearchBasedAgentState {
 		vidasPerdidas = 0;
 		dulcesPorJuntar = 3;
 		this.actualizarCeldasPorVisitar();
-
+		
+		escenario = escenarioAmbiente;
+		
+		//Utilizado para la representación gráfica del estadoAmbiente/Agente
+		frame = new FrameTest();
+		times = 0;
 		//this.initState();
 	}
 
@@ -59,6 +64,8 @@ public class CaperucitaState extends SearchBasedAgentState {
 	@Override
 	public void updateState(Perception p) {
 
+		this.actualizarFrame();
+		
 		CaperucitaAgentPerception percepcionCaperucita = (CaperucitaAgentPerception) p;
 
 		int row = this.getPosicionFila();
@@ -102,20 +109,28 @@ public class CaperucitaState extends SearchBasedAgentState {
 			i++;
 		}
 
-		//    	 if(times == 0) {
-		//         	frame.initBoard("Pacman", world, position);
-		//         	times++;
-		//         }
-		//         else
-		//         	frame.repaint(world, position);
-		//         
-		//         try {
-		// 			TimeUnit.SECONDS.sleep(1);
-		// 		} catch (InterruptedException e) {
-		// 			// TODO Auto-generated catch block
-		// 			e.printStackTrace();
-		// 		}
+	
 	}
+
+	private void actualizarFrame() {
+   	
+		if(times == 0) {
+      	frame.initBoard("Caperucita en el bosque",this.getMapaBosque(), this.getPosicion(), this.escenario);
+      	times++;
+      }
+      else
+      	frame.repaint(this.getMapaBosque(), this.getPosicion());
+      
+      try {
+			TimeUnit.SECONDS.sleep(2);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+
 
 	/**
 	 * This method is optional, and sets the initial state of the agent.

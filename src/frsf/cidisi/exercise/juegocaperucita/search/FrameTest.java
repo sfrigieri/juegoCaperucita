@@ -12,18 +12,34 @@ public class FrameTest {
 	private JPanel panel;
 	private JFrame f;
 	private JLabel [][] jLmatrix;
+	private int [][] matrixOtherTrees;
 	private ImageIcon[] icons;
+	private ImageIcon[] iconsOtherTrees;
 	private Random generator;
-
+	private int escenario;
+	//Inicializarlo en la clase
+	public static int valorPrevioCeldaLobo= -1;
 	
-	public void initBoard(String games_name, int[][] matrix, int[] position){
+	public void initBoard(String games_name, int[][] matrix, int[] position, int escenarioAmbiente){
 	
 		generator = new Random();
-		jLmatrix = new JLabel[4][4];
+		escenario =  escenarioAmbiente;
+		jLmatrix = new JLabel[9][14];
+		matrixOtherTrees = this.getInitMatrix(escenarioAmbiente);
 		f = new JFrame(games_name);
 		icons = new ImageIcon[5];
-		panel = new JPanel(new GridLayout(4, 4, 1, 1));
-
+		iconsOtherTrees = new ImageIcon[2];
+		panel = new JPanel(new GridLayout(9, 14, 1, 1));
+	
+		//asignar a iconsOtherTrees arbusto en 0 y pino amarillo en 1;
+		//Setear matrixOtherTrees posiciones arbutos (0) y pinos amarillos (1), -1 para resto.
+		
+		//Siempre que valor sea ARBOL, consultar que icono de arbol corresponde segun escenario en esa posicion
+		
+		//Cuando se detecte valor Lobo en matriz, asignar icono lobo segun valorPrevioCeldaLobo
+		//Si posicion lobo >columna 7. usar imagen izquierda, sino derecha. 
+		//(crear listas con icons lobo derechos o izquierdos.)
+		
 		icons[0] = new ImageIcon("C:\\Users\\Santi\\Documents\\GitHub\\examples\\src\\frsf\\cidisi\\faia\\examples\\search\\pacman\\icons\\LIBRE.jpg");
 		icons[1] = new ImageIcon("C:\\Users\\Santi\\Documents\\GitHub\\examples\\src\\frsf\\cidisi\\faia\\examples\\search\\pacman\\icons\\FANTASMAROJO.jpg");
 		icons[2] = new ImageIcon("C:\\Users\\Santi\\Documents\\GitHub\\examples\\src\\frsf\\cidisi\\faia\\examples\\search\\pacman\\icons\\FRUTILLA.jpg");
@@ -56,6 +72,11 @@ public class FrameTest {
 	}
 	
 	
+	private int[][] getInitMatrix(int escenarioAmbiente) {
+		return new int[9][14];
+	}
+
+
 	public void repaint(int[][] matrix, int[] position){
 
 
@@ -71,4 +92,5 @@ public class FrameTest {
 		jLmatrix[position[0]][position[1]].setIcon(icons[4]);
 
 	}
+
 }
