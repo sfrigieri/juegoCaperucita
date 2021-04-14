@@ -40,6 +40,8 @@ public class CaperucitaState extends SearchBasedAgentState {
 		//Utilizado para la representación gráfica del estadoAmbiente/Agente
 		frame = new FrameTest();
 		times = 0;
+		
+		this.actualizarFrame();
 		//this.initState();
 	}
 
@@ -63,8 +65,6 @@ public class CaperucitaState extends SearchBasedAgentState {
 	 */
 	@Override
 	public void updateState(Perception p) {
-
-		this.actualizarFrame();
 		
 		CaperucitaAgentPerception percepcionCaperucita = (CaperucitaAgentPerception) p;
 
@@ -109,25 +109,19 @@ public class CaperucitaState extends SearchBasedAgentState {
 			i++;
 		}
 
-	
+		this.actualizarFrame();
+
 	}
 
 	private void actualizarFrame() {
-   	
+		 
 		if(times == 0) {
       	frame.initBoard("Caperucita en el bosque",this.getMapaBosque(), this.getPosicion(), this.escenario);
-      	times++;
       }
       else
       	frame.repaint(this.getMapaBosque(), this.getPosicion());
       
-      try {
-			TimeUnit.SECONDS.sleep(2);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+    	times++;
 	}
 
 
