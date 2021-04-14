@@ -1,6 +1,7 @@
 package frsf.cidisi.exercise.juegocaperucita.search;
 
 import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
 
 import frsf.cidisi.faia.state.EnvironmentState;
 
@@ -15,6 +16,9 @@ public class BosqueState extends EnvironmentState {
 	private int vidasPerdidasAgente;
 
 	private int escenario;
+	private int valorPrevioCeldaLobo;
+	private int posicionFilaLobo;
+	private int posicionColumnaLobo;
 
 	public BosqueState(int escenarioAmbiente) {
 
@@ -23,7 +27,7 @@ public class BosqueState extends EnvironmentState {
 		mapa = this.getMapaInicial(escenario);
 		posicionAgente = this.getPosicionInicialAgente(escenario);
 		vidasPerdidasAgente = 0;
-
+		valorPrevioCeldaLobo = -1;
 		//No se utiliza
 		//	this.initState();
 	}
@@ -33,14 +37,51 @@ public class BosqueState extends EnvironmentState {
 		return escenario;
 	}
 
+	public void actualizarPosicionLobo() {
+
+		int mx;
+		int my;
+
+		//Si no es la primera vez que se actualiza posicion lobo, reasignar valor previo en mapa
+		//El valor -1 (NO_VISIBLE) no se utiliza en el mapa real, solo en el estado del agente.
+		if(this.valorPrevioCeldaLobo != -1)
+			this.setMapaPosicion(this.posicionFilaLobo, this.posicionColumnaLobo, this.valorPrevioCeldaLobo);
+
+
+		//nextInt no incluye Max. 
+		//Ej: si length col es 14, devolverá como máximo un 13 que es correcto (0-13 igual a 14 columnas).
+		do{
+
+
+			mx = ThreadLocalRandom.current().nextInt(0, this.mapa.length);
+
+			my = ThreadLocalRandom.current().nextInt(0, this.mapa[0].length);
+
+			//El Lobo no puede aparecer en la misma celda, la celda de Caperucita o en celda de Dulces
+		}
+		while((this.getPosicionMapa(mx, my) == CaperucitaAgentPerception.LOBO)
+				|| (mx == this.getPosicionAgenteFila() && my == this.getPosicionAgenteColumna())
+				|| (this.getPosicionMapa(mx, my) == CaperucitaAgentPerception.DULCES)
+				);
+
+		//Guardar valor previo para reasignarlo luego
+		this.valorPrevioCeldaLobo = this.getPosicionMapa(mx, my);
+
+		this.posicionFilaLobo = mx;
+		this.posicionColumnaLobo = my;
+
+		this.setMapaPosicion(mx, my, CaperucitaAgentPerception.LOBO);
+	}
+
+
 	public int[][] getMapaInicial(int escenario) {
 
 		if(escenario == 1)
 		{ 
 			int[][] mapaInicial = new int[9][14];
 
-			for (int row = 0; row < mapaInicial[0].length; row++) {
-				for (int col = 0; col < mapaInicial.length; col++) {
+			for (int row = 0; row < mapaInicial.length; row++) {
+				for (int col = 0; col < mapaInicial[0].length; col++) {
 					mapaInicial[row][col] = CaperucitaAgentPerception.LIBRE;
 				}
 			}
@@ -61,8 +102,8 @@ public class BosqueState extends EnvironmentState {
 		{ 
 			int[][] mapaInicial = new int[9][14];
 
-			for (int row = 0; row < mapaInicial[0].length; row++) {
-				for (int col = 0; col < mapaInicial.length; col++) {
+			for (int row = 0; row < mapaInicial.length; row++) {
+				for (int col = 0; col < mapaInicial[0].length; col++) {
 					mapaInicial[row][col] = CaperucitaAgentPerception.LIBRE;
 				}
 			}
@@ -84,8 +125,8 @@ public class BosqueState extends EnvironmentState {
 		{ 
 			int[][] mapaInicial = new int[9][14];
 
-			for (int row = 0; row < mapaInicial[0].length; row++) {
-				for (int col = 0; col < mapaInicial.length; col++) {
+			for (int row = 0; row < mapaInicial.length; row++) {
+				for (int col = 0; col < mapaInicial[0].length; col++) {
 					mapaInicial[row][col] = CaperucitaAgentPerception.LIBRE;
 				}
 			}
@@ -116,19 +157,19 @@ public class BosqueState extends EnvironmentState {
 			pos[1]=11;
 			return pos;
 		}
-		
+
 		if(escenario == 2) {
 			pos[0]=6;
 			pos[1]=3;
 			return pos;
 		}
-		
+
 		if(escenario == 3) {
 			pos[0]=4;
 			pos[1]=11;
 			return pos;
 		}
-		
+
 		return null;
 	}
 
@@ -273,13 +314,17 @@ public class BosqueState extends EnvironmentState {
 
 	public void resetPosicionAgente() {
 		this.setPosicionAgente(this.getPosicionInicialAgente(escenario));
-		
+
 	}
 
 
 	public void setMapaPosicion(int row, int col, int valor) {
-	        this.mapa[row][col] = valor;
-	    
+		this.mapa[row][col] = valor;
+
+	}
+
+	public int getPosicionMapa(int row, int col) {
+		return mapa[row][col];
 	}
 }
 

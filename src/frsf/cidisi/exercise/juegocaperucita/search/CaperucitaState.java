@@ -17,7 +17,7 @@ public class CaperucitaState extends SearchBasedAgentState {
 	private int dulcesPorJuntar;
 	private int celdasPorVisitar;
 	private Double costoAcciones;
-	
+
 	private int[] posicionInicial;
 	//Utilizado para la representación gráfica del estadoAmbiente/Agente
 	private FrameTest frame = new FrameTest();
@@ -134,7 +134,19 @@ public class CaperucitaState extends SearchBasedAgentState {
 	public String toString() {
 		String str = "";
 
-		//TODO: Complete Method
+		str = str + "mapa Bosque=\"[ \n";
+		for (int row = 0; row < mapaBosque.length; row++) {
+			str = str + "[ ";
+			for (int col = 0; col < mapaBosque[0].length; col++) {
+				if (mapaBosque[row][col] == -1) {
+					str = str + "* ";
+				} else {
+					str = str + mapaBosque[row][col] + " ";
+				}
+			}
+			str = str + " ]\n";
+		}
+		str = str +" ]\"";
 
 		return str;
 	}
@@ -178,6 +190,7 @@ public class CaperucitaState extends SearchBasedAgentState {
 		posicion = p;
 	}
 
+
 	public int[] getPosicionInicial(int escenario) {
 		int[] pos = new int[2];
 
@@ -204,20 +217,20 @@ public class CaperucitaState extends SearchBasedAgentState {
 
 
 	private int[][] getMapaInicial(int escenario) {
-		
+
 		if(escenario == 1)
 		{ 
 			int[][] mapaInicial = new int[9][14];
 
-			for (int row = 0; row < mapaInicial[0].length; row++) {
-				for (int col = 0; col < mapaInicial.length; col++) {
+			for (int row = 0; row < mapaInicial.length; row++) {
+				for (int col = 0; col < mapaInicial[0].length; col++) {
 					mapaInicial[row][col] = CaperucitaAgentPerception.NO_VISIBLE;
 				}
 			}
 
 			//Completar con elementos de escenario 1
-			            mapaInicial[7][7] = CaperucitaAgentPerception.FLORES;
-			            mapaInicial[8][7] = CaperucitaAgentPerception.FLORES;
+			mapaInicial[7][7] = CaperucitaAgentPerception.FLORES;
+			mapaInicial[8][7] = CaperucitaAgentPerception.FLORES;
 
 
 			return mapaInicial;
@@ -226,16 +239,16 @@ public class CaperucitaState extends SearchBasedAgentState {
 		{ 
 			int[][] mapaInicial = new int[9][14];
 
-			for (int row = 0; row < mapaInicial[0].length; row++) {
-				for (int col = 0; col < mapaInicial.length; col++) {
+			for (int row = 0; row < mapaInicial.length; row++) {
+				for (int col = 0; col < mapaInicial[0].length; col++) {
 					mapaInicial[row][col] = CaperucitaAgentPerception.NO_VISIBLE;
 				}
 			}
 
 			//Completar con elementos de escenario 2
-            mapaInicial[7][6] = CaperucitaAgentPerception.FLORES;
-            mapaInicial[8][6] = CaperucitaAgentPerception.FLORES;
-            
+			mapaInicial[7][6] = CaperucitaAgentPerception.FLORES;
+			mapaInicial[8][6] = CaperucitaAgentPerception.FLORES;
+
 			return mapaInicial;
 		}
 
@@ -243,15 +256,15 @@ public class CaperucitaState extends SearchBasedAgentState {
 		{ 
 			int[][] mapaInicial = new int[9][14];
 
-			for (int row = 0; row < mapaInicial[0].length; row++) {
-				for (int col = 0; col < mapaInicial.length; col++) {
+			for (int row = 0; row < mapaInicial.length; row++) {
+				for (int col = 0; col < mapaInicial[0].length; col++) {
 					mapaInicial[row][col] = CaperucitaAgentPerception.NO_VISIBLE;
 				}
 			}
 
 			//Completar con elementos de escenario 3
-            mapaInicial[0][3] = CaperucitaAgentPerception.FLORES;
-            mapaInicial[1][3] = CaperucitaAgentPerception.FLORES;
+			mapaInicial[0][3] = CaperucitaAgentPerception.FLORES;
+			mapaInicial[1][3] = CaperucitaAgentPerception.FLORES;
 
 			return mapaInicial;
 		}
@@ -312,10 +325,10 @@ public class CaperucitaState extends SearchBasedAgentState {
 
 		return celdas;
 	}
-	
+
 	public void incrementarCostoAcciones(Double costo) {
 		this.costoAcciones += costo;
-		
+
 	}
 
 	public double getCostoAcciones() {
