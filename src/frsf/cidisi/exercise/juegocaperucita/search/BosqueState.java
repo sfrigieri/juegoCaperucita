@@ -358,8 +358,9 @@ public class BosqueState extends EnvironmentState {
 
 		ArrayList<Integer> list = new ArrayList<Integer>();
 
-		int maxRow = mapa[col].length-1;
-
+		//TODO int maxRow = mapa[col].length-1;
+		int maxRow = mapa.length-1;
+		
 		if(row == maxRow)
 			return list;
 

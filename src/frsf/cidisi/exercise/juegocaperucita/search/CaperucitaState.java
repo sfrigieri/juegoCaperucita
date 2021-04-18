@@ -373,8 +373,8 @@ public class CaperucitaState extends SearchBasedAgentState {
 
 		int celdas = 0;
 
-		for (int row = 0; row < mapaBosque[0].length; row++)
-			for (int col = 0; col < mapaBosque.length; col++)
+		for (int row = 0; row < mapaBosque.length; row++)
+			for (int col = 0; col < mapaBosque[0].length; col++)
 				if (mapaBosque[row][col] == CaperucitaAgentPerception.NO_VISIBLE)
 					celdas++;
 
