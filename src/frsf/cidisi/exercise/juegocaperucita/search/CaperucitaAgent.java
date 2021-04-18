@@ -48,10 +48,10 @@ public class CaperucitaAgent extends SearchBasedAgent {
 	public Action selectAction() {
 
 		// Create the search strategy
-
 		IStepCostFunction cost = new CostFunction();
 		IEstimatedCostFunction heuristic = new Heuristic();
 		AStarSearch strategy = new AStarSearch(cost, heuristic);
+		
 		//DepthFirstSearch strategy = new DepthFirstSearch();          
 
 		// Create a Search object with the strategy

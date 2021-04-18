@@ -56,8 +56,7 @@ public class CaperucitaAgentPerception extends Perception {
     
 	@Override
 	public void initPerception(Agent agent, Environment environment) {
-		// TODO Auto-generated method stub
-		
+		// No se puede eliminar por restricciones de extensión
 	}
     
     @Override
@@ -69,8 +68,9 @@ public class CaperucitaAgentPerception extends Perception {
         return str.toString();
     }
 
-    // The following methods are agent-specific:
-    //TODO: Complete this section with the agent-specific methods
+
+
+    //Métodos Auxiliares
 	
      public ArrayList<Integer> getSensorSuperior(){
         return sensorSuperior;

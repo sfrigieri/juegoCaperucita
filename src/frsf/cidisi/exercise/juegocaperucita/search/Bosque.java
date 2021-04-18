@@ -31,9 +31,10 @@ public class Bosque extends Environment {
      */
     @Override
     public  CaperucitaAgentPerception getPercept() {
+    	
         // Create a new perception to return
          CaperucitaAgentPerception perception = new CaperucitaAgentPerception();
-		
+
 		perception.initPerception(this);
         
         // Return the perception
@@ -59,8 +60,8 @@ public class Bosque extends Environment {
         return false;
     }
     
+    
     // Metodos especificos de agente:
-
 	public ArrayList<Integer> getCeldasVisiblesSuperiores(int row, int col) {
 		return ((BosqueState) this.environmentState).getCeldasVisiblesSuperiores(row, col);
 	}

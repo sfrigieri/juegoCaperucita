@@ -1,5 +1,7 @@
 package frsf.cidisi.exercise.juegocaperucita.search.actions;
 
+import java.util.ArrayList;
+
 import frsf.cidisi.exercise.juegocaperucita.search.*;
 import frsf.cidisi.faia.agent.search.SearchAction;
 import frsf.cidisi.faia.agent.search.SearchBasedAgentState;
@@ -14,13 +16,50 @@ public class IrDerecha extends SearchAction {
      */
     @Override
     public SearchBasedAgentState execute(SearchBasedAgentState s) {
-        CaperucitaState agState = (CaperucitaState) s;
-        
-        // TODO: Use this conditions
-        // PreConditions: null
-        // PostConditions: null
-        
-        return null;
+    	
+    	CaperucitaState agState = (CaperucitaState) s;
+
+		((CaperucitaState) s).incrementarCostoAcciones(this.getCost());
+		
+		int fila = agState.getPosicionFila();
+		int col = agState.getPosicionColumna();
+
+		ArrayList<Integer> listaCeldas = agState.getCeldasVisiblesDerechas(fila, col);
+
+		if(agState.getVidasPerdidas() < 3 && !listaCeldas.isEmpty() 
+				&& listaCeldas.get(0) != CaperucitaAgentPerception.ARBOL) {
+
+			if(listaCeldas.contains(CaperucitaAgentPerception.LOBO)){
+				int vidasPerdidas = agState.getVidasPerdidas();
+				agState.setVidasPerdidas(++vidasPerdidas);
+				agState.setDulcesPorJuntar(3);
+				agState.setPosicion(agState.getPosicionInicial());
+			}	
+			else {
+				int avance = 0;
+				for(Integer valor : listaCeldas) {
+					avance++;
+					//Por cada celda en columna 'col' que contenga dulces
+					if(valor.intValue() == CaperucitaAgentPerception.DULCES) {
+						int dulcesPorJuntar = agState.getDulcesPorJuntar();
+						agState.setDulcesPorJuntar(--dulcesPorJuntar);
+						agState.setMapaPosicion(fila, col+avance, CaperucitaAgentPerception.LIBRE);
+					}
+				}
+				//Si en la última celda visible hay un árbol, la posición final será la anterior al árbol
+				if(listaCeldas.contains(CaperucitaAgentPerception.ARBOL))
+					agState.setPosicionColumna(col+avance-1); //TODO VER
+				//Sino, la posición final coincide con la última celda visible
+				else
+					agState.setPosicionColumna(col+avance);
+			}
+
+			return agState;
+
+		}
+		else
+			return null;
+		
     }
 
     /**
@@ -28,22 +67,62 @@ public class IrDerecha extends SearchAction {
      */
     @Override
     public EnvironmentState execute(AgentState ast, EnvironmentState est) {
-        BosqueState environmentState = (BosqueState) est;
-        CaperucitaState agState = ((CaperucitaState) ast);
+    	BosqueState environmentState = (BosqueState) est;
+		CaperucitaState agState = ((CaperucitaState) ast);
 
-        // TODO: Use this conditions
-        // PreConditions: null
-        // PostConditions: null
-        
-        if (true) {
-            // Update the real world
-            
-            // Update the agent state
-            
-            return environmentState;
-        }
+		int fila = environmentState.getPosicionAgenteFila();
+		int col = environmentState.getPosicionAgenteColumna();
 
-        return null;
+		ArrayList<Integer> listaCeldas = agState.getCeldasVisiblesDerechas(fila, col);
+
+		if(agState.getVidasPerdidas() < 3 && !listaCeldas.isEmpty() 
+				&& listaCeldas.get(0) != CaperucitaAgentPerception.ARBOL) {
+
+			if(listaCeldas.contains(CaperucitaAgentPerception.LOBO)){
+				int vidasPerdidas = agState.getVidasPerdidas();
+				
+				//Actualizo el contador de vidas perdidas en estadoAmbiente (necesario al evaluar agentFailed())
+				environmentState.setVidasPerdidasAgente(++vidasPerdidas);
+				//Se reinicializa el mapa y la posición del agente en estadoAmbiente
+				environmentState.resetPosicionAgente();
+				environmentState.resetMapa();
+				
+				agState.setVidasPerdidas(++vidasPerdidas); 
+				agState.setDulcesPorJuntar(3);//Las posiciones de dulces se actualizarán con las futuras percepciones
+				agState.setPosicion(agState.getPosicionInicial());
+			}	
+			else {
+				int avance = 0;
+				for(Integer valor : listaCeldas) {
+					avance++;
+					//Por cada celda en columna 'col' que contenga dulces
+					if(valor.intValue() == CaperucitaAgentPerception.DULCES) {
+						
+						environmentState.setMapaPosicion(fila, col+avance, CaperucitaAgentPerception.LIBRE);
+						
+						int dulcesPorJuntar = agState.getDulcesPorJuntar();
+						agState.setDulcesPorJuntar(--dulcesPorJuntar);
+						agState.setMapaPosicion(fila, col+avance, CaperucitaAgentPerception.LIBRE);
+					}
+				}
+				//Si en la última celda visible hay un árbol, la posición final será la anterior al árbol
+				if(listaCeldas.contains(CaperucitaAgentPerception.ARBOL)) {
+					environmentState.setPosicionAgenteColumna(col+avance-1);
+					agState.setPosicionColumna(col+avance-1);
+				}
+				//Sino, la posición final coincide con la última celda visible
+				else {
+					environmentState.setPosicionAgenteColumna(col+avance);
+					agState.setPosicionColumna(col+avance);
+				}
+
+			}
+
+			return environmentState;
+
+		}
+		else
+			return null;
     }
 
     /**
@@ -51,7 +130,7 @@ public class IrDerecha extends SearchAction {
      */
     @Override
     public Double getCost() {
-        return new Double(0);
+        return new Double(1);
     }
 
     /**

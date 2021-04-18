@@ -23,7 +23,7 @@ public class CaperucitaState extends SearchBasedAgentState {
 	private FrameTest frame;
 	private int times;
 
-
+	
 	public CaperucitaState(int escenarioAmbiente) {
 
 		mapaBosque = this.getMapaInicial(escenarioAmbiente);
@@ -53,10 +53,28 @@ public class CaperucitaState extends SearchBasedAgentState {
 	 */
 	@Override
 	public SearchBasedAgentState clone() {
-
-		//TODO: Complete Method
-
-		return null;
+		
+		CaperucitaState nuevoEstado = new CaperucitaState(this.escenario);
+		
+		int[][] nuevoMapaBosque = new int[this.mapaBosque.length][this.mapaBosque.length];
+		
+		for(int row = 0; row < this.mapaBosque.length; row++) {
+			for(int col = 0; col<this.mapaBosque.length; col++) {
+				nuevoMapaBosque[row][col] = this.mapaBosque[row][col];
+			}
+		}
+		
+		nuevoEstado.setMapaBosque(nuevoMapaBosque);
+		nuevoEstado.setPosicion(this.posicion);
+		nuevoEstado.setVidasPerdidas(this.vidasPerdidas);
+		nuevoEstado.setDulcesPorJuntar(this.dulcesPorJuntar);
+		nuevoEstado.setCeldasPorVisitar(this.celdasPorVisitar);
+		//TODO Consultar si iría o no. 
+		/*nuevoEstado.setCostoAcciones(this.costoAcciones);*/
+		
+		
+		return nuevoEstado;
+		
 	}
 
 	/**
@@ -132,7 +150,7 @@ public class CaperucitaState extends SearchBasedAgentState {
 	@Override
 	public void initState() {
 
-		//TODO: Complete Method
+		//No se puede eliminar por restricciones de extensión
 
 	}
 
@@ -167,14 +185,45 @@ public class CaperucitaState extends SearchBasedAgentState {
 	@Override
 	public boolean equals(Object obj) {
 
-		//TODO: Complete Method
+		/* TODO Ver si falta alguno
+		 
+		private Double costoAcciones;
+		private int escenario;
+		private int[] posicionInicial;
+		private FrameTest frame;
+		private int times;
+		
+		*/
 
-		return true;
+		if (!(obj instanceof CaperucitaState))
+            return false;
+        
+		CaperucitaState objeto = (CaperucitaState)obj;
+		
+        int[][] mapaBosque = ((CaperucitaState) obj).getMapaBosque();
+        
+        //Compara ambos mapas (Referencia: Pacman)
+        for (int row = 0; row < this.mapaBosque.length; row++) {
+            for (int col = 0; col < this.mapaBosque.length; col++) {
+                if (this.mapaBosque[row][col] != mapaBosque[row][col]) {
+                    return false;
+                }
+            }
+        }
+		
+		boolean posicionFila = objeto.getPosicion()[0] == this.posicion[0];
+		boolean posicionColumna = objeto.getPosicion()[1] == this.posicion[1];
+		boolean vidas = objeto.getVidasPerdidas() == this.vidasPerdidas;
+		boolean dulces = objeto.getDulcesPorJuntar() == this.dulcesPorJuntar;
+		boolean celdas = objeto.getCeldasPorVisitar() == this.celdasPorVisitar;
+
+		return posicionFila && posicionColumna && vidas && dulces && celdas;
+		
 	}
 
-	//TODO: Complete this section with agent-specific methods
-	// The following methods are agent-specific:
 
+	//Métodos Auxiliares
+	
 	public int[][] getMapaBosque(){
 		return mapaBosque;
 	}

@@ -10,7 +10,6 @@ import frsf.cidisi.faia.state.EnvironmentState;
  */
 public class BosqueState extends EnvironmentState {
 
-	//TODO: Setup Variables
 	private int[][] mapa;
 	private int[] posicionAgente;
 	private int vidasPerdidasAgente;
@@ -52,7 +51,6 @@ public class BosqueState extends EnvironmentState {
 		//Ej: si length col es 14, devolverá como máximo un 13 que es correcto (0-13 igual a 14 columnas).
 		do{
 
-
 			mx = ThreadLocalRandom.current().nextInt(0, this.mapa.length);
 
 			my = ThreadLocalRandom.current().nextInt(0, this.mapa[0].length);
@@ -87,15 +85,49 @@ public class BosqueState extends EnvironmentState {
 				}
 			}
 
-			//Completar con elementos de escenario 1
-			//            mapaInicial[0][0] = CaperucitaAgentPerception.ARBOL;
-			//            mapaInicial[0][0] = CaperucitaAgentPerception.ARBOL;
-			//            mapaInicial[0][0] = CaperucitaAgentPerception.ARBOL;
-			//            mapaInicial[0][0] = CaperucitaAgentPerception.ARBOL;
-			//            mapaInicial[0][0] = CaperucitaAgentPerception.ARBOL;
-			//            mapaInicial[0][0] = CaperucitaAgentPerception.ARBOL;
-			//            mapaInicial[0][0] = CaperucitaAgentPerception.ARBOL;
-			//            mapaInicial[0][0] = CaperucitaAgentPerception.ARBOL;
+			//Árboles
+			for (int row = 0; row < mapaInicial.length; row++) {
+				for (int col = 0; col < 3; col++) {
+					mapaInicial[row][col] = CaperucitaAgentPerception.ARBOL;
+				}
+			}
+			
+			for (int col = 3; col < 12; col++) {
+				mapaInicial[0][col] = CaperucitaAgentPerception.ARBOL;
+				mapaInicial[8][col] = CaperucitaAgentPerception.ARBOL;
+			}
+			
+			for (int row = 0; row < mapaInicial.length; row++) {
+				for (int col = 12; col < 14; col++) {
+					mapaInicial[row][col] = CaperucitaAgentPerception.ARBOL;
+				}
+			}
+			
+			 mapaInicial[1][7] = CaperucitaAgentPerception.ARBOL;
+			 mapaInicial[1][11] = CaperucitaAgentPerception.ARBOL;
+			 mapaInicial[2][4] = CaperucitaAgentPerception.ARBOL;
+			 mapaInicial[3][9] = CaperucitaAgentPerception.ARBOL;
+			 mapaInicial[4][3] = CaperucitaAgentPerception.ARBOL;
+			 mapaInicial[4][4] = CaperucitaAgentPerception.ARBOL;
+			 mapaInicial[4][8] = CaperucitaAgentPerception.ARBOL;
+			 mapaInicial[5][4] = CaperucitaAgentPerception.ARBOL;
+			 mapaInicial[5][5] = CaperucitaAgentPerception.ARBOL;
+			 mapaInicial[6][5] = CaperucitaAgentPerception.ARBOL;
+			 mapaInicial[6][6] = CaperucitaAgentPerception.ARBOL;
+			 mapaInicial[6][7] = CaperucitaAgentPerception.ARBOL;
+			 mapaInicial[6][9] = CaperucitaAgentPerception.ARBOL;
+			 mapaInicial[6][11] = CaperucitaAgentPerception.ARBOL;
+			 mapaInicial[7][6] = CaperucitaAgentPerception.ARBOL;
+			 mapaInicial[7][11] = CaperucitaAgentPerception.ARBOL;
+			 
+			//Dulces
+			 mapaInicial[1][3] = CaperucitaAgentPerception.DULCES;
+			 mapaInicial[1][10] = CaperucitaAgentPerception.DULCES;
+			 mapaInicial[3][8] = CaperucitaAgentPerception.DULCES;
+			 
+			 //Flores 
+			 mapaInicial[7][7] = CaperucitaAgentPerception.FLORES;
+			 mapaInicial[8][7] = CaperucitaAgentPerception.FLORES;
 
 			return mapaInicial;
 		}
@@ -108,17 +140,58 @@ public class BosqueState extends EnvironmentState {
 					mapaInicial[row][col] = CaperucitaAgentPerception.LIBRE;
 				}
 			}
+			
+			//Árboles
+			for (int row = 0; row < mapaInicial.length; row++) {
+				for (int col = 0; col < 3; col++) {
+					mapaInicial[row][col] = CaperucitaAgentPerception.ARBOL;
+				}
+			}
+			
+			for (int col = 3; col < 11; col++) {
+				mapaInicial[0][col] = CaperucitaAgentPerception.ARBOL;
+				mapaInicial[1][col] = CaperucitaAgentPerception.ARBOL;
+				mapaInicial[7][col] = CaperucitaAgentPerception.ARBOL;
+				mapaInicial[8][col] = CaperucitaAgentPerception.ARBOL;
+			}
+			
+			for (int row = 0; row < mapaInicial.length; row++) {
+				for (int col = 11; col < 14; col++) {
+					mapaInicial[row][col] = CaperucitaAgentPerception.ARBOL;
+				}
+			}
+			
+			 mapaInicial[2][3] = CaperucitaAgentPerception.ARBOL;
+			 mapaInicial[2][7] = CaperucitaAgentPerception.ARBOL;
+			 mapaInicial[2][8] = CaperucitaAgentPerception.ARBOL;
+			 mapaInicial[2][10] = CaperucitaAgentPerception.ARBOL;
+			 mapaInicial[3][3] = CaperucitaAgentPerception.ARBOL;
+			 mapaInicial[3][4] = CaperucitaAgentPerception.ARBOL;
+			 mapaInicial[4][4] = CaperucitaAgentPerception.ARBOL;
+			 mapaInicial[4][5] = CaperucitaAgentPerception.ARBOL;
+			 mapaInicial[4][7] = CaperucitaAgentPerception.ARBOL;
+			 mapaInicial[4][9] = CaperucitaAgentPerception.ARBOL;
+			 mapaInicial[5][5] = CaperucitaAgentPerception.ARBOL;
+			 mapaInicial[5][7] = CaperucitaAgentPerception.ARBOL;
+			 mapaInicial[5][9] = CaperucitaAgentPerception.ARBOL;
+			 mapaInicial[6][9] = CaperucitaAgentPerception.ARBOL;
+				 
+			 //Libres
+			 mapaInicial[1][6] = CaperucitaAgentPerception.LIBRE;
+			 mapaInicial[7][8] = CaperucitaAgentPerception.LIBRE;
+			 mapaInicial[7][9] = CaperucitaAgentPerception.LIBRE;
+			 mapaInicial[7][10] = CaperucitaAgentPerception.LIBRE;
+			 
+			//Dulces
+			 mapaInicial[1][5] = CaperucitaAgentPerception.DULCES;
+			 mapaInicial[3][8] = CaperucitaAgentPerception.DULCES;
+			 mapaInicial[4][10] = CaperucitaAgentPerception.DULCES;
+			 
+			 //Flores 
+			 mapaInicial[7][6] = CaperucitaAgentPerception.FLORES;
+			 mapaInicial[8][6] = CaperucitaAgentPerception.FLORES;
 
-			//Completar con elementos de escenario 2
-			//            mapaInicial[0][0] = CaperucitaAgentPerception.ARBOL;
-			//            mapaInicial[0][0] = CaperucitaAgentPerception.ARBOL;
-			//            mapaInicial[0][0] = CaperucitaAgentPerception.ARBOL;
-			//            mapaInicial[0][0] = CaperucitaAgentPerception.ARBOL;
-			//            mapaInicial[0][0] = CaperucitaAgentPerception.ARBOL;
-			//            mapaInicial[0][0] = CaperucitaAgentPerception.ARBOL;
-			//            mapaInicial[0][0] = CaperucitaAgentPerception.ARBOL;
-			//            mapaInicial[0][0] = CaperucitaAgentPerception.ARBOL;
-
+			
 			return mapaInicial;
 		}
 
@@ -131,16 +204,59 @@ public class BosqueState extends EnvironmentState {
 					mapaInicial[row][col] = CaperucitaAgentPerception.LIBRE;
 				}
 			}
-
-			//Completar con elementos de escenario 3
-			//            mapaInicial[0][0] = CaperucitaAgentPerception.ARBOL;
-			//            mapaInicial[0][0] = CaperucitaAgentPerception.ARBOL;
-			//            mapaInicial[0][0] = CaperucitaAgentPerception.ARBOL;
-			//            mapaInicial[0][0] = CaperucitaAgentPerception.ARBOL;
-			//            mapaInicial[0][0] = CaperucitaAgentPerception.ARBOL;
-			//            mapaInicial[0][0] = CaperucitaAgentPerception.ARBOL;
-			//            mapaInicial[0][0] = CaperucitaAgentPerception.ARBOL;
-			//            mapaInicial[0][0] = CaperucitaAgentPerception.ARBOL;
+			
+			
+			//Árboles
+			for (int row = 0; row < mapaInicial.length; row++) {
+				for (int col = 0; col < 3; col++) {
+					mapaInicial[row][col] = CaperucitaAgentPerception.ARBOL;
+				}
+			}
+			
+			for (int col = 3; col < 11; col++) {
+				mapaInicial[0][col] = CaperucitaAgentPerception.ARBOL;
+				mapaInicial[1][col] = CaperucitaAgentPerception.ARBOL;
+				mapaInicial[7][col] = CaperucitaAgentPerception.ARBOL;
+				mapaInicial[8][col] = CaperucitaAgentPerception.ARBOL;
+			}
+			
+			for (int row = 0; row < mapaInicial.length; row++) {
+				for (int col = 11; col < 14; col++) {
+					mapaInicial[row][col] = CaperucitaAgentPerception.ARBOL;
+				}
+			}
+			
+			 mapaInicial[2][4] = CaperucitaAgentPerception.ARBOL;
+			 mapaInicial[2][6] = CaperucitaAgentPerception.ARBOL;
+			 mapaInicial[2][8] = CaperucitaAgentPerception.ARBOL;
+			 mapaInicial[2][10] = CaperucitaAgentPerception.ARBOL;
+			 mapaInicial[3][9] = CaperucitaAgentPerception.ARBOL;
+			 mapaInicial[4][3] = CaperucitaAgentPerception.ARBOL;
+			 mapaInicial[4][4] = CaperucitaAgentPerception.ARBOL;
+			 mapaInicial[5][7] = CaperucitaAgentPerception.ARBOL;
+			 mapaInicial[5][9] = CaperucitaAgentPerception.ARBOL;
+			 mapaInicial[6][7] = CaperucitaAgentPerception.ARBOL;
+			 mapaInicial[6][10] = CaperucitaAgentPerception.ARBOL;
+				 
+			 //Libres
+			 mapaInicial[1][5] = CaperucitaAgentPerception.LIBRE;
+			 mapaInicial[1][6] = CaperucitaAgentPerception.LIBRE;
+			 mapaInicial[1][7] = CaperucitaAgentPerception.LIBRE;
+			 mapaInicial[1][6] = CaperucitaAgentPerception.LIBRE;
+			 mapaInicial[7][6] = CaperucitaAgentPerception.LIBRE;
+			 mapaInicial[7][7] = CaperucitaAgentPerception.LIBRE;
+			 mapaInicial[7][8] = CaperucitaAgentPerception.LIBRE;
+			 mapaInicial[5][11] = CaperucitaAgentPerception.LIBRE;
+			 mapaInicial[6][11] = CaperucitaAgentPerception.LIBRE;
+			 
+			//Dulces
+			 mapaInicial[2][7] = CaperucitaAgentPerception.DULCES;
+			 mapaInicial[6][4] = CaperucitaAgentPerception.DULCES;
+			 mapaInicial[6][8] = CaperucitaAgentPerception.DULCES;
+			 
+			 //Flores 
+			 mapaInicial[0][3] = CaperucitaAgentPerception.FLORES;
+			 mapaInicial[1][3] = CaperucitaAgentPerception.FLORES;
 
 			return mapaInicial;
 		}
@@ -180,7 +296,8 @@ public class BosqueState extends EnvironmentState {
 	@Override
 	public void initState() {
 
-		//TODO: Complete Method
+		//No se puede eliminar por restricciones de extensión
+		
 	}
 
 	/**
@@ -195,9 +312,10 @@ public class BosqueState extends EnvironmentState {
 		return str;
 	}
 
-	//TODO: Complete this section with agent-specific methods
-	// The following methods are agent-specific:
 
+
+	//Métodos Auxiliares
+	
 	public int[][] getMapa(){
 		return mapa;
 	}
@@ -218,7 +336,6 @@ public class BosqueState extends EnvironmentState {
 	}
 
 	//Las celdas percibidas quedan ordenadas en la dirección de cada sensor, partiendo desde la más cercana. 
-
 	public ArrayList<Integer> getCeldasVisiblesSuperiores(int row, int col) {
 
 		ArrayList<Integer> list = new ArrayList<Integer>();
