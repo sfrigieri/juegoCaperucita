@@ -59,7 +59,7 @@ public class CaperucitaState extends SearchBasedAgentState {
 		int[][] nuevoMapaBosque = new int[this.mapaBosque.length][this.mapaBosque.length];
 		
 		for(int row = 0; row < this.mapaBosque.length; row++) {
-			for(int col = 0; col<this.mapaBosque.length; col++) {
+			for(int col = 0; col<this.mapaBosque[0].length; col++) {
 				nuevoMapaBosque[row][col] = this.mapaBosque[row][col];
 			}
 		}
@@ -158,7 +158,7 @@ public class CaperucitaState extends SearchBasedAgentState {
 	public String toString() {
 		String str = "";
 
-		str = str + "mapa Bosque=\"[ \n";
+		str = str + "mapa Caperucita=\"[ \n";
 		for (int row = 0; row < mapaBosque.length; row++) {
 			str = str + "[ ";
 			for (int col = 0; col < mapaBosque[0].length; col++) {
@@ -191,7 +191,7 @@ public class CaperucitaState extends SearchBasedAgentState {
         
         //Compara ambos mapas (Referencia: Pacman)
         for (int row = 0; row < this.mapaBosque.length; row++) {
-            for (int col = 0; col < this.mapaBosque.length; col++) {
+            for (int col = 0; col < this.mapaBosque[0].length; col++) {
                 if (this.mapaBosque[row][col] != mapaBosque[row][col]) {
                     return false;
                 }

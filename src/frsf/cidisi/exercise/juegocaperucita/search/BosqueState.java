@@ -300,17 +300,31 @@ public class BosqueState extends EnvironmentState {
 		
 	}
 
+
 	/**
-	 * String representation of the real world state.
+	 * This method returns the String representation of the agent state.
 	 */
 	@Override
 	public String toString() {
 		String str = "";
 
-		//TODO: Complete Method
+		str = str + "mapa Bosque=\"[ \n";
+		for (int row = 0; row < mapa.length; row++) {
+			str = str + "[ ";
+			for (int col = 0; col < mapa[0].length; col++) {
+				if (mapa[row][col] == -1) {
+					str = str + "* ";
+				} else {
+					str = str + mapa[row][col] + " ";
+				}
+			}
+			str = str + " ]\n";
+		}
+		str = str +" ]\"";
 
 		return str;
 	}
+	
 
 
 
