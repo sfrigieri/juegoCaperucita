@@ -59,7 +59,7 @@ public class CaperucitaAgent extends SearchBasedAgent {
 
 		/* Generate an XML file with the search tree. It can also be generated
 		 * in other formats like PDF with PDF_TREE */
-		searchSolver.setVisibleTree(Search.GRAPHVIZ_TREE);
+		searchSolver.setVisibleTree(Search.EFAIA_TREE); //TODO Probar
 
 		// Set the Search searchSolver.
 		this.setSolver(searchSolver);

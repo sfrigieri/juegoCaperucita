@@ -69,10 +69,7 @@ public class CaperucitaState extends SearchBasedAgentState {
 		nuevoEstado.setVidasPerdidas(this.vidasPerdidas);
 		nuevoEstado.setDulcesPorJuntar(this.dulcesPorJuntar);
 		nuevoEstado.setCeldasPorVisitar(this.celdasPorVisitar);
-		//TODO Consultar si iría o no. 
-		/*nuevoEstado.setCostoAcciones(this.costoAcciones);*/
-		
-		
+
 		return nuevoEstado;
 		
 	}
@@ -185,21 +182,11 @@ public class CaperucitaState extends SearchBasedAgentState {
 	@Override
 	public boolean equals(Object obj) {
 
-		/* TODO Ver si falta alguno
-		 
-		private Double costoAcciones;
-		private int escenario;
-		private int[] posicionInicial;
-		private FrameTest frame;
-		private int times;
-		
-		*/
 
 		if (!(obj instanceof CaperucitaState))
             return false;
         
-		CaperucitaState objeto = (CaperucitaState)obj;
-		
+		CaperucitaState objeto = (CaperucitaState)obj;		
         int[][] mapaBosque = ((CaperucitaState) obj).getMapaBosque();
         
         //Compara ambos mapas (Referencia: Pacman)
@@ -418,7 +405,7 @@ public class CaperucitaState extends SearchBasedAgentState {
 
 		ArrayList<Integer> list = new ArrayList<Integer>();
 
-		int maxRow = mapaBosque[col].length-1;
+		int maxRow = mapaBosque.length-1; //TODO Ver 
 
 		if(row == maxRow)
 			return list;
@@ -454,7 +441,7 @@ public class CaperucitaState extends SearchBasedAgentState {
 
 		ArrayList<Integer> list = new ArrayList<Integer>();
 
-		int maxCol = mapaBosque.length-1;
+		int maxCol = mapaBosque[row].length-1;
 
 		if(col == maxCol)
 			return list;
@@ -468,9 +455,6 @@ public class CaperucitaState extends SearchBasedAgentState {
 
 		return list;
 	}
-
-
-
 
 
 }
