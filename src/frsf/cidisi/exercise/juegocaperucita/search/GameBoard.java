@@ -13,7 +13,7 @@ import javax.swing.*;
 import javax.swing.border.BevelBorder;
 
 
-public class FrameTest {
+public class GameBoard {
 	
 	private JPanel panelAgente;
 	private JFrame frameAgente;

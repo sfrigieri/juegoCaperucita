@@ -64,7 +64,7 @@ public class BosqueState extends EnvironmentState {
 
 		//Guardar valor previo para reasignarlo luego
 		this.valorPrevioCeldaLobo = this.getPosicionMapa(mx, my);
-		FrameTest.valorPrevioCeldaLobo = this.getPosicionMapa(mx, my);
+		GameBoard.valorPrevioCeldaLobo = this.getPosicionMapa(mx, my);
 
 		this.posicionFilaLobo = mx;
 		this.posicionColumnaLobo = my;

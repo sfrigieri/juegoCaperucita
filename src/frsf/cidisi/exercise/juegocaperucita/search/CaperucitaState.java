@@ -20,7 +20,7 @@ public class CaperucitaState extends SearchBasedAgentState {
 	
 	private int escenario;
 	private int[] posicionInicial;
-	private FrameTest frame;
+	private GameBoard frame;
 	private int times;
 
 	
@@ -38,7 +38,7 @@ public class CaperucitaState extends SearchBasedAgentState {
 		escenario = escenarioAmbiente;
 		
 		//Utilizado para la representación gráfica del estadoAmbiente/Agente
-		frame = new FrameTest();
+		frame = new GameBoard();
 		times = 0;
 		
 		this.actualizarFrame();
