@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import frsf.cidisi.faia.agent.Action;
 import frsf.cidisi.faia.environment.Environment;
+import frsf.cidisi.faia.state.AgentState;
 
 
 
@@ -60,6 +61,11 @@ public class Bosque extends Environment {
         return false;
     }
     
+    @Override
+    public void updateState(AgentState ast, Action action) {
+    	 super.updateState(ast, action);
+    	((BosqueState) this.environmentState).updateGameBoard();
+    }
     
     // Metodos especificos de agente:
 	public ArrayList<Integer> getCeldasVisiblesSuperiores(int row, int col) {

@@ -56,7 +56,6 @@ public class CaperucitaAgentPerception extends Perception {
     
 	@Override
 	public void initPerception(Agent agent, Environment environment) {
-		// No se puede eliminar por restricciones de extensión
 	}
     
     @Override

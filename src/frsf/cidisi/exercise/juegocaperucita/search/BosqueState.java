@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 import frsf.cidisi.faia.state.EnvironmentState;
+import graphics.GameBoard;
 
 /**
  * This class represents the real world state.
@@ -16,9 +17,9 @@ public class BosqueState extends EnvironmentState {
 
 	private int escenario;
 	private int valorPrevioCeldaLobo;
-	private int posicionFilaLobo;
-	private int posicionColumnaLobo;
-
+	private int[] posicionLobo;
+	private GameBoard gameBoard;
+	
 	public BosqueState(int escenarioAmbiente) {
 
 		escenario = escenarioAmbiente;
@@ -26,9 +27,14 @@ public class BosqueState extends EnvironmentState {
 		mapa = this.getMapaInicial(escenario);
 		posicionAgente = this.getPosicionInicialAgente(escenario);
 		vidasPerdidasAgente = 0;
+
+		//Utilizado para la representación gráfica del estadoAmbiente
+		gameBoard = new GameBoard();
+		this.initGameBoard();
+		
 		valorPrevioCeldaLobo = -1;
-		//No se utiliza
-		//	this.initState();
+		posicionLobo = new int[2];
+		this.inicializarPosicionLobo();
 	}
 
 
@@ -38,41 +44,64 @@ public class BosqueState extends EnvironmentState {
 
 	public void actualizarPosicionLobo() {
 
-		int mx;
-		int my;
+		//Reasignar valor previo de la posición en la que se encuentra el lobo
+			this.setMapaPosicion(this.posicionLobo[0], this.posicionLobo[1], this.valorPrevioCeldaLobo);
 
-		//Si no es la primera vez que se actualiza posicion lobo, reasignar valor previo en mapa
-		//El valor -1 (NO_VISIBLE) no se utiliza en el mapa real, solo en el estado del agente.
-		if(this.valorPrevioCeldaLobo != -1)
-			this.setMapaPosicion(this.posicionFilaLobo, this.posicionColumnaLobo, this.valorPrevioCeldaLobo);
+		this.posicionLobo = this.crearPosicionNuevaLobo();
 
+		//Guardar valor previo para reasignarlo luego
+		this.guardarValorPrevioCeldaLobo();
+		
+		//Actualizar mapa con nueva posición lobo
+		this.setMapaPosicion(this.posicionLobo[0], this.posicionLobo[1], CaperucitaAgentPerception.LOBO);
+		this.updateGameBoard();
+	}
+
+
+	private void guardarValorPrevioCeldaLobo() {
+		this.valorPrevioCeldaLobo = this.getPosicionMapa(this.posicionLobo[0], this.posicionLobo[1]);
+		gameBoard.setValorPrevioCeldaLobo(this.valorPrevioCeldaLobo);
+
+	}
+
+
+	private int[] crearPosicionNuevaLobo() {
+		
+		int[] posicion = new int[2];
 
 		//nextInt no incluye Max. 
 		//Ej: si length col es 14, devolverá como máximo un 13 que es correcto (0-13 igual a 14 columnas).
 		do{
 
-			mx = ThreadLocalRandom.current().nextInt(0, this.mapa.length);
+			posicion[0] = ThreadLocalRandom.current().nextInt(0, this.mapa.length);
 
-			my = ThreadLocalRandom.current().nextInt(0, this.mapa[0].length);
+			posicion[1] = ThreadLocalRandom.current().nextInt(0, this.mapa[0].length);
 
 			//El Lobo no puede aparecer en la misma celda, la celda de Caperucita o en celda de Dulces
 		}
-		while((this.getPosicionMapa(mx, my) == CaperucitaAgentPerception.LOBO)
-				|| (mx == this.getPosicionAgenteFila() && my == this.getPosicionAgenteColumna())
-				|| (this.getPosicionMapa(mx, my) == CaperucitaAgentPerception.DULCES)
+		while((this.getPosicionMapa(posicion[0], posicion[1]) == CaperucitaAgentPerception.LOBO)
+				|| (posicion[0] == this.getPosicionAgenteFila() && posicion[1] == this.getPosicionAgenteColumna())
+				|| (this.getPosicionMapa(posicion[0], posicion[1]) == CaperucitaAgentPerception.DULCES)
 				);
-
-		//Guardar valor previo para reasignarlo luego
-		this.valorPrevioCeldaLobo = this.getPosicionMapa(mx, my);
-		GameBoard.valorPrevioCeldaLobo = this.getPosicionMapa(mx, my);
-
-		this.posicionFilaLobo = mx;
-		this.posicionColumnaLobo = my;
-
-		this.setMapaPosicion(mx, my, CaperucitaAgentPerception.LOBO);
+		
+		return posicion;
 	}
 
 
+	
+	public void inicializarPosicionLobo() {
+
+		this.posicionLobo = this.crearPosicionNuevaLobo();
+
+		//Guardar valor previo para reasignarlo luego
+		this.guardarValorPrevioCeldaLobo();
+
+		//Actualizar mapa con nueva posición lobo
+		this.setMapaPosicion(this.posicionLobo[0], this.posicionLobo[1], CaperucitaAgentPerception.LOBO);
+		this.updateGameBoard();
+	}
+	
+	
 	public int[][] getMapaInicial(int escenario) {
 
 		if(escenario == 1)
@@ -102,7 +131,7 @@ public class BosqueState extends EnvironmentState {
 					mapaInicial[row][col] = CaperucitaAgentPerception.ARBOL;
 				}
 			}
-			
+
 			 mapaInicial[1][7] = CaperucitaAgentPerception.ARBOL;
 			 mapaInicial[1][11] = CaperucitaAgentPerception.ARBOL;
 			 mapaInicial[2][4] = CaperucitaAgentPerception.ARBOL;
@@ -296,8 +325,6 @@ public class BosqueState extends EnvironmentState {
 	@Override
 	public void initState() {
 
-		//No se puede eliminar por restricciones de extensión
-		
 	}
 
 
@@ -325,7 +352,14 @@ public class BosqueState extends EnvironmentState {
 		return str;
 	}
 	
+	private void initGameBoard() {
+		gameBoard.initBoard("Mapa estado bosque",this.getMapa(), this.getPosicionAgente(), this.escenario, false);	
+	}
 
+
+	public void updateGameBoard() {
+		gameBoard.repaint(this.getMapa(), this.getPosicionAgente());
+	}
 
 
 	//Métodos Auxiliares
@@ -372,7 +406,6 @@ public class BosqueState extends EnvironmentState {
 
 		ArrayList<Integer> list = new ArrayList<Integer>();
 
-		//TODO int maxRow = mapa[col].length-1;
 		int maxRow = mapa.length-1;
 		
 		if(row == maxRow)
