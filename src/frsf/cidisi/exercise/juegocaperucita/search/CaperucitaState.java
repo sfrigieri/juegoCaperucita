@@ -1,10 +1,9 @@
 package frsf.cidisi.exercise.juegocaperucita.search;
 
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
-
 import frsf.cidisi.faia.agent.Perception;
 import frsf.cidisi.faia.agent.search.SearchBasedAgentState;
+import graphics.GameBoard;
 
 /**
  * Represent the internal state of the Agent.
@@ -17,33 +16,36 @@ public class CaperucitaState extends SearchBasedAgentState {
 	private int dulcesPorJuntar;
 	private int celdasPorVisitar;
 	private Double costoAcciones;
-	
+
 	private int escenario;
 	private int[] posicionInicial;
-	private GameBoard frame;
-	private int times;
+	private int[] posicionAnterior;
+	ArrayList<int[]> listaCeldasPorVisitar;
+	private GameBoard gameBoard;
 
-	
-	public CaperucitaState(int escenarioAmbiente) {
+	public CaperucitaState(int escenarioAmbiente, boolean isAClone) {
 
 		mapaBosque = this.getMapaInicial(escenarioAmbiente);
 		posicionInicial = this.getPosicionInicial(escenarioAmbiente);
 		posicion = new int[2];
+		posicionAnterior = new int[2];
 		posicion[0] = posicionInicial[0];
 		posicion[1] = posicionInicial[1];
 		vidasPerdidas = 0;
 		dulcesPorJuntar = 3;
+		costoAcciones = 0.0;
+		listaCeldasPorVisitar = new ArrayList<int[]>();
 		this.actualizarCeldasPorVisitar();
-		
+
 		escenario = escenarioAmbiente;
-		
-		//Utilizado para la representación gráfica del estadoAmbiente/Agente
-		frame = new GameBoard();
-		times = 0;
-		
-		this.actualizarFrame();
-		//this.initState();
+
+		//Utilizado para la representación gráfica del estadoAgente
+		if(!isAClone) {
+			gameBoard = new GameBoard();
+			this.initGameBoard();
+		}
 	}
+
 
 
 
@@ -51,27 +53,67 @@ public class CaperucitaState extends SearchBasedAgentState {
 	 * This method clones the state of the agent. It's used in the search
 	 * process, when creating the search tree.
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public SearchBasedAgentState clone() {
-		
-		CaperucitaState nuevoEstado = new CaperucitaState(this.escenario);
-		
-		int[][] nuevoMapaBosque = new int[this.mapaBosque.length][this.mapaBosque.length];
-		
+
+		CaperucitaState nuevoEstado = new CaperucitaState(this.escenario, true);
+
+		int[][] nuevoMapaBosque = new int[this.mapaBosque.length][this.mapaBosque[0].length];
+
 		for(int row = 0; row < this.mapaBosque.length; row++) {
 			for(int col = 0; col<this.mapaBosque[0].length; col++) {
 				nuevoMapaBosque[row][col] = this.mapaBosque[row][col];
 			}
 		}
-		
+
 		nuevoEstado.setMapaBosque(nuevoMapaBosque);
-		nuevoEstado.setPosicion(this.posicion);
+		nuevoEstado.setPosicionFila(this.getPosicionFila());
+		nuevoEstado.setPosicionColumna(this.getPosicionColumna());
 		nuevoEstado.setVidasPerdidas(this.vidasPerdidas);
 		nuevoEstado.setDulcesPorJuntar(this.dulcesPorJuntar);
+		nuevoEstado.setListaCeldasPorVisitar((ArrayList<int[]>) this.listaCeldasPorVisitar.clone());
 		nuevoEstado.setCeldasPorVisitar(this.celdasPorVisitar);
 
 		return nuevoEstado;
-		
+
+	}
+
+
+
+
+
+	/**
+	 * This method is used in the search process to verify if the node already
+	 * exists in the actual search.
+	 */
+	@Override
+	public boolean equals(Object obj) {
+
+
+		if (!(obj instanceof CaperucitaState))
+			return false;
+
+		CaperucitaState objeto = (CaperucitaState)obj;		
+		int[][] mapaBosque = objeto.getMapaBosque();
+
+		//Compara ambos mapas (Referencia: Pacman)
+		for (int row = 0; row < this.mapaBosque.length; row++) {
+			for (int col = 0; col < this.mapaBosque[0].length; col++) {
+				if (this.mapaBosque[row][col] != mapaBosque[row][col]) {
+					return false;
+				}
+			}
+		}
+
+		boolean posicionFila = objeto.getPosicion()[0] == this.posicion[0];
+		boolean posicionColumna = objeto.getPosicion()[1] == this.posicion[1];
+		boolean vidas = objeto.getVidasPerdidas() == this.vidasPerdidas;
+		boolean dulces = objeto.getDulcesPorJuntar() == this.dulcesPorJuntar;
+		boolean celdas = objeto.getCeldasPorVisitar() == this.celdasPorVisitar;
+
+		return posicionFila && posicionColumna && vidas && dulces && celdas;
+
 	}
 
 	/**
@@ -80,8 +122,10 @@ public class CaperucitaState extends SearchBasedAgentState {
 	 */
 	@Override
 	public void updateState(Perception p) {
-		
+
 		CaperucitaAgentPerception percepcionCaperucita = (CaperucitaAgentPerception) p;
+
+		this.setCeldaLoboANoVisible();
 
 		int row = this.getPosicionFila();
 		int col = this.getPosicionColumna();
@@ -118,25 +162,37 @@ public class CaperucitaState extends SearchBasedAgentState {
 
 		i = col+1;
 		//El último elemento en la lista es un árbol o la columna máxima
-		for (Integer valor : percepcionCaperucita.getSensorSuperior()) 
+		for (Integer valor : percepcionCaperucita.getSensorDerecho()) 
 		{ 
-			mapaBosque[row][col] = valor.intValue();
+			mapaBosque[row][i] = valor.intValue();
 			i++;
 		}
 
-		this.actualizarFrame();
+		this.updateGameBoard();
 
 	}
 
-	private void actualizarFrame() {
-		 
-		if(times == 0) {
-      	frame.initBoard("Caperucita en el bosque",this.getMapaBosque(), this.getPosicion(), this.escenario);
-      }
-      else
-      	frame.repaint(this.getMapaBosque(), this.getPosicion());
-      
-    	times++;
+
+	private void setCeldaLoboANoVisible() {
+
+		for (int row = 0; row < mapaBosque.length; row++) {
+			for (int col = 0; col < mapaBosque[0].length; col++) {
+				if (mapaBosque[row][col] == CaperucitaAgentPerception.LOBO)
+					mapaBosque[row][col] = CaperucitaAgentPerception.NO_VISIBLE;
+			}
+		}
+	}
+
+
+
+
+	private void initGameBoard() {
+		gameBoard.initBoard("Mapa estado caperucita",this.getMapaBosque(), this.getPosicion(), this.escenario, true);	
+	}
+
+
+	public void updateGameBoard() {
+		gameBoard.repaint(this.getMapaBosque(), this.getPosicion());
 	}
 
 
@@ -146,8 +202,6 @@ public class CaperucitaState extends SearchBasedAgentState {
 	 */
 	@Override
 	public void initState() {
-
-		//No se puede eliminar por restricciones de extensión
 
 	}
 
@@ -175,42 +229,17 @@ public class CaperucitaState extends SearchBasedAgentState {
 		return str;
 	}
 
-	/**
-	 * This method is used in the search process to verify if the node already
-	 * exists in the actual search.
-	 */
-	@Override
-	public boolean equals(Object obj) {
 
-
-		if (!(obj instanceof CaperucitaState))
-            return false;
-        
-		CaperucitaState objeto = (CaperucitaState)obj;		
-        int[][] mapaBosque = ((CaperucitaState) obj).getMapaBosque();
-        
-        //Compara ambos mapas (Referencia: Pacman)
-        for (int row = 0; row < this.mapaBosque.length; row++) {
-            for (int col = 0; col < this.mapaBosque[0].length; col++) {
-                if (this.mapaBosque[row][col] != mapaBosque[row][col]) {
-                    return false;
-                }
-            }
-        }
-		
-		boolean posicionFila = objeto.getPosicion()[0] == this.posicion[0];
-		boolean posicionColumna = objeto.getPosicion()[1] == this.posicion[1];
-		boolean vidas = objeto.getVidasPerdidas() == this.vidasPerdidas;
-		boolean dulces = objeto.getDulcesPorJuntar() == this.dulcesPorJuntar;
-		boolean celdas = objeto.getCeldasPorVisitar() == this.celdasPorVisitar;
-
-		return posicionFila && posicionColumna && vidas && dulces && celdas;
-		
-	}
 
 
 	//Métodos Auxiliares
-	
+
+	private void setListaCeldasPorVisitar(ArrayList<int[]> collect) {
+		this.listaCeldasPorVisitar = collect;
+
+	}
+
+
 	public int[][] getMapaBosque(){
 		return mapaBosque;
 	}
@@ -276,7 +305,8 @@ public class CaperucitaState extends SearchBasedAgentState {
 			//Completar con elementos de escenario 1
 			mapaInicial[7][7] = CaperucitaAgentPerception.FLORES;
 			mapaInicial[8][7] = CaperucitaAgentPerception.FLORES;
-
+			mapaInicial[8][8] = CaperucitaAgentPerception.ARBOL;
+			mapaInicial[this.getPosicionInicial(escenario)[0]][this.getPosicionInicial(escenario)[1]] = CaperucitaAgentPerception.LIBRE;
 
 			return mapaInicial;
 		}
@@ -293,7 +323,7 @@ public class CaperucitaState extends SearchBasedAgentState {
 			//Completar con elementos de escenario 2
 			mapaInicial[7][6] = CaperucitaAgentPerception.FLORES;
 			mapaInicial[8][6] = CaperucitaAgentPerception.FLORES;
-
+			mapaInicial[this.getPosicionInicial(escenario)[0]][this.getPosicionInicial(escenario)[1]] = CaperucitaAgentPerception.LIBRE;
 			return mapaInicial;
 		}
 
@@ -310,7 +340,7 @@ public class CaperucitaState extends SearchBasedAgentState {
 			//Completar con elementos de escenario 3
 			mapaInicial[0][3] = CaperucitaAgentPerception.FLORES;
 			mapaInicial[1][3] = CaperucitaAgentPerception.FLORES;
-
+			mapaInicial[this.getPosicionInicial(escenario)[0]][this.getPosicionInicial(escenario)[1]] = CaperucitaAgentPerception.LIBRE;
 			return mapaInicial;
 		}
 
@@ -356,20 +386,94 @@ public class CaperucitaState extends SearchBasedAgentState {
 	}
 
 
-	public int actualizarCeldasPorVisitar() {
-
-		int celdas = 0;
+	public void actualizarCeldasPorVisitar() {
 
 		for (int row = 0; row < mapaBosque.length; row++)
-			for (int col = 0; col < mapaBosque[0].length; col++)
-				if (mapaBosque[row][col] == CaperucitaAgentPerception.NO_VISIBLE)
-					celdas++;
+			for (int col = 0; col < mapaBosque[0].length; col++) {
+				int[] posicionActual = new int[2];
+				posicionActual[0] = row;
+				posicionActual[1] = col;
+				this.listaCeldasPorVisitar.add(posicionActual);
+			}
 
+		this.listaCeldasPorVisitar
+		.removeIf(posicion -> (
+				posicion[0] == this.getPosicionFila() && posicion[1] == this.getPosicionColumna()));
 
-		celdasPorVisitar = celdas;
-
-		return celdas;
+		this.celdasPorVisitar = this.listaCeldasPorVisitar.size();
 	}
+
+
+	public void actualizarCeldasPorVisitar(int posicionAnteriorFilaOColumna, String accion) {
+
+		if(accion == "irAbajo") {
+			for(int i = posicionAnteriorFilaOColumna; i <= this.getPosicionFila(); i++) {
+				int[] posAnterior =  new int[2];
+				posAnterior[0] = i;
+				posAnterior[1]= this.getPosicionColumna();
+				this.setPosicionAnterior(posAnterior);
+				this.listaCeldasPorVisitar
+				.removeIf(posicion -> (
+						posicion[0] == this.getPosicionAnterior()[0] && posicion[1] == this.getPosicionColumna()));
+			}
+		}
+		else {
+			if(accion == "irArriba") {
+				for(int i = posicionAnteriorFilaOColumna; i >= this.getPosicionFila(); i--) {
+					int[] posAnterior =  new int[2];
+					posAnterior[0] = i;
+					posAnterior[1]= this.getPosicionColumna();
+					this.setPosicionAnterior(posAnterior);
+					this.listaCeldasPorVisitar
+					.removeIf(posicion -> (
+							posicion[0] == this.getPosicionAnterior()[0] && posicion[1] == this.getPosicionColumna()));
+				}
+			}
+			else {
+				if(accion == "irDerecha") {
+
+					for(int i = posicionAnteriorFilaOColumna; i <= this.getPosicionColumna(); i++) {
+						int[] posAnterior =  new int[2];
+						posAnterior[0] = this.getPosicionFila();
+						posAnterior[1]= i;
+						this.setPosicionAnterior(posAnterior);
+						this.listaCeldasPorVisitar
+						.removeIf(posicion -> (
+								posicion[0] == this.getPosicionFila() && posicion[1] == this.getPosicionAnterior()[1]));
+					}
+				}
+				else
+				{
+					for(int i = posicionAnteriorFilaOColumna; i >= this.getPosicionColumna(); i--) {
+						int[] posAnterior =  new int[2];
+						posAnterior[0] = this.getPosicionFila();
+						posAnterior[1]= i;
+						this.setPosicionAnterior(posAnterior);
+						this.listaCeldasPorVisitar
+						.removeIf(posicion -> (
+								posicion[0] == this.getPosicionFila() && posicion[1] == this.getPosicionAnterior()[1]));
+					}
+				}
+			}
+		}
+
+		this.celdasPorVisitar = this.listaCeldasPorVisitar.size();
+	}
+
+
+	private int[] getPosicionAnterior() {
+		return this.posicionAnterior;
+
+	}
+
+
+	private void setPosicionAnterior(int[] is) {
+		this.posicionAnterior = is;
+
+	}
+
+
+
 
 	public void incrementarCostoAcciones(Double costo) {
 		this.costoAcciones += costo;
@@ -383,7 +487,7 @@ public class CaperucitaState extends SearchBasedAgentState {
 
 	//Las celdas percibidas quedan ordenadas en la dirección de cada sensor, partiendo desde la más cercana. 
 
-	public ArrayList<Integer> getCeldasVisiblesSuperiores(int row, int col) {
+	public ArrayList<Integer> getCeldasSuperiores(int row, int col) {
 
 		ArrayList<Integer> list = new ArrayList<Integer>();
 
@@ -393,19 +497,18 @@ public class CaperucitaState extends SearchBasedAgentState {
 		for(int i = row; i > 0; i--) {
 			list.add(mapaBosque[i-1][col]);
 
-			//Última celda visible
-			if(mapaBosque[i-1][col] == CaperucitaAgentPerception.ARBOL)
+			if( mapaBosque[i-1][col] == CaperucitaAgentPerception.ARBOL)
 				break;
 		}
 
 		return list;
 	}
 
-	public ArrayList<Integer> getCeldasVisiblesInferiores(int row, int col) {
+	public ArrayList<Integer> getCeldasInferiores(int row, int col) {
 
 		ArrayList<Integer> list = new ArrayList<Integer>();
 
-		int maxRow = mapaBosque.length-1; //TODO Ver 
+		int maxRow = mapaBosque.length-1;
 
 		if(row == maxRow)
 			return list;
@@ -413,14 +516,14 @@ public class CaperucitaState extends SearchBasedAgentState {
 		for(int i = row; i < maxRow; i++) {
 			list.add(mapaBosque[i+1][col]);
 
-			if(mapaBosque[i+1][col] == CaperucitaAgentPerception.ARBOL)
+			if( mapaBosque[i+1][col] == CaperucitaAgentPerception.ARBOL)
 				break;
 		}
 
 		return list;
 	}
 
-	public ArrayList<Integer> getCeldasVisiblesIzquierdas(int row, int col) {
+	public ArrayList<Integer> getCeldasIzquierdas(int row, int col) {
 
 		ArrayList<Integer> list = new ArrayList<Integer>();
 
@@ -430,14 +533,14 @@ public class CaperucitaState extends SearchBasedAgentState {
 		for(int i = col; i > 0; i--) {
 			list.add(mapaBosque[row][i-1]);
 
-			if(mapaBosque[row][i-1] == CaperucitaAgentPerception.ARBOL)
+			if( mapaBosque[row][i-1] == CaperucitaAgentPerception.ARBOL)
 				break;
 		}
 
 		return list;
 	}
 
-	public ArrayList<Integer> getCeldasVisiblesDerechas(int row, int col) {
+	public ArrayList<Integer> getCeldasDerechas(int row, int col) {
 
 		ArrayList<Integer> list = new ArrayList<Integer>();
 
@@ -449,7 +552,7 @@ public class CaperucitaState extends SearchBasedAgentState {
 		for(int i = col; i < maxCol; i++) {
 			list.add(mapaBosque[row][i+1]);
 
-			if(mapaBosque[row][i+1] == CaperucitaAgentPerception.ARBOL)
+			if( mapaBosque[row][i+1] == CaperucitaAgentPerception.ARBOL)
 				break;
 		}
 
