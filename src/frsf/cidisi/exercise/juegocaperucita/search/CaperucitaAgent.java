@@ -23,7 +23,7 @@ public class CaperucitaAgent extends SearchBasedAgent {
 		CaperucitaGoal agGoal = new CaperucitaGoal();
 
 		// The Agent State
-		CaperucitaState agState = new CaperucitaState(escenario);
+		CaperucitaState agState = new CaperucitaState(escenario, false);
 
 		this.setAgentState(agState);
 
@@ -59,7 +59,7 @@ public class CaperucitaAgent extends SearchBasedAgent {
 
 		/* Generate an XML file with the search tree. It can also be generated
 		 * in other formats like PDF with PDF_TREE */
-		searchSolver.setVisibleTree(Search.EFAIA_TREE); //TODO Probar
+		//searchSolver.setVisibleTree(Search.EFAIA_TREE);
 
 		// Set the Search searchSolver.
 		this.setSolver(searchSolver);
