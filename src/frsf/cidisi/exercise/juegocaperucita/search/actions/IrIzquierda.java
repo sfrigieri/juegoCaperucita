@@ -24,7 +24,7 @@ public class IrIzquierda extends SearchAction {
 		int fila = agState.getPosicionFila();
 		int col = agState.getPosicionColumna();
 
-		ArrayList<Integer> listaCeldas = agState.getCeldasVisiblesIzquierdas(fila, col);
+		ArrayList<Integer> listaCeldas = agState.getCeldasIzquierdas(fila, col);
 
 		if(agState.getVidasPerdidas() < 3 && !listaCeldas.isEmpty() 
 				&& listaCeldas.get(0) != CaperucitaAgentPerception.ARBOL) {
@@ -34,9 +34,11 @@ public class IrIzquierda extends SearchAction {
 				agState.setVidasPerdidas(++vidasPerdidas);
 				agState.setDulcesPorJuntar(3);
 				agState.setPosicion(agState.getPosicionInicial());
+				agState.setMapaPosicion(fila,col-listaCeldas.indexOf(CaperucitaAgentPerception.LOBO)+1,  CaperucitaAgentPerception.NO_VISIBLE);
 			}	
 			else {
 				int avance = 0;
+				int posicionColumnaAnterior = agState.getPosicionColumna();
 				for(Integer valor : listaCeldas) {
 					avance++;
 					//Por cada celda en columna 'col' que contenga dulces
@@ -52,6 +54,8 @@ public class IrIzquierda extends SearchAction {
 				//Sino, la posición final coincide con la última celda visible
 				else
 					agState.setPosicionColumna(col-avance);
+				
+				agState.actualizarCeldasPorVisitar(posicionColumnaAnterior,"irIzquierda");
 			}
 
 			return agState;
@@ -69,10 +73,12 @@ public class IrIzquierda extends SearchAction {
     	BosqueState environmentState = (BosqueState) est;
 		CaperucitaState agState = ((CaperucitaState) ast);
 
-		int fila = environmentState.getPosicionAgenteFila();
-		int col = environmentState.getPosicionAgenteColumna();
+		agState.incrementarCostoAcciones(this.getCost());
+		
+		int fila = agState.getPosicionFila();
+		int col = agState.getPosicionColumna();
 
-		ArrayList<Integer> listaCeldas = agState.getCeldasVisiblesIzquierdas(fila, col);
+		ArrayList<Integer> listaCeldas = agState.getCeldasIzquierdas(fila, col);
 
 		if(agState.getVidasPerdidas() < 3 && !listaCeldas.isEmpty() 
 				&& listaCeldas.get(0) != CaperucitaAgentPerception.ARBOL) {
@@ -89,9 +95,11 @@ public class IrIzquierda extends SearchAction {
 				agState.setVidasPerdidas(++vidasPerdidas); 
 				agState.setDulcesPorJuntar(3);//Las posiciones de dulces se actualizarán con las futuras percepciones
 				agState.setPosicion(agState.getPosicionInicial());
+				agState.setMapaPosicion(fila,col-listaCeldas.indexOf(CaperucitaAgentPerception.LOBO)+1, CaperucitaAgentPerception.NO_VISIBLE);
 			}	
 			else {
 				int avance = 0;
+				int posicionColumnaAnterior = agState.getPosicionColumna();
 				for(Integer valor : listaCeldas) {
 					avance++;
 					//Por cada celda en columna 'col' que contenga dulces
@@ -114,7 +122,8 @@ public class IrIzquierda extends SearchAction {
 					environmentState.setPosicionAgenteColumna(col-avance);
 					agState.setPosicionColumna(col-avance);
 				}
-
+				agState.actualizarCeldasPorVisitar(posicionColumnaAnterior,"irIzquierda");
+				agState.updateGameBoard();
 			}
 
 			return environmentState;

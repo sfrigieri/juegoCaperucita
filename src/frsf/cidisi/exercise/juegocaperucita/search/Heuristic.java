@@ -23,6 +23,6 @@ public class Heuristic implements IEstimatedCostFunction {
     //Óptimo (costo estimado igual a cero): 
     //	Llegar al estado meta sin vidas perdidas, conociendo todas las celdas y habiendo recolectado todos los dulces
        
-        return (agState.getDulcesPorJuntar()*10 + agState.getCeldasPorVisitar() + agState.getVidasPerdidas()*20);
+        return (agState.getDulcesPorJuntar()*200 + agState.getCeldasPorVisitar()*2 + agState.getVidasPerdidas()*300);
     }
 }
