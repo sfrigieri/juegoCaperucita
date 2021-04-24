@@ -6,7 +6,6 @@ import java.awt.LayoutManager;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import javax.imageio.ImageIO;
@@ -20,10 +19,7 @@ public class GameBoard {
 	private JPanel panel;
 	private JFrame frame;
 	private JLabel [][] jLmatrix;
-	//private int [][] matrixOtherTrees;
 	private ImageIcon[] icons;
-	//private ImageIcon[] iconsOtherTrees;
-	private Random generator;
 	private int escenario;
 	private int imageCount;
 	private String frameName;
@@ -35,15 +31,12 @@ public class GameBoard {
 	public void initBoard(String board_name, int[][] matrix, int[] agPosition, int escenarioAmbiente, boolean esAgState){
 
 		merger = new MergedIcons();
-		generator = new Random();
 		escenario =  escenarioAmbiente;
 		esAgente = esAgState;
 		jLmatrix = this.getInitJLmatrix();
-		//matrixOtherTrees = this.getInitMatrix(escenarioAmbiente);
 		frame = new JFrame(board_name);
 		frameName = board_name;
 		this.initIcons();
-		//iconsOtherTrees = new ImageIcon[2];
 		panel = new JPanel(this.getInitGridLayout());
 
 		//asignar a iconsOtherTrees arbusto en 0 y pino amarillo en 1;

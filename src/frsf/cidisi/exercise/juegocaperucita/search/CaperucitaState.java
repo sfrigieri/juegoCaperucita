@@ -74,10 +74,11 @@ public class CaperucitaState extends SearchBasedAgentState {
 		nuevoEstado.setDulcesPorJuntar(this.dulcesPorJuntar);
 		nuevoEstado.setListaCeldasPorVisitar((ArrayList<int[]>) this.listaCeldasPorVisitar.clone());
 		nuevoEstado.setCeldasPorVisitar(this.celdasPorVisitar);
-
+		
 		return nuevoEstado;
 
 	}
+
 
 
 
@@ -111,10 +112,13 @@ public class CaperucitaState extends SearchBasedAgentState {
 		boolean vidas = objeto.getVidasPerdidas() == this.vidasPerdidas;
 		boolean dulces = objeto.getDulcesPorJuntar() == this.dulcesPorJuntar;
 		boolean celdas = objeto.getCeldasPorVisitar() == this.celdasPorVisitar;
-
+				
 		return posicionFila && posicionColumna && vidas && dulces && celdas;
 
 	}
+
+	
+	
 
 	/**
 	 * This method is used to update the Agent State when a Perception is
@@ -125,7 +129,7 @@ public class CaperucitaState extends SearchBasedAgentState {
 
 		CaperucitaAgentPerception percepcionCaperucita = (CaperucitaAgentPerception) p;
 
-		this.setCeldaLoboANoVisible();
+		//bring me back this.resetValorPrevioCeldaLobo();
 
 		int row = this.getPosicionFila();
 		int col = this.getPosicionColumna();
@@ -167,22 +171,22 @@ public class CaperucitaState extends SearchBasedAgentState {
 			mapaBosque[row][i] = valor.intValue();
 			i++;
 		}
-
+		
+		
 		this.updateGameBoard();
 
 	}
 
 
-	private void setCeldaLoboANoVisible() {
+	private void resetValorPrevioCeldaLobo() {
 
 		for (int row = 0; row < mapaBosque.length; row++) {
 			for (int col = 0; col < mapaBosque[0].length; col++) {
 				if (mapaBosque[row][col] == CaperucitaAgentPerception.LOBO)
-					mapaBosque[row][col] = CaperucitaAgentPerception.NO_VISIBLE;
+					mapaBosque[row][col] = this.getMapaInicial(this.escenario)[row][col];
 			}
 		}
 	}
-
 
 
 
@@ -306,6 +310,7 @@ public class CaperucitaState extends SearchBasedAgentState {
 			mapaInicial[7][7] = CaperucitaAgentPerception.FLORES;
 			mapaInicial[8][7] = CaperucitaAgentPerception.FLORES;
 			mapaInicial[8][8] = CaperucitaAgentPerception.ARBOL;
+			mapaInicial[8][9] = CaperucitaAgentPerception.ARBOL;
 			mapaInicial[this.getPosicionInicial(escenario)[0]][this.getPosicionInicial(escenario)[1]] = CaperucitaAgentPerception.LIBRE;
 
 			return mapaInicial;
@@ -323,6 +328,16 @@ public class CaperucitaState extends SearchBasedAgentState {
 			//Completar con elementos de escenario 2
 			mapaInicial[7][6] = CaperucitaAgentPerception.FLORES;
 			mapaInicial[8][6] = CaperucitaAgentPerception.FLORES;
+			mapaInicial[8][5] = CaperucitaAgentPerception.ARBOL;
+			mapaInicial[7][5] = CaperucitaAgentPerception.ARBOL;
+			mapaInicial[8][4] = CaperucitaAgentPerception.ARBOL;
+			mapaInicial[0][7] = CaperucitaAgentPerception.ARBOL;
+			mapaInicial[1][7] = CaperucitaAgentPerception.ARBOL;
+			mapaInicial[2][7] = CaperucitaAgentPerception.ARBOL;
+			mapaInicial[5][11] = CaperucitaAgentPerception.ARBOL;
+			mapaInicial[2][10] = CaperucitaAgentPerception.ARBOL;
+			mapaInicial[8][10] = CaperucitaAgentPerception.ARBOL;
+			mapaInicial[4][10] = CaperucitaAgentPerception.DULCES;
 			mapaInicial[this.getPosicionInicial(escenario)[0]][this.getPosicionInicial(escenario)[1]] = CaperucitaAgentPerception.LIBRE;
 			return mapaInicial;
 		}
@@ -340,6 +355,14 @@ public class CaperucitaState extends SearchBasedAgentState {
 			//Completar con elementos de escenario 3
 			mapaInicial[0][3] = CaperucitaAgentPerception.FLORES;
 			mapaInicial[1][3] = CaperucitaAgentPerception.FLORES;
+			mapaInicial[2][6] = CaperucitaAgentPerception.ARBOL;
+			mapaInicial[0][4] = CaperucitaAgentPerception.ARBOL;
+			mapaInicial[1][2] = CaperucitaAgentPerception.ARBOL;
+			mapaInicial[7][2] = CaperucitaAgentPerception.ARBOL;
+			mapaInicial[8][2] = CaperucitaAgentPerception.ARBOL;
+			mapaInicial[7][9] = CaperucitaAgentPerception.ARBOL;
+			mapaInicial[2][8] = CaperucitaAgentPerception.ARBOL;
+			mapaInicial[6][8] = CaperucitaAgentPerception.DULCES;
 			mapaInicial[this.getPosicionInicial(escenario)[0]][this.getPosicionInicial(escenario)[1]] = CaperucitaAgentPerception.LIBRE;
 			return mapaInicial;
 		}
@@ -351,10 +374,14 @@ public class CaperucitaState extends SearchBasedAgentState {
 		return posicionInicial;
 	}
 	public void setPosicionFila(int value) {
+       if(value < 0 || value > 8)
+		System.out.println("out of index > value fila:"+value);
 		this.posicion[0] = value;
 	}
 
 	public void setPosicionColumna(int value) {
+	       if(value < 0 || value > 13)
+	   		System.out.println("out of index > value fila:"+value);
 		this.posicion[1] = value;
 	}
 
@@ -390,10 +417,10 @@ public class CaperucitaState extends SearchBasedAgentState {
 
 		for (int row = 0; row < mapaBosque.length; row++)
 			for (int col = 0; col < mapaBosque[0].length; col++) {
-				int[] posicionActual = new int[2];
-				posicionActual[0] = row;
-				posicionActual[1] = col;
-				this.listaCeldasPorVisitar.add(posicionActual);
+					int[] posicionActual = new int[2];
+					posicionActual[0] = row;
+					posicionActual[1] = col;
+					this.listaCeldasPorVisitar.add(posicionActual);
 			}
 
 		this.listaCeldasPorVisitar
@@ -458,6 +485,7 @@ public class CaperucitaState extends SearchBasedAgentState {
 		}
 
 		this.celdasPorVisitar = this.listaCeldasPorVisitar.size();
+		//System.out.println("celdasporvisitar: "+this.celdasPorVisitar);
 	}
 
 
