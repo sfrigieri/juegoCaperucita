@@ -91,13 +91,22 @@ public class BosqueState extends EnvironmentState {
 	
 	public void inicializarPosicionLobo() {
 
-		this.posicionLobo = this.crearPosicionNuevaLobo();
+//		this.posicionLobo = this.crearPosicionNuevaLobo();
+//		
+//		//Guardar valor previo para reasignarlo luego
+//		this.guardarValorPrevioCeldaLobo();
+//
+//		//Actualizar mapa con nueva posición lobo
+//		this.setMapaPosicion(this.posicionLobo[0], this.posicionLobo[1], CaperucitaAgentPerception.LOBO);
+		
+		if(this.escenario == 1)
+			this.setMapaPosicion(7, 8,CaperucitaAgentPerception.LOBO);
+		else
+			if(this.escenario == 2)
+			this.setMapaPosicion(3, 6,CaperucitaAgentPerception.LOBO);
+			else
+				this.setMapaPosicion(3, 5,CaperucitaAgentPerception.LOBO);
 
-		//Guardar valor previo para reasignarlo luego
-		this.guardarValorPrevioCeldaLobo();
-
-		//Actualizar mapa con nueva posición lobo
-		this.setMapaPosicion(this.posicionLobo[0], this.posicionLobo[1], CaperucitaAgentPerception.LOBO);
 		this.updateGameBoard();
 	}
 	
@@ -275,6 +284,7 @@ public class BosqueState extends EnvironmentState {
 			 mapaInicial[7][6] = CaperucitaAgentPerception.LIBRE;
 			 mapaInicial[7][7] = CaperucitaAgentPerception.LIBRE;
 			 mapaInicial[7][8] = CaperucitaAgentPerception.LIBRE;
+			 mapaInicial[4][11] = CaperucitaAgentPerception.LIBRE;
 			 mapaInicial[5][11] = CaperucitaAgentPerception.LIBRE;
 			 mapaInicial[6][11] = CaperucitaAgentPerception.LIBRE;
 			 
