@@ -33,7 +33,8 @@ public class IrArriba extends SearchAction {
 				agState.setVidasPerdidas(++vidasPerdidas);
 				agState.setDulcesPorJuntar(3);
 				agState.setPosicion(agState.getPosicionInicial());
-				agState.setMapaPosicion(fila-listaCeldas.indexOf(CaperucitaAgentPerception.LOBO)+1, col,  CaperucitaAgentPerception.NO_VISIBLE);
+				agState.actualizarCeldasPorVisitar();
+				agState.setMapaPosicion(fila-(listaCeldas.indexOf(CaperucitaAgentPerception.LOBO)+1), col,  CaperucitaAgentPerception.NO_VISIBLE);
 			}	
 			else {
 				int avance = 0;
@@ -94,7 +95,8 @@ public class IrArriba extends SearchAction {
 				agState.setVidasPerdidas(++vidasPerdidas); 
 				agState.setDulcesPorJuntar(3);//Las posiciones de dulces se actualizarán con las futuras percepciones
 				agState.setPosicion(agState.getPosicionInicial());
-				agState.setMapaPosicion(fila-listaCeldas.indexOf(CaperucitaAgentPerception.LOBO)+1, col,  CaperucitaAgentPerception.NO_VISIBLE);
+				agState.actualizarCeldasPorVisitar();
+				agState.setMapaPosicion(fila-(listaCeldas.indexOf(CaperucitaAgentPerception.LOBO)+1), col,  CaperucitaAgentPerception.NO_VISIBLE);
 			}	
 			else {
 				int avance = 0;
