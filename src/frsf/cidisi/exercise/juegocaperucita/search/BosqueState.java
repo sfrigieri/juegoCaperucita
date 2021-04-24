@@ -90,7 +90,7 @@ public class BosqueState extends EnvironmentState {
 
 	
 	public void inicializarPosicionLobo() {
-
+		//TODO inicializarPosicionLobo
 //		this.posicionLobo = this.crearPosicionNuevaLobo();
 //		
 //		//Guardar valor previo para reasignarlo luego

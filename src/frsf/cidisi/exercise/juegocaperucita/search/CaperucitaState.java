@@ -128,8 +128,8 @@ public class CaperucitaState extends SearchBasedAgentState {
 	public void updateState(Perception p) {
 
 		CaperucitaAgentPerception percepcionCaperucita = (CaperucitaAgentPerception) p;
-
-		//bring me back this.resetValorPrevioCeldaLobo();
+		//TODO resetValorPrevioCeldaLobo
+		//this.resetValorPrevioCeldaLobo();
 
 		int row = this.getPosicionFila();
 		int col = this.getPosicionColumna();

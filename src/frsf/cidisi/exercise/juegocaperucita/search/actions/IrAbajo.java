@@ -52,7 +52,7 @@ public class IrAbajo extends SearchAction {
 				}
 				//Si en la última celda visible hay un árbol, la posición final será la anterior al árbol
 				if(listaCeldas.contains(CaperucitaAgentPerception.ARBOL))
-					agState.setPosicionFila(fila+avance-1); //TODO VER
+					agState.setPosicionFila(fila+avance-1);
 				//Sino, la posición final coincide con la última celda visible
 				else
 					agState.setPosicionFila(fila+avance);
