@@ -10,24 +10,19 @@ import frsf.cidisi.faia.solver.search.NTree;
 	
 public class Heuristic implements IEstimatedCostFunction {
 	
-	//Ponderación máxima
-	private double pondMax = 100;
-	
+
 	/**
 	 * It returns the estimated cost to reach the goal from a NTree node.
 	 */
 	@Override
 	public double getEstimatedCost(NTree node) {
 		CaperucitaState agState = (CaperucitaState) node.getAgentState();
-		//Por cada dulce obtenido restará pondMax puntos de costo a cada paso futuro del camino
-		//Por cada celda visitada restará 0.001*pondMax puntos de costo.
-		//Por cada vida perdida sumará 0.5*pondMax puntos de costo a cada paso futuro del camino
-		// más 3*pondMax puntos por tener que volver a juntar los dulces.
-
+		//Por cada dulce obtenido restará 1 punto de costo a cada paso futuro del camino
+		//Por cada celda visitada restará 1 punto de costo a cada paso futuro del camino
 
 		//Óptimo (costo estimado igual a cero): 
-		//	Llegar al estado meta sin vidas perdidas, conociendo todas las celdas y habiendo recolectado todos los dulces
+		//	Llegar al estado meta, conociendo todas las celdas y habiendo recolectado todos los dulces
 
-		return (agState.getDulcesPorJuntar()*pondMax + agState.getCeldasPorVisitar()*pondMax*0.001 + agState.getVidasPerdidas()*pondMax*0.5);
+		return (agState.getDulcesPorJuntar()*20 + agState.getCeldasPorVisitar());
 	}
 }

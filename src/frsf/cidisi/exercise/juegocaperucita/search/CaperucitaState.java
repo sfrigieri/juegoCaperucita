@@ -1,6 +1,7 @@
 package frsf.cidisi.exercise.juegocaperucita.search;
 
 import java.util.ArrayList;
+
 import frsf.cidisi.faia.agent.Perception;
 import frsf.cidisi.faia.agent.search.SearchBasedAgentState;
 import graphics.GameBoard;
@@ -34,10 +35,9 @@ public class CaperucitaState extends SearchBasedAgentState {
 		vidasPerdidas = 0;
 		dulcesPorJuntar = 3;
 		costoAccion = 0.0;
+		escenario = escenarioAmbiente;
 		listaCeldasPorVisitar = new ArrayList<int[]>();
 		this.actualizarCeldasPorVisitar();
-
-		escenario = escenarioAmbiente;
 
 		//Utilizado para la representación gráfica del estadoAgente
 		if(!isAClone) {
@@ -113,13 +113,13 @@ public class CaperucitaState extends SearchBasedAgentState {
 		boolean vidas = objeto.getVidasPerdidas() == this.vidasPerdidas;
 		boolean dulces = objeto.getDulcesPorJuntar() == this.dulcesPorJuntar;
 		boolean celdas = objeto.getCeldasPorVisitar() == this.celdasPorVisitar;
-				
+
 		return posicionFila && posicionColumna && vidas && dulces && celdas;
 
 	}
 
-	
-	
+
+
 
 	/**
 	 * This method is used to update the Agent State when a Perception is
@@ -172,8 +172,8 @@ public class CaperucitaState extends SearchBasedAgentState {
 			mapaBosque[row][i] = valor.intValue();
 			i++;
 		}
-		
-		
+
+
 		this.updateGameBoard();
 
 	}
@@ -375,14 +375,14 @@ public class CaperucitaState extends SearchBasedAgentState {
 		return posicionInicial;
 	}
 	public void setPosicionFila(int value) {
-       if(value < 0 || value > 8)
-		System.out.println("out of index > value fila:"+value);
+		if(value < 0 || value > 8)
+			System.out.println("out of index > value fila:"+value);
 		this.posicion[0] = value;
 	}
 
 	public void setPosicionColumna(int value) {
-	       if(value < 0 || value > 13)
-	   		System.out.println("out of index > value fila:"+value);
+		if(value < 0 || value > 13)
+			System.out.println("out of index > value fila:"+value);
 		this.posicion[1] = value;
 	}
 
@@ -416,20 +416,457 @@ public class CaperucitaState extends SearchBasedAgentState {
 
 	public void actualizarCeldasPorVisitar() {
 
-		for (int row = 0; row < mapaBosque.length; row++)
-			for (int col = 0; col < mapaBosque[0].length; col++) {
-					int[] posicionActual = new int[2];
-					posicionActual[0] = row;
-					posicionActual[1] = col;
-					this.listaCeldasPorVisitar.add(posicionActual);
-			}
-
-		this.listaCeldasPorVisitar
-		.removeIf(posicion -> (
-				posicion[0] == this.getPosicionFila() && posicion[1] == this.getPosicionColumna()));
+		this.listaCeldasPorVisitar = this.getCeldasVisitables();
 
 		this.celdasPorVisitar = this.listaCeldasPorVisitar.size();
 	}
+
+
+	private ArrayList<int[]> getCeldasVisitables() {
+
+		ArrayList<int[]> celdasVisitables = new ArrayList<int[]>();
+
+		if(escenario == 1) {
+
+			int[] pos = new int[2];
+
+			pos[0]= 2;
+			pos[1]= 11;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 3;
+			pos[1]= 11;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 4;
+			pos[1]= 11;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 5;
+			pos[1]= 11;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 1;
+			pos[1]= 10;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 2;
+			pos[1]= 10;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 3;
+			pos[1]= 10;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 4;
+			pos[1]= 10;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 5;
+			pos[1]= 10;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 6;
+			pos[1]= 10;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 7;
+			pos[1]= 10;
+			celdasVisitables.add(pos.clone());
+
+			pos[0]= 1;
+			pos[1]= 9;
+			celdasVisitables.add(pos.clone());
+
+			pos[0]= 2;
+			pos[1]= 9;
+			celdasVisitables.add(pos.clone());
+
+			pos[0]= 5;
+			pos[1]= 9;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 7;
+			pos[1]= 9;
+			celdasVisitables.add(pos.clone());
+
+			pos[0]= 1;
+			pos[1]= 8;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 2;
+			pos[1]= 8;
+			celdasVisitables.add(pos.clone());
+
+			pos[0]= 3;
+			pos[1]= 8;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 5;
+			pos[1]= 8;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 7;
+			pos[1]= 8;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 2;
+			pos[1]= 7;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 3;
+			pos[1]= 7;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 4;
+			pos[1]= 7;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 5;
+			pos[1]= 7;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 7;
+			pos[1]= 7;
+			celdasVisitables.add(pos.clone());
+
+			pos[0]= 1;
+			pos[1]= 6;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 2;
+			pos[1]= 6;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 3;
+			pos[1]= 6;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 4;
+			pos[1]= 6;
+			celdasVisitables.add(pos.clone());
+
+			pos[0]= 5;
+			pos[1]= 6;
+			celdasVisitables.add(pos.clone());
+
+			pos[0]= 1;
+			pos[1]= 5;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 2;
+			pos[1]= 5;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 3;
+			pos[1]= 5;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 4;
+			pos[1]= 5;
+			celdasVisitables.add(pos.clone());
+
+			pos[0]= 1;
+			pos[1]= 4;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 3;
+			pos[1]= 4;
+			celdasVisitables.add(pos.clone());
+
+			pos[0]= 1;
+			pos[1]= 3;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 2;
+			pos[1]= 3;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 3;
+			pos[1]= 3;
+			celdasVisitables.add(pos.clone()); 
+
+
+			return celdasVisitables;
+			
+		}
+		else { if(escenario == 2)
+		{ 
+			int[] pos = new int[2];
+
+			pos[0]= 3;
+			pos[1]= 10;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 4;
+			pos[1]= 10;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 5;
+			pos[1]= 10;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 6;
+			pos[1]= 10;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 7;
+			pos[1]= 10;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 3;
+			pos[1]= 9;
+			celdasVisitables.add(pos.clone());
+
+			pos[0]= 7;
+			pos[1]= 9;
+			celdasVisitables.add(pos.clone());
+
+			pos[0]= 3;
+			pos[1]= 8;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 4;
+			pos[1]= 8;
+			celdasVisitables.add(pos.clone());
+
+			pos[0]= 5;
+			pos[1]= 8;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 6;
+			pos[1]= 8;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 7;
+			pos[1]= 8;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 3;
+			pos[1]= 7;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 6;
+			pos[1]= 7;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 1;
+			pos[1]= 6;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 2;
+			pos[1]= 6;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 3;
+			pos[1]= 6;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 4;
+			pos[1]= 6;
+			celdasVisitables.add(pos.clone());
+
+			pos[0]= 5;
+			pos[1]= 6;
+			celdasVisitables.add(pos.clone());
+
+			pos[0]= 6;
+			pos[1]= 6;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 1;
+			pos[1]= 5;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 2;
+			pos[1]= 5;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 3;
+			pos[1]= 5;
+			celdasVisitables.add(pos.clone());
+
+			pos[0]= 6;
+			pos[1]= 5;
+			celdasVisitables.add(pos.clone());
+
+			pos[0]= 5;
+			pos[1]= 4;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 6;
+			pos[1]= 4;
+			celdasVisitables.add(pos.clone());
+			
+			pos[0]= 4;
+			pos[1]= 3;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 5;
+			pos[1]= 3;
+			celdasVisitables.add(pos.clone()); 
+			
+			pos[0]= 6;
+			pos[1]= 3;
+			celdasVisitables.add(pos.clone()); 
+
+
+			return celdasVisitables;
+			
+		}
+		else if(escenario == 3)
+		{ 
+			
+			int[] pos = new int[2];
+
+			pos[0]= 4;
+			pos[1]= 11;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 5;
+			pos[1]= 11;
+			celdasVisitables.add(pos.clone());
+			
+			pos[0]= 6;
+			pos[1]= 11;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 4;
+			pos[1]= 10;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 4;
+			pos[1]= 9;
+			celdasVisitables.add(pos.clone());
+
+			pos[0]= 3;
+			pos[1]= 8;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 4;
+			pos[1]= 8;
+			celdasVisitables.add(pos.clone());
+
+			pos[0]= 5;
+			pos[1]= 8;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 6;
+			pos[1]= 8;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 7;
+			pos[1]= 8;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 1;
+			pos[1]= 7;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 2;
+			pos[1]= 7;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 3;
+			pos[1]= 7;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 4;
+			pos[1]= 7;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 7;
+			pos[1]= 7;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 1;
+			pos[1]= 6;
+			celdasVisitables.add(pos.clone());
+
+			pos[0]= 3;
+			pos[1]= 6;
+			celdasVisitables.add(pos.clone());
+
+			pos[0]= 4;
+			pos[1]= 6;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 5;
+			pos[1]= 6;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 6;
+			pos[1]= 6;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 7;
+			pos[1]= 6;
+			celdasVisitables.add(pos.clone());
+
+			pos[0]= 1;
+			pos[1]= 5;
+			celdasVisitables.add(pos.clone());
+
+			pos[0]= 2;
+			pos[1]= 5;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 3;
+			pos[1]= 5;
+			celdasVisitables.add(pos.clone());
+			
+			pos[0]= 4;
+			pos[1]= 5;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 5;
+			pos[1]= 5;
+			celdasVisitables.add(pos.clone()); 
+			
+			pos[0]= 6;
+			pos[1]= 5;
+			celdasVisitables.add(pos.clone());
+			
+			pos[0]= 3;
+			pos[1]= 4;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 5;
+			pos[1]= 4;
+			celdasVisitables.add(pos.clone());
+
+			pos[0]= 6;
+			pos[1]= 4;
+			celdasVisitables.add(pos.clone());
+
+			pos[0]= 1;
+			pos[1]= 3;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 2;
+			pos[1]= 3;
+			celdasVisitables.add(pos.clone());
+			
+			pos[0]= 3;
+			pos[1]= 3;
+			celdasVisitables.add(pos.clone()); 
+
+			pos[0]= 5;
+			pos[1]= 3;
+			celdasVisitables.add(pos.clone()); 
+			
+			pos[0]= 6;
+			pos[1]= 3;
+			celdasVisitables.add(pos.clone()); 
+
+			return celdasVisitables;
+		}}
+
+		return null;
+
+	}
+
+
 
 
 	public void actualizarCeldasPorVisitar(int posicionAnteriorFilaOColumna, String accion) {
@@ -485,8 +922,11 @@ public class CaperucitaState extends SearchBasedAgentState {
 			}
 		}
 
+
 		this.celdasPorVisitar = this.listaCeldasPorVisitar.size();
-		//System.out.println("celdasporvisitar: "+this.celdasPorVisitar);
+//		System.out.println("celdasporvisitar: "+this.celdasPorVisitar);
+//		for(int[] pos : this.listaCeldasPorVisitar)
+//			System.out.println(""+pos[0]+" , "+pos[1]+"");
 	}
 
 

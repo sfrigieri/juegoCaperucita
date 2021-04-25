@@ -20,7 +20,6 @@ public class GameBoard {
 	private JFrame frame;
 	private JLabel [][] jLmatrix;
 	private ImageIcon[] icons;
-	private int escenario;
 	private int imageCount;
 	private String frameName;
 	private boolean esAgente;
@@ -31,7 +30,6 @@ public class GameBoard {
 	public void initBoard(String board_name, int[][] matrix, int[] agPosition, int escenarioAmbiente, boolean esAgState){
 
 		merger = new MergedIcons();
-		escenario =  escenarioAmbiente;
 		esAgente = esAgState;
 		jLmatrix = this.getInitJLmatrix();
 		frame = new JFrame(board_name);
@@ -39,14 +37,7 @@ public class GameBoard {
 		this.initIcons();
 		panel = new JPanel(this.getInitGridLayout());
 
-		//asignar a iconsOtherTrees arbusto en 0 y pino amarillo en 1;
-		//Setear matrixOtherTrees posiciones arbutos (0) y pinos amarillos (1), -1 para resto.
-
-		//Siempre que valor sea ARBOL, consultar que icono de arbol corresponde segun escenario en esa posicion
-
-		//Cuando se detecte valor Lobo en matriz, asignar icono lobo segun valorPrevioCeldaLobo
-
-
+		
 		for (int row = 0; row < matrix.length; row++) {
 			for (int col = 0; col < matrix[0].length; col++) {
 				jLmatrix[row][col] = new JLabel();
@@ -106,10 +97,6 @@ public class GameBoard {
 	}
 
 
-	private int[][] getInitMatrix(int escenarioAmbiente) {
-		return new int[9][14];
-	}
-
 
 	public void repaint(int[][] matrix, int[] position){
 
@@ -156,7 +143,7 @@ public class GameBoard {
 	public void contentPaneToImage(Container container, String board_name) {
 
 		try {
-			TimeUnit.SECONDS.sleep(1);
+			TimeUnit.MILLISECONDS.sleep(500);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
