@@ -49,18 +49,18 @@ public class CaperucitaAgent extends SearchBasedAgent {
 
 		// Create the search strategy
 		//A Star Search:
-		//		IStepCostFunction cost = new CostFunction();
-		//		IEstimatedCostFunction heuristic = new Heuristic();
-		//		AStarSearch strategy = new AStarSearch(cost, heuristic);
+//				IStepCostFunction cost = new CostFunction();
+//				IEstimatedCostFunction heuristic = new Heuristic();
+//				AStarSearch strategy = new AStarSearch(cost, heuristic);
 
 		//		DepthFirstSearch strategy = new DepthFirstSearch();          
 
 		//Breath First Search:
-		BreathFirstSearch strategy = new BreathFirstSearch();
+//		BreathFirstSearch strategy = new BreathFirstSearch();
 
 		//Uniform Cost:
-		// IStepCostFunction costFunction = new CostFunction();
-		// UniformCostSearch strategy = new UniformCostSearch(costFunction);
+		 IStepCostFunction costFunction = new CostFunction();
+		 UniformCostSearch strategy = new UniformCostSearch(costFunction);
 
 		//Greedy Search:
 		//         IEstimatedCostFunction heuristic = new Heuristic();

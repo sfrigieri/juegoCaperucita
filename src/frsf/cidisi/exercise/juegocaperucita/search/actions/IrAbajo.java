@@ -19,7 +19,7 @@ public class IrAbajo extends SearchAction {
 
 		CaperucitaState agState = (CaperucitaState) s;
 
-		((CaperucitaState) s).incrementarCostoAcciones(this.getCost());
+		((CaperucitaState) s).incrementarCostoAccion(this.getCost());
 
 		int fila = agState.getPosicionFila();
 		int col = agState.getPosicionColumna();
@@ -37,6 +37,7 @@ public class IrAbajo extends SearchAction {
 				agState.actualizarCeldasPorVisitar();
 				agState.setMapaPosicion(fila+listaCeldas
 						.indexOf(CaperucitaAgentPerception.LOBO)+1, col, CaperucitaAgentPerception.NO_VISIBLE);
+				((CaperucitaState) s).incrementarCostoAccion(20);
 			}	
 			else {
 				int avance = 0;
@@ -48,6 +49,7 @@ public class IrAbajo extends SearchAction {
 						int dulcesPorJuntar = agState.getDulcesPorJuntar();
 						agState.setDulcesPorJuntar(--dulcesPorJuntar);
 						agState.setMapaPosicion(fila+avance, col, CaperucitaAgentPerception.LIBRE);
+						((CaperucitaState) s).incrementarCostoAccion(-1);
 					}
 				}
 				//Si en la última celda visible hay un árbol, la posición final será la anterior al árbol
@@ -75,8 +77,6 @@ public class IrAbajo extends SearchAction {
 	public EnvironmentState execute(AgentState ast, EnvironmentState est) {
 		BosqueState environmentState = (BosqueState) est;
 		CaperucitaState agState = ((CaperucitaState) ast);
-
-		agState.incrementarCostoAcciones(this.getCost());
 
 		int fila = agState.getPosicionFila();
 		int col = agState.getPosicionColumna();

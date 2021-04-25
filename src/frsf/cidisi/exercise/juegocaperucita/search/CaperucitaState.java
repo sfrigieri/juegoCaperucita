@@ -15,7 +15,7 @@ public class CaperucitaState extends SearchBasedAgentState {
 	private int vidasPerdidas;
 	private int dulcesPorJuntar;
 	private int celdasPorVisitar;
-	private Double costoAcciones;
+	private double costoAccion;
 
 	private int escenario;
 	private int[] posicionInicial;
@@ -33,7 +33,7 @@ public class CaperucitaState extends SearchBasedAgentState {
 		posicion[1] = posicionInicial[1];
 		vidasPerdidas = 0;
 		dulcesPorJuntar = 3;
-		costoAcciones = 0.0;
+		costoAccion = 0.0;
 		listaCeldasPorVisitar = new ArrayList<int[]>();
 		this.actualizarCeldasPorVisitar();
 
@@ -74,10 +74,11 @@ public class CaperucitaState extends SearchBasedAgentState {
 		nuevoEstado.setDulcesPorJuntar(this.dulcesPorJuntar);
 		nuevoEstado.setListaCeldasPorVisitar((ArrayList<int[]>) this.listaCeldasPorVisitar.clone());
 		nuevoEstado.setCeldasPorVisitar(this.celdasPorVisitar);
-		
+
 		return nuevoEstado;
 
 	}
+
 
 
 
@@ -503,13 +504,12 @@ public class CaperucitaState extends SearchBasedAgentState {
 
 
 
-	public void incrementarCostoAcciones(Double costo) {
-		this.costoAcciones += costo;
-
+	public void incrementarCostoAccion(double costo) {
+		this.costoAccion = (this.costoAccion + costo);
 	}
 
-	public double getCostoAcciones() {
-		return this.costoAcciones;
+	public double getCostoAccion() {
+		return this.costoAccion;
 	}
 
 

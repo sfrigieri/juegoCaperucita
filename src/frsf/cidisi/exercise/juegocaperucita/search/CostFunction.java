@@ -11,7 +11,7 @@ import frsf.cidisi.faia.state.AgentState;
 public class CostFunction implements IStepCostFunction {
 
     public double calculateCost(AgentState agentState) {
-        return ((CaperucitaState) agentState).getCostoAcciones();
+        return ((CaperucitaState) agentState).getCostoAccion();
     }
 	
 	
@@ -20,6 +20,6 @@ public class CostFunction implements IStepCostFunction {
      */
     @Override
     public double calculateCost(NTree node) {
-        return ((CaperucitaState) node.getAgentState()).getCostoAcciones();
+        return ((CaperucitaState) node.getAgentState()).getCostoAccion();
     }
 }
