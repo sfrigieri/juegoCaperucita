@@ -192,12 +192,12 @@ public class CaperucitaState extends SearchBasedAgentState {
 
 
 	private void initGameBoard() {
-		gameBoard.initBoard("Mapa estado caperucita",this.getMapaBosque(), this.getPosicion(), this.escenario, true);	
+		gameBoard.initBoard("Mapa estado caperucita", this);	
 	}
 
 
 	public void updateGameBoard() {
-		gameBoard.repaint(this.getMapaBosque(), this.getPosicion());
+		gameBoard.repaint(this);
 	}
 
 
@@ -1026,6 +1026,9 @@ public class CaperucitaState extends SearchBasedAgentState {
 
 		return list;
 	}
+
+
+
 
 
 }

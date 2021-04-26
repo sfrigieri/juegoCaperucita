@@ -49,9 +49,9 @@ public class CaperucitaAgent extends SearchBasedAgent {
 
 		// Create the search strategy
 		//A Star Search:
-				IStepCostFunction cost = new CostFunction();
-				IEstimatedCostFunction heuristic = new Heuristic();
-				AStarSearch strategy = new AStarSearch(cost, heuristic);
+//				IStepCostFunction cost = new CostFunction();
+//				IEstimatedCostFunction heuristic = new Heuristic();
+//				AStarSearch strategy = new AStarSearch(cost, heuristic);
 
 //				DepthFirstSearch strategy = new DepthFirstSearch();          
 
@@ -59,8 +59,8 @@ public class CaperucitaAgent extends SearchBasedAgent {
 //		BreathFirstSearch strategy = new BreathFirstSearch();
 
 		//Uniform Cost:
-//		 IStepCostFunction costFunction = new CostFunction();
-//		 UniformCostSearch strategy = new UniformCostSearch(costFunction);
+		 IStepCostFunction costFunction = new CostFunction();
+		 UniformCostSearch strategy = new UniformCostSearch(costFunction);
 
 		//Greedy Search:
 //		         IEstimatedCostFunction heuristic = new Heuristic();
@@ -85,7 +85,10 @@ public class CaperucitaAgent extends SearchBasedAgent {
 		} catch (Exception ex) {
 			Logger.getLogger(CaperucitaAgent.class.getName()).log(Level.SEVERE, null, ex);
 		}
-
+		if(selectedAction == null && ((CaperucitaState) this.getProblem().getAgentState()).getVidasPerdidas() == 2) {
+			((CaperucitaState) this.getProblem().getAgentState()).setVidasPerdidas(3);
+			((CaperucitaState) this.getProblem().getAgentState()).updateGameBoard();
+		}
 		// Return the selected action
 		return selectedAction;
 
