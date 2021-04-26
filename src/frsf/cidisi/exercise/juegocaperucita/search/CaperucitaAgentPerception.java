@@ -42,7 +42,7 @@ public class CaperucitaAgentPerception extends Perception {
 
 		//Antes de generar la percepción, se actualiza aleatoriamente la posición del Lobo
 		//TODO actualizarPosicionLobo
-		//environmentState.actualizarPosicionLobo();
+		environmentState.actualizarPosicionLobo();
 
 		int row = environmentState.getPosicionAgente()[0];
 		int col = environmentState.getPosicionAgente()[1];

@@ -36,7 +36,7 @@ public class IrIzquierda extends SearchAction {
 				agState.setPosicion(agState.getPosicionInicial().clone());
 				agState.actualizarCeldasPorVisitar();
 				agState.setMapaPosicion(fila,col-(listaCeldas.indexOf(CaperucitaAgentPerception.LOBO)+1), CaperucitaAgentPerception.NO_VISIBLE);
-				((CaperucitaState) s).incrementarCostoAccion(20);
+				((CaperucitaState) s).incrementarCostoAccion(10);
 			}	
 			else {
 				int avance = 0;
@@ -48,7 +48,7 @@ public class IrIzquierda extends SearchAction {
 						int dulcesPorJuntar = agState.getDulcesPorJuntar();
 						agState.setDulcesPorJuntar(--dulcesPorJuntar);
 						agState.setMapaPosicion(fila, col-avance, CaperucitaAgentPerception.LIBRE);
-						((CaperucitaState) s).incrementarCostoAccion(-1);
+						((CaperucitaState) s).incrementarCostoAccion(-10);
 					}
 				}
 				//Si en la última celda visible hay un árbol, la posición final será la anterior al árbol
@@ -162,7 +162,7 @@ public class IrIzquierda extends SearchAction {
 	 */
 	@Override
 	public Double getCost() {
-		return new Double(1);
+		return new Double(10);
 	}
 
 	/**

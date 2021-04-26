@@ -24,6 +24,7 @@ public class CaperucitaState extends SearchBasedAgentState {
 	private int[] posicionAnterior;
 	ArrayList<int[]> listaCeldasPorVisitar;
 	private GameBoard gameBoard;
+	private int celdasVisitadas;
 
 	public CaperucitaState(int escenarioAmbiente, boolean isAClone) {
 
@@ -131,7 +132,7 @@ public class CaperucitaState extends SearchBasedAgentState {
 
 		CaperucitaAgentPerception percepcionCaperucita = (CaperucitaAgentPerception) p;
 		//TODO resetValorPrevioCeldaLobo
-		//this.resetValorPrevioCeldaLobo();
+		this.resetValorPrevioCeldaLobo();
 
 		int row = this.getPosicionFila();
 		int col = this.getPosicionColumna();
@@ -421,6 +422,8 @@ public class CaperucitaState extends SearchBasedAgentState {
 
 	public void actualizarCeldasPorVisitar() {
 
+		this.celdasVisitadas = 0;
+		
 		this.listaCeldasPorVisitar = this.getCeldasVisitables();
 
 		this.celdasPorVisitar = this.listaCeldasPorVisitar.size();
@@ -876,6 +879,7 @@ public class CaperucitaState extends SearchBasedAgentState {
 
 	public void actualizarCeldasPorVisitar(int posicionAnteriorFilaOColumna, String accion) {
 
+		
 		if(accion == "irAbajo") {
 			for(int i = posicionAnteriorFilaOColumna; i <= this.getPosicionFila(); i++) {
 				int[] posAnterior =  new int[2];
@@ -926,9 +930,13 @@ public class CaperucitaState extends SearchBasedAgentState {
 				}
 			}
 		}
-
-
-		this.celdasPorVisitar = this.listaCeldasPorVisitar.size();
+		
+		int celdasPorVisitarActual = this.listaCeldasPorVisitar.size();
+		
+		this.celdasVisitadas = Math.abs(this.celdasPorVisitar - celdasPorVisitarActual);
+		
+		this.celdasPorVisitar = celdasPorVisitarActual;
+		
 //		System.out.println("celdasporvisitar: "+this.celdasPorVisitar);
 //		for(int[] pos : this.listaCeldasPorVisitar)
 //			System.out.println(""+pos[0]+" , "+pos[1]+"");
@@ -1030,6 +1038,13 @@ public class CaperucitaState extends SearchBasedAgentState {
 		}
 
 		return list;
+	}
+
+
+
+
+	public double getCeldasVisitadas() {
+		return this.celdasVisitadas;
 	}
 
 

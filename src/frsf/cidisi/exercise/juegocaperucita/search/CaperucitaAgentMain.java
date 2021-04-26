@@ -6,9 +6,9 @@ import frsf.cidisi.faia.simulator.SearchBasedAgentSimulator;
 public class CaperucitaAgentMain {
 
     public static void main(String[] args) throws PrologConnectorException {
-        CaperucitaAgent agent = new CaperucitaAgent(1);
+        CaperucitaAgent agent = new CaperucitaAgent(2);
 
-        Bosque environment = new Bosque(1);
+        Bosque environment = new Bosque(2);
 
         SearchBasedAgentSimulator simulator =
                 new SearchBasedAgentSimulator(environment, agent);
