@@ -33,7 +33,7 @@ public class IrDerecha extends SearchAction {
 				int vidasPerdidas = agState.getVidasPerdidas();
 				agState.setVidasPerdidas(++vidasPerdidas);
 				agState.setDulcesPorJuntar(3);
-				agState.setPosicion(agState.getPosicionInicial());
+				agState.setPosicion(agState.getPosicionInicial().clone());
 				agState.actualizarCeldasPorVisitar();
 				agState.setMapaPosicion(fila, col+listaCeldas.indexOf(CaperucitaAgentPerception.LOBO)+1,  CaperucitaAgentPerception.NO_VISIBLE);
 				((CaperucitaState) s).incrementarCostoAccion(20);
@@ -96,7 +96,7 @@ public class IrDerecha extends SearchAction {
 				
 				agState.setVidasPerdidas(vidasPerdidas); 
 				agState.setDulcesPorJuntar(3);//Las posiciones de dulces se actualizarán con las futuras percepciones
-				agState.setPosicion(agState.getPosicionInicial());
+				agState.setPosicion(agState.getPosicionInicial().clone());
 				agState.actualizarCeldasPorVisitar();
 				agState.setMapaPosicion(fila, col+listaCeldas.indexOf(CaperucitaAgentPerception.LOBO)+1, CaperucitaAgentPerception.NO_VISIBLE);
 			}	
