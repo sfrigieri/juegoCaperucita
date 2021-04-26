@@ -52,6 +52,7 @@ public class IrAbajo extends SearchAction {
 						((CaperucitaState) s).incrementarCostoAccion(-1);
 					}
 				}
+
 				//Si en la última celda visible hay un árbol, la posición final será la anterior al árbol
 				if(listaCeldas.contains(CaperucitaAgentPerception.ARBOL))
 					agState.setPosicionFila(fila+avance-1);
@@ -60,6 +61,27 @@ public class IrAbajo extends SearchAction {
 					agState.setPosicionFila(fila+avance);
 
 				agState.actualizarCeldasPorVisitar(posicionFilaAnterior,"irAbajo");
+			}
+
+			if(CaperucitaAgent.comprobarEstadoRepetido) {
+
+
+				if(CaperucitaAgent.accionMediante && agState.equals(CaperucitaAgent.estadoAnterior)) {
+					System.out.println("--------------------------------------------------");
+					System.out.println("agState anterior es igual al siguiente");
+					System.out.println("Se evitó acción "+this.getClass().getName());
+					System.out.println("--------------------------------------------------");
+					CaperucitaAgent.seEvitoAccion = true;
+					return null;
+				}
+				else if(CaperucitaAgent.estadoSiguienteAlRepetido != null 
+						&& agState.equals(CaperucitaAgent.estadoSiguienteAlRepetido)) {
+					System.out.println("--------------------------------------------------");
+					System.out.println("agState siguiente coincide con el siguiente al último repetido");
+					System.out.println("Se evitó acción "+this.getClass().getName());
+					System.out.println("--------------------------------------------------");
+					return null;
+				}
 			}
 
 			return agState;

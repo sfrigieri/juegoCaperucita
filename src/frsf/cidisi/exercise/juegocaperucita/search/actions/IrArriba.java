@@ -17,9 +17,9 @@ public class IrArriba extends SearchAction {
 	@Override
 	public SearchBasedAgentState execute(SearchBasedAgentState s) {
 		CaperucitaState agState = (CaperucitaState) s;
-		
+
 		((CaperucitaState) s).incrementarCostoAccion(this.getCost());
-		
+
 		int fila = agState.getPosicionFila();
 		int col = agState.getPosicionColumna();
 
@@ -56,8 +56,29 @@ public class IrArriba extends SearchAction {
 				//Sino, la posición final coincide con la última celda visible
 				else
 					agState.setPosicionFila(fila-avance);
-				
+
 				agState.actualizarCeldasPorVisitar(posicionFilaAnterior,"irArriba");
+			}
+
+			if(CaperucitaAgent.comprobarEstadoRepetido) {
+
+
+				if(CaperucitaAgent.accionMediante && agState.equals(CaperucitaAgent.estadoAnterior)) {
+					System.out.println("--------------------------------------------------");
+					System.out.println("agState anterior es igual al siguiente");
+					System.out.println("Se evitó acción "+this.getClass().getName());
+					System.out.println("--------------------------------------------------");
+					CaperucitaAgent.seEvitoAccion = true;
+					return null;
+				}
+				else if(CaperucitaAgent.estadoSiguienteAlRepetido != null 
+						&& agState.equals(CaperucitaAgent.estadoSiguienteAlRepetido)) {
+					System.out.println("--------------------------------------------------");
+					System.out.println("agState siguiente coincide con el siguiente al último repetido");
+					System.out.println("Se evitó acción "+this.getClass().getName());
+					System.out.println("--------------------------------------------------");
+					return null;
+				}
 			}
 
 			return agState;
@@ -85,13 +106,13 @@ public class IrArriba extends SearchAction {
 
 			if(listaCeldas.contains(CaperucitaAgentPerception.LOBO)){
 				int vidasPerdidas = agState.getVidasPerdidas();
-				
+
 				//Actualizo el contador de vidas perdidas en estadoAmbiente (necesario al evaluar agentFailed())
 				environmentState.setVidasPerdidasAgente(++vidasPerdidas);
 				//Se reinicializa el mapa y la posición del agente en estadoAmbiente
 				environmentState.resetPosicionAgente();
 				environmentState.resetMapa();
-				
+
 				agState.setVidasPerdidas(vidasPerdidas); 
 				agState.setDulcesPorJuntar(3);//Las posiciones de dulces se actualizarán con las futuras percepciones
 				agState.setPosicion(agState.getPosicionInicial().clone());
@@ -105,9 +126,9 @@ public class IrArriba extends SearchAction {
 					avance++;
 					//Por cada celda en columna 'col' que contenga dulces
 					if(valor.intValue() == CaperucitaAgentPerception.DULCES) {
-						
+
 						environmentState.setMapaPosicion(fila-avance, col, CaperucitaAgentPerception.LIBRE);
-						
+
 						int dulcesPorJuntar = agState.getDulcesPorJuntar();
 						agState.setDulcesPorJuntar(--dulcesPorJuntar);
 						agState.setMapaPosicion(fila-avance, col, CaperucitaAgentPerception.LIBRE);

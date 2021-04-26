@@ -10,17 +10,17 @@ import frsf.cidisi.faia.state.EnvironmentState;
 
 public class IrDerecha extends SearchAction {
 
-    /**
-     * This method updates a tree node state when the search process is running.
-     * It does not updates the real world state.
-     */
-    @Override
-    public SearchBasedAgentState execute(SearchBasedAgentState s) {
-    	
-    	CaperucitaState agState = (CaperucitaState) s;
+	/**
+	 * This method updates a tree node state when the search process is running.
+	 * It does not updates the real world state.
+	 */
+	@Override
+	public SearchBasedAgentState execute(SearchBasedAgentState s) {
+
+		CaperucitaState agState = (CaperucitaState) s;
 
 		((CaperucitaState) s).incrementarCostoAccion(this.getCost());
-		
+
 		int fila = agState.getPosicionFila();
 		int col = agState.getPosicionColumna();
 
@@ -57,8 +57,29 @@ public class IrDerecha extends SearchAction {
 				//Sino, la posición final coincide con la última celda visible
 				else
 					agState.setPosicionColumna(col+avance);
-				
+
 				agState.actualizarCeldasPorVisitar(posicionColumnaAnterior,"irDerecha");
+			}
+
+			if(CaperucitaAgent.comprobarEstadoRepetido) {
+
+
+				if(CaperucitaAgent.accionMediante && agState.equals(CaperucitaAgent.estadoAnterior)) {
+					System.out.println("--------------------------------------------------");
+					System.out.println("agState anterior es igual al siguiente");
+					System.out.println("Se evitó acción "+this.getClass().getName());
+					System.out.println("--------------------------------------------------");
+					CaperucitaAgent.seEvitoAccion = true;
+					return null;
+				}
+				else if(CaperucitaAgent.estadoSiguienteAlRepetido != null 
+						&& agState.equals(CaperucitaAgent.estadoSiguienteAlRepetido)) {
+					System.out.println("--------------------------------------------------");
+					System.out.println("agState siguiente coincide con el siguiente al último repetido");
+					System.out.println("Se evitó acción "+this.getClass().getName());
+					System.out.println("--------------------------------------------------");
+					return null;
+				}
 			}
 
 			return agState;
@@ -66,17 +87,17 @@ public class IrDerecha extends SearchAction {
 		}
 		else
 			return null;
-		
-    }
 
-    /**
-     * This method updates the agent state and the real world state.
-     */
-    @Override
-    public EnvironmentState execute(AgentState ast, EnvironmentState est) {
-    	BosqueState environmentState = (BosqueState) est;
+	}
+
+	/**
+	 * This method updates the agent state and the real world state.
+	 */
+	@Override
+	public EnvironmentState execute(AgentState ast, EnvironmentState est) {
+		BosqueState environmentState = (BosqueState) est;
 		CaperucitaState agState = ((CaperucitaState) ast);
-		
+
 		int fila = agState.getPosicionFila();
 		int col = agState.getPosicionColumna();
 
@@ -87,13 +108,13 @@ public class IrDerecha extends SearchAction {
 
 			if(listaCeldas.contains(CaperucitaAgentPerception.LOBO)){
 				int vidasPerdidas = agState.getVidasPerdidas();
-				
+
 				//Actualizo el contador de vidas perdidas en estadoAmbiente (necesario al evaluar agentFailed())
 				environmentState.setVidasPerdidasAgente(++vidasPerdidas);
 				//Se reinicializa el mapa y la posición del agente en estadoAmbiente
 				environmentState.resetPosicionAgente();
 				environmentState.resetMapa();
-				
+
 				agState.setVidasPerdidas(vidasPerdidas); 
 				agState.setDulcesPorJuntar(3);//Las posiciones de dulces se actualizarán con las futuras percepciones
 				agState.setPosicion(agState.getPosicionInicial().clone());
@@ -107,9 +128,9 @@ public class IrDerecha extends SearchAction {
 					avance++;
 					//Por cada celda en columna 'col' que contenga dulces
 					if(valor.intValue() == CaperucitaAgentPerception.DULCES) {
-						
+
 						environmentState.setMapaPosicion(fila, col+avance, CaperucitaAgentPerception.LIBRE);
-						
+
 						int dulcesPorJuntar = agState.getDulcesPorJuntar();
 						agState.setDulcesPorJuntar(--dulcesPorJuntar);
 						agState.setMapaPosicion(fila, col+avance, CaperucitaAgentPerception.LIBRE);
@@ -134,22 +155,22 @@ public class IrDerecha extends SearchAction {
 		}
 		else
 			return null;
-    }
+	}
 
-    /**
-     * This method returns the action cost.
-     */
-    @Override
-    public Double getCost() {
-        return new Double(1);
-    }
+	/**
+	 * This method returns the action cost.
+	 */
+	@Override
+	public Double getCost() {
+		return new Double(1);
+	}
 
-    /**
-     * This method is not important for a search based agent, but is essensial
-     * when creating a calculus based one.
-     */
-    @Override
-    public String toString() {
-        return "IrDerecha";
-    }
+	/**
+	 * This method is not important for a search based agent, but is essensial
+	 * when creating a calculus based one.
+	 */
+	@Override
+	public String toString() {
+		return "IrDerecha";
+	}
 }

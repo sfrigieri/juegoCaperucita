@@ -17,7 +17,16 @@ import java.util.Vector;
 
 public class CaperucitaAgent extends SearchBasedAgent {
 
+	public static CaperucitaState estadoAnterior;
+	public static CaperucitaState estadoSiguienteAlRepetido;
+	public static boolean seEvitoAccion;
+	public static boolean accionMediante;
+	public static boolean comprobarEstadoRepetido;
+
 	public CaperucitaAgent(int escenario) {
+		comprobarEstadoRepetido = false;
+		seEvitoAccion = false;
+		accionMediante = false;
 
 		// The Agent Goal
 		CaperucitaGoal agGoal = new CaperucitaGoal();
@@ -47,24 +56,25 @@ public class CaperucitaAgent extends SearchBasedAgent {
 	@Override
 	public Action selectAction() {
 
+
 		// Create the search strategy
 		//A Star Search:
-//				IStepCostFunction cost = new CostFunction();
-//				IEstimatedCostFunction heuristic = new Heuristic();
-//				AStarSearch strategy = new AStarSearch(cost, heuristic);
+		//						IStepCostFunction cost = new CostFunction();
+		//						IEstimatedCostFunction heuristic = new Heuristic();
+		//						AStarSearch strategy = new AStarSearch(cost, heuristic);
 
-//				DepthFirstSearch strategy = new DepthFirstSearch();          
+		DepthFirstSearch strategy = new DepthFirstSearch();          
 
 		//Breath First Search:
-//		BreathFirstSearch strategy = new BreathFirstSearch();
+		//				BreathFirstSearch strategy = new BreathFirstSearch();
 
 		//Uniform Cost:
-		 IStepCostFunction costFunction = new CostFunction();
-		 UniformCostSearch strategy = new UniformCostSearch(costFunction);
+		//		IStepCostFunction costFunction = new CostFunction();
+		//		UniformCostSearch strategy = new UniformCostSearch(costFunction);
 
 		//Greedy Search:
-//		         IEstimatedCostFunction heuristic = new Heuristic();
-//		         GreedySearch strategy = new GreedySearch(heuristic);
+		//				         IEstimatedCostFunction heuristic = new Heuristic();
+		//				         GreedySearch strategy = new GreedySearch(heuristic);
 
 
 		// Create a Search object with the strategy
@@ -85,14 +95,22 @@ public class CaperucitaAgent extends SearchBasedAgent {
 		} catch (Exception ex) {
 			Logger.getLogger(CaperucitaAgent.class.getName()).log(Level.SEVERE, null, ex);
 		}
-		if(selectedAction == null && ((CaperucitaState) this.getProblem().getAgentState()).getVidasPerdidas() == 2) {
-			((CaperucitaState) this.getProblem().getAgentState()).setVidasPerdidas(3);
-			((CaperucitaState) this.getProblem().getAgentState()).updateGameBoard();
+		if(selectedAction == null && ((CaperucitaState) this.getAgentState()).getVidasPerdidas() == 2) {
+			((CaperucitaState) this.getAgentState()).setVidasPerdidas(3);
+			((CaperucitaState) this.getAgentState()).updateGameBoard();
 		}
+		else 
+			if(comprobarEstadoRepetido && seEvitoAccion) {
+				seEvitoAccion = false;
+				estadoSiguienteAlRepetido = (CaperucitaState) ((CaperucitaState) this.getAgentState()).clone();
+			} 
+
 		// Return the selected action
 		return selectedAction;
 
 	}
+
+
 
 	/**
 	 * This method is executed by the simulator to give the agent a perception.
@@ -102,5 +120,23 @@ public class CaperucitaAgent extends SearchBasedAgent {
 	@Override
 	public void see(Perception p) {
 		this.getAgentState().updateState(p);
+
+		if(comprobarEstadoRepetido) {
+
+			if(estadoAnterior == null)
+				estadoAnterior = (CaperucitaState) ((CaperucitaState) this.getAgentState()).clone();
+			else {
+
+				if(accionMediante) {
+					estadoAnterior = (CaperucitaState) ((CaperucitaState) this.getAgentState()).clone();
+					accionMediante = false;
+				}
+				else
+					accionMediante = true;
+			}
+
+		}
 	}
+
+
 }
