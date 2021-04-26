@@ -355,8 +355,11 @@ public class BosqueState extends EnvironmentState {
 			}
 			str = str + " ]\n";
 		}
-		str = str +" ]\"";
-
+		str = str +" ]\n";
+		str = str +"\n Información del agente: \n";
+		str = str +"\n Posicion: ["+posicionAgente[0]+"]["+posicionAgente[1]+"]";
+		str = str +"\n Vidas Perdidas: "+vidasPerdidasAgente+"\n\n";
+	
 		return str;
 	}
 

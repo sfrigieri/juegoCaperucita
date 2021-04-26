@@ -16,9 +16,10 @@ public class CaperucitaState extends SearchBasedAgentState {
 	private int vidasPerdidas;
 	private int dulcesPorJuntar;
 	private int celdasPorVisitar;
-	private double costoAccion;
 
+	//Los siguientes atributos no forman parte de la comparación equals
 	private int escenario;
+	private double costoAccion;
 	private int[] posicionInicial;
 	private int[] posicionAnterior;
 	ArrayList<int[]> listaCeldasPorVisitar;
@@ -230,7 +231,11 @@ public class CaperucitaState extends SearchBasedAgentState {
 			str = str + " ]\n";
 		}
 		str = str +" ]\"";
-
+		
+		str = str +"\n Posicion: ["+posicion[0]+"]["+posicion[1]+"]";
+		str = str +"\n Dulces por juntar: "+dulcesPorJuntar;
+		str = str +"\n Vidas Perdidas: "+vidasPerdidas;
+		str = str +"\n Celdas por visitar: "+celdasPorVisitar+"\n\n";
 		return str;
 	}
 
