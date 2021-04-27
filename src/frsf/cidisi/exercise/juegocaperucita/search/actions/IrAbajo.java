@@ -19,7 +19,6 @@ public class IrAbajo extends SearchAction {
 
 		CaperucitaState agState = (CaperucitaState) s;
 
-		((CaperucitaState) s).incrementarCostoAccion(this.getCost());
 
 		int fila = agState.getPosicionFila();
 		int col = agState.getPosicionColumna();
@@ -49,7 +48,7 @@ public class IrAbajo extends SearchAction {
 						int dulcesPorJuntar = agState.getDulcesPorJuntar();
 						agState.setDulcesPorJuntar(--dulcesPorJuntar);
 						agState.setMapaPosicion(fila+avance, col, CaperucitaAgentPerception.LIBRE);
-						((CaperucitaState) s).incrementarCostoAccion(-10);
+						((CaperucitaState) s).incrementarCostoAccion(0);
 					}
 				}
 
@@ -167,7 +166,8 @@ public class IrAbajo extends SearchAction {
 	 */
 	@Override
 	public Double getCost() {
-		return new Double(10);
+		//El costo es establecido dentro del método execute
+		return new Double(0);
 	}
 
 	/**

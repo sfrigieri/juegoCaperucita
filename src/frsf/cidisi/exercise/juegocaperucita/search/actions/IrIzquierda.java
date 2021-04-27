@@ -19,8 +19,6 @@ public class IrIzquierda extends SearchAction {
 
 		CaperucitaState agState = (CaperucitaState) s;
 
-		((CaperucitaState) s).incrementarCostoAccion(this.getCost());
-
 		int fila = agState.getPosicionFila();
 		int col = agState.getPosicionColumna();
 
@@ -48,7 +46,7 @@ public class IrIzquierda extends SearchAction {
 						int dulcesPorJuntar = agState.getDulcesPorJuntar();
 						agState.setDulcesPorJuntar(--dulcesPorJuntar);
 						agState.setMapaPosicion(fila, col-avance, CaperucitaAgentPerception.LIBRE);
-						((CaperucitaState) s).incrementarCostoAccion(-10);
+						((CaperucitaState) s).incrementarCostoAccion(0);
 					}
 				}
 				//Si en la última celda visible hay un árbol, la posición final será la anterior al árbol
@@ -162,7 +160,8 @@ public class IrIzquierda extends SearchAction {
 	 */
 	@Override
 	public Double getCost() {
-		return new Double(10);
+		//El costo es establecido dentro del método execute
+		return new Double(0);
 	}
 
 	/**
