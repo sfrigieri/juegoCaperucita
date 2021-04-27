@@ -19,7 +19,7 @@ public class IrAbajo extends SearchAction {
 
 		CaperucitaState agState = (CaperucitaState) s;
 
-		((CaperucitaState) s).incrementarCostoAccion(this.getCost());
+		((CaperucitaState) s).setCostoAccion(this.getCost());
 
 		int fila = agState.getPosicionFila();
 		int col = agState.getPosicionColumna();
@@ -37,7 +37,7 @@ public class IrAbajo extends SearchAction {
 				agState.actualizarCeldasPorVisitar();
 				agState.setMapaPosicion(fila+listaCeldas
 						.indexOf(CaperucitaAgentPerception.LOBO)+1, col, CaperucitaAgentPerception.NO_VISIBLE);
-				((CaperucitaState) s).incrementarCostoAccion(10);
+				((CaperucitaState) s).setCostoAccion(20);
 			}	
 			else {
 				int avance = 0;
@@ -49,7 +49,7 @@ public class IrAbajo extends SearchAction {
 						int dulcesPorJuntar = agState.getDulcesPorJuntar();
 						agState.setDulcesPorJuntar(--dulcesPorJuntar);
 						agState.setMapaPosicion(fila+avance, col, CaperucitaAgentPerception.LIBRE);
-						((CaperucitaState) s).incrementarCostoAccion(-10);
+						((CaperucitaState) s).setCostoAccion(5);
 					}
 				}
 

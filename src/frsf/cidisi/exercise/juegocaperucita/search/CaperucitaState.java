@@ -971,8 +971,8 @@ public class CaperucitaState extends SearchBasedAgentState {
 
 
 
-	public void incrementarCostoAccion(double costo) {
-		this.costoAccion = (this.costoAccion + costo);
+	public void setCostoAccion(double costo) {
+		this.costoAccion = costo;
 	}
 
 	public double getCostoAccion() {
