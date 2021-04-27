@@ -11,9 +11,11 @@ import frsf.cidisi.faia.state.AgentState;
 	
 public class Bosque extends Environment {
 
-
 	
-    public Bosque(int escenario) {
+    public static boolean permitirMovimientoLobo = true;
+    
+
+	public Bosque(int escenario) {
        
     	this.environmentState = new BosqueState(escenario);
 

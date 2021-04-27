@@ -80,6 +80,7 @@ public class BosqueState extends EnvironmentState {
 		while((this.getPosicionMapa(posicion[0], posicion[1]) == CaperucitaAgentPerception.LOBO)
 				|| (posicion[0] == this.getPosicionAgenteFila() && posicion[1] == this.getPosicionAgenteColumna())
 				|| (this.getPosicionMapa(posicion[0], posicion[1]) == CaperucitaAgentPerception.DULCES)
+				|| (this.getPosicionMapa(posicion[0], posicion[1]) == CaperucitaAgentPerception.FLORES)
 				);
 
 		return posicion;
@@ -88,22 +89,26 @@ public class BosqueState extends EnvironmentState {
 
 
 	public void inicializarPosicionLobo() {
-		//TODO inicializarPosicionLobo
-				this.posicionLobo = this.crearPosicionNuevaLobo();
-				
-				//Guardar valor previo para reasignarlo luego
-				this.guardarValorPrevioCeldaLobo();
-		
-				//Actualizar mapa con nueva posición lobo
-				this.setMapaPosicion(this.posicionLobo[0], this.posicionLobo[1], CaperucitaAgentPerception.LOBO);
 
-//		if(this.escenario == 1)
-//			this.setMapaPosicion(7, 8,CaperucitaAgentPerception.LOBO);
-//		else
-//			if(this.escenario == 2)
-//				this.setMapaPosicion(3, 6,CaperucitaAgentPerception.LOBO);
-//			else
-//				this.setMapaPosicion(3, 5,CaperucitaAgentPerception.LOBO);
+		if(Bosque.permitirMovimientoLobo) {
+			this.posicionLobo = this.crearPosicionNuevaLobo();
+
+			//Guardar valor previo para reasignarlo luego
+			this.guardarValorPrevioCeldaLobo();
+
+			//Actualizar mapa con nueva posición lobo
+			this.setMapaPosicion(this.posicionLobo[0], this.posicionLobo[1], CaperucitaAgentPerception.LOBO);
+		}
+		else {
+
+			if(this.escenario == 1)
+				this.setMapaPosicion(7, 8,CaperucitaAgentPerception.LOBO);
+			else
+				if(this.escenario == 2)
+					this.setMapaPosicion(5, 6,CaperucitaAgentPerception.LOBO);
+				else
+					this.setMapaPosicion(3, 5,CaperucitaAgentPerception.LOBO);
+		}
 
 		this.updateGameBoard();
 	}
@@ -359,7 +364,7 @@ public class BosqueState extends EnvironmentState {
 		str = str +"\n Información del agente: \n";
 		str = str +"\n Posicion: ["+posicionAgente[0]+"]["+posicionAgente[1]+"]";
 		str = str +"\n Vidas Perdidas: "+vidasPerdidasAgente+"\n\n";
-	
+
 		return str;
 	}
 

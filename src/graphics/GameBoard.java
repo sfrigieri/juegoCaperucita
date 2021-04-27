@@ -10,7 +10,6 @@ import java.util.concurrent.TimeUnit;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
 
 import frsf.cidisi.exercise.juegocaperucita.search.CaperucitaAgentPerception;
 import frsf.cidisi.exercise.juegocaperucita.search.CaperucitaState;
@@ -318,7 +317,7 @@ public class GameBoard {
 	public void contentPaneToImage(Container container, String board_name) {
 
 		try {
-			TimeUnit.MILLISECONDS.sleep(500);
+			TimeUnit.MILLISECONDS.sleep(900);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

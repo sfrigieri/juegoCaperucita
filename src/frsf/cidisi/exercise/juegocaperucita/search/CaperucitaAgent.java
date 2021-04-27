@@ -19,14 +19,11 @@ public class CaperucitaAgent extends SearchBasedAgent {
 
 	public static CaperucitaState estadoAnterior;
 	public static CaperucitaState estadoSiguienteAlRepetido;
-	public static boolean seEvitoAccion;
-	public static boolean accionMediante;
-	public static boolean comprobarEstadoRepetido;
+	public static boolean seEvitoAccion = false;
+	public static boolean accionMediante = false;
+	public static boolean comprobarEstadoRepetido = true;
 
 	public CaperucitaAgent(int escenario) {
-		comprobarEstadoRepetido = false;
-		seEvitoAccion = false;
-		accionMediante = false;
 
 		// The Agent Goal
 		CaperucitaGoal agGoal = new CaperucitaGoal();
@@ -73,8 +70,8 @@ public class CaperucitaAgent extends SearchBasedAgent {
 //				UniformCostSearch strategy = new UniformCostSearch(costFunction);
 
 		//Greedy Search:
-		//				         IEstimatedCostFunction heuristic = new Heuristic();
-		//				         GreedySearch strategy = new GreedySearch(heuristic);
+//						         IEstimatedCostFunction heuristic = new Heuristic();
+//						         GreedySearch strategy = new GreedySearch(heuristic);
 
 
 		// Create a Search object with the strategy
