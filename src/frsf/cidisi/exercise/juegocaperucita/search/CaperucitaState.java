@@ -24,7 +24,7 @@ public class CaperucitaState extends SearchBasedAgentState {
 	private int[] posicionAnterior;
 	ArrayList<int[]> listaCeldasPorVisitar;
 	private GameBoard gameBoard;
-	private int celdasVisitadas;
+	private double celdasVisitadas;
 
 	public CaperucitaState(int escenarioAmbiente, boolean isAClone) {
 
@@ -40,7 +40,7 @@ public class CaperucitaState extends SearchBasedAgentState {
 		escenario = escenarioAmbiente;
 		listaCeldasPorVisitar = new ArrayList<int[]>();
 		this.actualizarCeldasPorVisitar();
-
+		
 		//Utilizado para la representación gráfica del estadoAgente
 		if(!isAClone) {
 			gameBoard = new GameBoard();
@@ -131,8 +131,9 @@ public class CaperucitaState extends SearchBasedAgentState {
 	public void updateState(Perception p) {
 
 		CaperucitaAgentPerception percepcionCaperucita = (CaperucitaAgentPerception) p;
-		//TODO resetValorPrevioCeldaLobo
-		this.resetValorPrevioCeldaLobo();
+
+		if(Bosque.permitirMovimientoLobo)
+			this.resetValorPrevioCeldaLobo();
 
 		int row = this.getPosicionFila();
 		int col = this.getPosicionColumna();
@@ -232,11 +233,12 @@ public class CaperucitaState extends SearchBasedAgentState {
 			str = str + " ]\n";
 		}
 		str = str +" ]\"";
-		
+
 		str = str +"\n Posicion: ["+posicion[0]+"]["+posicion[1]+"]";
 		str = str +"\n Dulces por juntar: "+dulcesPorJuntar;
 		str = str +"\n Vidas Perdidas: "+vidasPerdidas;
-		str = str +"\n Celdas por visitar: "+celdasPorVisitar+"\n\n";
+		str = str +"\n Distancia al objetivo: "+this.getDistanciaAObjetivo()+"\n\n";
+
 		return str;
 	}
 
@@ -423,7 +425,7 @@ public class CaperucitaState extends SearchBasedAgentState {
 	public void actualizarCeldasPorVisitar() {
 
 		this.celdasVisitadas = 0;
-		
+
 		this.listaCeldasPorVisitar = this.getCeldasVisitables();
 
 		this.celdasPorVisitar = this.listaCeldasPorVisitar.size();
@@ -596,7 +598,7 @@ public class CaperucitaState extends SearchBasedAgentState {
 
 
 			return celdasVisitables;
-			
+
 		}
 		else { if(escenario == 2)
 		{ 
@@ -705,7 +707,7 @@ public class CaperucitaState extends SearchBasedAgentState {
 			pos[0]= 6;
 			pos[1]= 4;
 			celdasVisitables.add(pos.clone());
-			
+
 			pos[0]= 4;
 			pos[1]= 3;
 			celdasVisitables.add(pos.clone()); 
@@ -713,18 +715,18 @@ public class CaperucitaState extends SearchBasedAgentState {
 			pos[0]= 5;
 			pos[1]= 3;
 			celdasVisitables.add(pos.clone()); 
-			
+
 			pos[0]= 6;
 			pos[1]= 3;
 			celdasVisitables.add(pos.clone()); 
 
 
 			return celdasVisitables;
-			
+
 		}
 		else if(escenario == 3)
 		{ 
-			
+
 			int[] pos = new int[2];
 
 			pos[0]= 4;
@@ -734,7 +736,7 @@ public class CaperucitaState extends SearchBasedAgentState {
 			pos[0]= 5;
 			pos[1]= 11;
 			celdasVisitables.add(pos.clone());
-			
+
 			pos[0]= 6;
 			pos[1]= 11;
 			celdasVisitables.add(pos.clone()); 
@@ -822,7 +824,7 @@ public class CaperucitaState extends SearchBasedAgentState {
 			pos[0]= 3;
 			pos[1]= 5;
 			celdasVisitables.add(pos.clone());
-			
+
 			pos[0]= 4;
 			pos[1]= 5;
 			celdasVisitables.add(pos.clone()); 
@@ -830,11 +832,11 @@ public class CaperucitaState extends SearchBasedAgentState {
 			pos[0]= 5;
 			pos[1]= 5;
 			celdasVisitables.add(pos.clone()); 
-			
+
 			pos[0]= 6;
 			pos[1]= 5;
 			celdasVisitables.add(pos.clone());
-			
+
 			pos[0]= 3;
 			pos[1]= 4;
 			celdasVisitables.add(pos.clone()); 
@@ -854,7 +856,7 @@ public class CaperucitaState extends SearchBasedAgentState {
 			pos[0]= 2;
 			pos[1]= 3;
 			celdasVisitables.add(pos.clone());
-			
+
 			pos[0]= 3;
 			pos[1]= 3;
 			celdasVisitables.add(pos.clone()); 
@@ -862,7 +864,7 @@ public class CaperucitaState extends SearchBasedAgentState {
 			pos[0]= 5;
 			pos[1]= 3;
 			celdasVisitables.add(pos.clone()); 
-			
+
 			pos[0]= 6;
 			pos[1]= 3;
 			celdasVisitables.add(pos.clone()); 
@@ -879,10 +881,16 @@ public class CaperucitaState extends SearchBasedAgentState {
 
 	public void actualizarCeldasPorVisitar(int posicionAnteriorFilaOColumna, String accion) {
 
+		int[] posAnterior = new int[2];
+		double deltaX;
+		double deltaY;
 		
 		if(accion == "irAbajo") {
+			
+			deltaX = this.getPosicionColumna() - this.posicion[1];
+			deltaY = posicionAnteriorFilaOColumna - this.posicion[0];
+			
 			for(int i = posicionAnteriorFilaOColumna; i <= this.getPosicionFila(); i++) {
-				int[] posAnterior =  new int[2];
 				posAnterior[0] = i;
 				posAnterior[1]= this.getPosicionColumna();
 				this.setPosicionAnterior(posAnterior);
@@ -893,8 +901,11 @@ public class CaperucitaState extends SearchBasedAgentState {
 		}
 		else {
 			if(accion == "irArriba") {
+				
+				deltaX = this.getPosicionColumna() - this.posicion[1];
+				deltaY = posicionAnteriorFilaOColumna - this.posicion[0];
+				
 				for(int i = posicionAnteriorFilaOColumna; i >= this.getPosicionFila(); i--) {
-					int[] posAnterior =  new int[2];
 					posAnterior[0] = i;
 					posAnterior[1]= this.getPosicionColumna();
 					this.setPosicionAnterior(posAnterior);
@@ -906,8 +917,10 @@ public class CaperucitaState extends SearchBasedAgentState {
 			else {
 				if(accion == "irDerecha") {
 
+					deltaX = posicionAnteriorFilaOColumna - this.posicion[1];
+					deltaY = this.getPosicionFila() - this.posicion[0];
+					
 					for(int i = posicionAnteriorFilaOColumna; i <= this.getPosicionColumna(); i++) {
-						int[] posAnterior =  new int[2];
 						posAnterior[0] = this.getPosicionFila();
 						posAnterior[1]= i;
 						this.setPosicionAnterior(posAnterior);
@@ -918,8 +931,10 @@ public class CaperucitaState extends SearchBasedAgentState {
 				}
 				else
 				{
+					deltaX = posicionAnteriorFilaOColumna - this.posicion[1];
+					deltaY = this.getPosicionFila() - this.posicion[0];
+					
 					for(int i = posicionAnteriorFilaOColumna; i >= this.getPosicionColumna(); i--) {
-						int[] posAnterior =  new int[2];
 						posAnterior[0] = this.getPosicionFila();
 						posAnterior[1]= i;
 						this.setPosicionAnterior(posAnterior);
@@ -930,16 +945,15 @@ public class CaperucitaState extends SearchBasedAgentState {
 				}
 			}
 		}
-		
-		int celdasPorVisitarActual = this.listaCeldasPorVisitar.size();
-		
-		this.celdasVisitadas = Math.abs(this.celdasPorVisitar - celdasPorVisitarActual);
-		
-		this.celdasPorVisitar = celdasPorVisitarActual;
-		
-//		System.out.println("celdasporvisitar: "+this.celdasPorVisitar);
-//		for(int[] pos : this.listaCeldasPorVisitar)
-//			System.out.println(""+pos[0]+" , "+pos[1]+"");
+
+
+		this.celdasVisitadas = ((double)((int)(Math.sqrt(deltaX*deltaX + deltaY*deltaY)*100.0)))/100.0;
+
+		this.celdasPorVisitar = this.listaCeldasPorVisitar.size();
+
+		//	System.out.println("celdas visitadas: "+this.celdasVisitadas);
+		//		for(int[] pos : this.listaCeldasPorVisitar)
+		//			System.out.println(""+pos[0]+" , "+pos[1]+"");
 	}
 
 
@@ -1045,6 +1059,44 @@ public class CaperucitaState extends SearchBasedAgentState {
 
 	public double getCeldasVisitadas() {
 		return this.celdasVisitadas;
+	}
+
+
+
+
+	public double getDistanciaAObjetivo() {
+
+		double deltaX;
+		double deltaY;
+
+		if(escenario == 1) {
+			deltaX = 7 - this.posicion[1];
+			deltaY = 7 - this.posicion[0];
+
+			return ((double)((int)(Math.sqrt(deltaX*deltaX + deltaY*deltaY)*100.0)))/100.0;
+
+		}
+
+		if(escenario == 2) {
+
+			deltaX = 6 - this.posicion[1];
+			deltaY = 8 - this.posicion[0];
+
+			return ((double)((int)(Math.sqrt(deltaX*deltaX + deltaY*deltaY)*100.0)))/100.0;
+
+		}
+
+		if(escenario == 3) {
+
+			deltaX = 3 - this.posicion[1];
+			deltaY = 0 - this.posicion[0];
+
+			return ((double)((int)(Math.sqrt(deltaX*deltaX + deltaY*deltaY)*100.0)))/100.0;	
+
+		}
+
+		return 0;
+
 	}
 
 

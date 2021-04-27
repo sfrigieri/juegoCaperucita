@@ -17,12 +17,8 @@ public class Heuristic implements IEstimatedCostFunction {
 	@Override
 	public double getEstimatedCost(NTree node) {
 		CaperucitaState agState = (CaperucitaState) node.getAgentState();
-		//Por cada dulce obtenido restará 1 punto de costo a cada paso futuro del camino
-		//Por cada celda visitada restará 1 punto de costo a cada paso futuro del camino
 
-		//Óptimo (costo estimado igual a cero): 
-		//	Llegar al estado meta, conociendo todas las celdas y habiendo recolectado todos los dulces
-
-		return (agState.getDulcesPorJuntar()*10 + agState.getCeldasPorVisitar());
+		//	Distancia euclidiana a la celda con flores
+		return agState.getDistanciaAObjetivo();
 	}
 }
