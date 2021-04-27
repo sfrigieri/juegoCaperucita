@@ -48,7 +48,7 @@ public class IrIzquierda extends SearchAction {
 						int dulcesPorJuntar = agState.getDulcesPorJuntar();
 						agState.setDulcesPorJuntar(--dulcesPorJuntar);
 						agState.setMapaPosicion(fila, col-avance, CaperucitaAgentPerception.LIBRE);
-						((CaperucitaState) s).setCostoAccion(5);
+						((CaperucitaState) s).setCostoAccion(0);
 					}
 				}
 				//Si en la última celda visible hay un árbol, la posición final será la anterior al árbol

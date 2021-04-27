@@ -67,8 +67,6 @@ public class BosqueState extends EnvironmentState {
 
 		int[] posicion = new int[2];
 
-		//nextInt no incluye Max. 
-		//Ej: si length col es 14, devolverá como máximo un 13 que es correcto (0-13 igual a 14 columnas).
 		do{
 
 			posicion[0] = ThreadLocalRandom.current().nextInt(0, this.mapa.length);
@@ -107,7 +105,7 @@ public class BosqueState extends EnvironmentState {
 				if(this.escenario == 2)
 					this.setMapaPosicion(5, 6,CaperucitaAgentPerception.LOBO);
 				else
-					this.setMapaPosicion(3, 5,CaperucitaAgentPerception.LOBO);
+					this.setMapaPosicion(3, 6,CaperucitaAgentPerception.LOBO);
 		}
 
 		this.updateGameBoard();

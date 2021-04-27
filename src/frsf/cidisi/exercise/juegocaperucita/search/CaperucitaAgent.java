@@ -21,7 +21,7 @@ public class CaperucitaAgent extends SearchBasedAgent {
 	public static CaperucitaState estadoSiguienteAlRepetido;
 	public static boolean seEvitoAccion = false;
 	public static boolean accionMediante = false;
-	public static boolean comprobarEstadoRepetido = true;
+	public static boolean comprobarEstadoRepetido = false;
 
 	public CaperucitaAgent(int escenario) {
 

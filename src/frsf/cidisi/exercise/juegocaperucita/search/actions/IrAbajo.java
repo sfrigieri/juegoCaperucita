@@ -49,7 +49,7 @@ public class IrAbajo extends SearchAction {
 						int dulcesPorJuntar = agState.getDulcesPorJuntar();
 						agState.setDulcesPorJuntar(--dulcesPorJuntar);
 						agState.setMapaPosicion(fila+avance, col, CaperucitaAgentPerception.LIBRE);
-						((CaperucitaState) s).setCostoAccion(5);
+						((CaperucitaState) s).setCostoAccion(0);
 					}
 				}
 
